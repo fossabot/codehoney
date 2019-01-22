@@ -1,0 +1,27 @@
+$colors: (
+    text: #E7ECEF,
+    text-disabled: #7f7f7f,
+
+    purple: #332E54,
+    light-purple: #A19DCA,
+    orange: #f4b865,
+    red: #F05D5E,
+    green: #5EB5B1,
+    blue: #59A6D0,
+
+    gray: rgba(#332E54,1),
+
+    white: #EBEBEB,
+    black: #000000,
+
+    bg: #000
+);
+
+@function color($key) {
+    @if map-has-key($colors, $key) {
+        @return map-get($colors, $key);
+    }
+
+    @warn "Unknown `#{$key}` in $colors.";
+    @return null;
+}

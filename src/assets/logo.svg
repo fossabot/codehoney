@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="107" height="16" viewBox="0 0 107 16">
+  <g fill="none" fill-rule="evenodd" transform="translate(0 -3)">
+    <text font-family="PTMono-Regular, PT Mono" font-size="16">
+      <tspan x="0" y="14" fill="#000">code </tspan> <tspan x="57.6" y="14" fill="#FCA311" font-family="JosefinSans-Bold, Josefin Sans" font-weight="bold">Honey</tspan>
+    </text>
+    <polygon fill="#FCA311" points="44.949 4 51.315 4 54 9.111 51.315 14.222 44.949 14.222 42 9.111" transform="rotate(90 48 9.111)"/>
+  </g>
+</svg>

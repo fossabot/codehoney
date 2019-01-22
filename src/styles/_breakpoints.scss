@@ -1,0 +1,16 @@
+$breakpoints: (
+	ultrawide: '1920px',
+	desktop: '1440px',
+	desktopSmall: '1180px',
+	tabletLandscape: '1024px',
+	tabletPortrait: '768px',
+	mobile: '480px',
+);
+
+@function breakpoint($key) {
+	@if map-has-key($breakpoints, $key) {
+		@return map-get($breakpoints, $key);
+	}
+	@warn "Unknown `#{$key}` in $breakpoints.";
+	@return null;
+}

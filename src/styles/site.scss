@@ -1,0 +1,56 @@
+body,
+html {
+	margin: 0;
+	width: 100%;
+	font-family: font(regular);
+	color: color(text);
+	font-size: 16px;
+	letter-spacing: 0.5px;
+	line-height: 1.5em;
+	height: 100%;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: rgba(#EFEFEF, 0.9);
+}
+
+* {
+	box-sizing: border-box;
+	-webkit-tap-highlight-color: transparent;
+
+}
+
+::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+	background-color: transparent;
+	/* or add it to the track */
+}
+
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+	background: color(light-purple);
+	height: 6px;
+	width: 6px;
+}
+
+%wrapper {
+	padding-right: 30px;
+	padding-left: 30px;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 1600px;
+	width: 100%;
+
+	@media (min-width: breakpoint(tabletPortrait)) {
+		padding-right: 40px;
+		padding-left: 40px;
+	}
+
+	@media (min-width:breakpoint(tabletLandscape)) {}
+}
+
+%wrapper-small {
+	@extend %wrapper;
+	max-width: 741px;
+}
