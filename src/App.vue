@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <Sidebar :data="snippets" />
+    <Sidebar :languages="languages" :tags="tags" />
     <div class="Window">
-      <SnippetsBox :data="snippets" />
-      <Editor />
+      <SnippetsBox :snippets="snippets" />
+      <Editor :snippet="snippet" />
     </div>
     <div class="WindowButtons">
-      <WindowButton :red="true" />
-      <WindowButton :orange="true" />
-      <WindowButton :green="true" />
+      <WindowButton red />
+      <WindowButton orange />
+      <WindowButton green />
     </div>
   </div>
 </template>
@@ -18,6 +18,7 @@ import SnippetsBox from './views/SnippetsBox.vue';
 import Editor from './views/Editor.vue';
 import WindowButton from "./components/WindowButton.vue"
 import dummyData from "./data/dummyData.json"
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'app',
@@ -27,10 +28,14 @@ export default {
     Editor,
     WindowButton
   },
-  data: () => {
-    return {
-      snippets: dummyData
-    }
+  data: () => ({}),
+  computed: { ...mapGetters({
+      languages: 'languages',
+      language: 'activeLanguage',
+      tags: 'tags',
+      snippets: 'snippets',
+      snippet: 'activeSnippet',
+    }),
   }
 };
 

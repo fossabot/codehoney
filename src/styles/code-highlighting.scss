@@ -1,24 +1,50 @@
-.hljs-keyword {
-    color: color(light-purple);
+.token {
+	text-shadow: none;
+	background-color: transparent;
+	white-space: normal;
+
+	&.keyword {
+		color: color(light-purple);
+	}
+
+	&.operator {
+		color: color(light-purple);
+		background-color: transparent;
+	}
+
+	&.function {
+		color: color(blue);
+	}
+
+	&.number {
+		color: color(orange);
+	}
+
+	&.string {
+		color: color(green);
+	}
 }
 
 .hljs-number {
-    color: color(orange);
+	color: color(orange);
 }
 
 .hljs-function {
 	color: color(blue);
 }
-.hljs-comment{
-	color: rgba(#fff,0.5);
+
+.hljs-comment {
+	color: rgba(#fff, 0.5);
 }
+
 .hljs-params {
-    color: #C9925A;
+	color: #C9925A;
 }
-.hljs-built_in{
+
+.hljs-built_in {
 	color: #6BD386;
 }
 
-.hljs-string{
+.hljs-string {
 	color: color(red);
 }

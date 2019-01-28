@@ -14,58 +14,10 @@ export default {
     Search,
     Snippets,
   },
-  props: {},
-  data: () => ({
-    snippets: [{
-      id: 1,
-      name: 'NumWays(n,steps)',
-      description: "returns the numbers of possible ways to go the stairs up for a given set of steps"
-    }, {
-      id: 2,
-      name: 'longestItem(Array)',
-      description: "return the longest item in an Array"
-    }, {
-      id: 3,
-      name: 'NumWays(n,steps)',
-      description: "returns the numbers of possible ways to go the stairs up for a given set of steps"
-    }, {
-      id: 4,
-      name: 'longestItem(Array)',
-      description: "return the longest item in an Array"
-    }, {
-      id: 5,
-      name: 'NumWays(n,steps)',
-      description: "returns the numbers of possible ways to go the stairs up for a given set of steps"
-    }, {
-      id: 6,
-      name: 'longestItem(Array)',
-      description: "return the longest item in an Array"
-    }, {
-      id: 7,
-      name: 'NumWays(n,steps)',
-      description: "returns the numbers of possible ways to go the stairs up for a given set of steps"
-    }, {
-      id: 8,
-      name: 'longestItem(Array)',
-      description: "return the longest item in an Array"
-    }, {
-      id: 9,
-      name: 'NumWays(n,steps)',
-      description: "returns the numbers of possible ways to go the stairs up for a given set of steps"
-    }, {
-      id: 10,
-      name: 'longestItem(Array)',
-      description: "return the longest item in an Array"
-    }, {
-      id: 11,
-      name: 'NumWays(n,steps)',
-      description: "returns the numbers of possible ways to go the stairs up for a given set of steps"
-    }, {
-      id: 12,
-      name: 'longestItem(Array)',
-      description: "return the longest item in an Array"
-    }, ],
-  }),
+  props: {
+    snippets: Array,
+  },
+  data: () => ({}),
   mounted: function() {
 
   }

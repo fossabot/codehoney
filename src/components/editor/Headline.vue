@@ -1,7 +1,7 @@
 <template>
     <div class="Headline">
-        <h1>{{title}}</h1>
-        <p>{{description}}</p>
+        <h1 contenteditable>{{title}}</h1>
+        <p contenteditable>{{description}}</p>
     </div>
 </template>
 <script>

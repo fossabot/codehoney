@@ -1,10 +1,11 @@
 <template>
   <div class="Snippets">
-    <Snippet v-for="(snippet,i) in snippets" :key="i" :item="snippet" :isSelected="selectedItem || 1" @selected="handleSelected($event)" />
+    <Snippet v-for="(snippet,i) in snippets" :key="i" :item="snippet" :isSelected="selectedItem || 0" @selected="handleSelected($event)" />
   </div>
 </template>
 <script>
 import Snippet from './Snippet.vue';
+import { EventBus } from '../../event-bus.js';
 
 export default {
   name: 'Snippets',
@@ -22,6 +23,9 @@ export default {
   methods: {
     handleSelected(id) {
       this.selectedItem = id;
+      EventBus.$emit('item-selected', this.snippets[id]);
+
+      const longestItem = (...vals) => vals.reduce((a, x) => (x.length > a.length ? x : a));
     },
   },
   mounted: function() {},
@@ -34,6 +38,7 @@ export default {
   position: relative;
   overflow: auto;
   height: calc(100% - 90px);
+  width: calc(100% - 2px);
 
   .Title {
     font-weight: bold;

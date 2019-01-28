@@ -1,7 +1,7 @@
 <template>
   <div class="Sidebar">
     <img class="Logo" src="../assets/logo.svg">
-    <Categories title="Languages" :categories="categories" selectFirstItem/>
+    <Categories title="Languages" :categories="languages" selectFirstItem />
     <Categories title="Tags" :categories="tags" />
   </div>
 </template>
@@ -11,43 +11,13 @@ import Categories from '../components/sidebar/Categories.vue';
 export default {
   name: 'Sidebar',
   props: {
-    msg: String,
+    languages: Array,
+    tags: Array,
   },
   components: {
     Categories,
   },
-  data: () => ({
-    categories: [{
-        'name': 'Javascript',
-        'id': 1,
-        count: 35
-      },
-      {
-        'name': 'SCSS',
-        'id': 2,
-        count: 17
-
-      },
-      {
-        'name': 'HTML',
-        'id': 3,
-        count: 3
-
-      }
-    ],
-    tags: [{
-        'name': 'Array',
-        'id': 1,
-        count: 4
-      },
-      {
-        'name': 'List',
-        'id': 2,
-        count: 2
-
-      },
-    ],
-  }),
+  data: () => ({}),
 };
 
 </script>

@@ -1,38 +1,56 @@
 <template>
-  <pre class="Code"><code ref="code" class="javascript" contenteditable tabindex="-1" v-html="beautify(content)"></code></pre>
+  <pre class="Code"><code focus contenteditable v-html="code"></code><span class="LineNumbers"><span v-for="(line,i) of lines" :key="randomID(i)" class="LineNumber">{{i+1}}</span></span>
+</pre>
 </template>
 <script>
-let hljs = require('highlight.js');
+import Prism from 'prismjs';
+import prismtheme from 'prismjs/themes/prism-tomorrow.css';
+
 let beautify = require('js-beautify');
+let uniqid = require('uniqid');
 
 export default {
   name: 'Code',
   props: {
     content: String,
   },
+  data: () => ({
+    code: "",
+    lines: 0
+  }),
+  watch: {
+    content: {
+      immediate: true,
+      handler(content) {
+        let code = this.beautify(content);
+        let html = this.highlight(code);
+        this.code = html;
+        this.lineNumbers();
+      }
+    }
+  },
   methods: {
     beautify: function(code) {
-      return beautify(code, { indent_size: 2, space_in_empty_paren: true });
+      return beautify(code, { indent_size: 4, space_in_empty_paren: true });
     },
-    highlight: function() {
-      let code = this.$refs.code;
-      // let content = this.getContent();
-      hljs.highlightBlock(code);
+    highlight: function(code) {
+      return Prism.highlight(code, Prism.languages.javascript, 'javascript');
     },
-    // getContent: function() {
-    //   let html = this.$refs.code.innerHTML.replace(/<[^>]*>/g, "");
-    //   return html;
-    // }
+    lineNumbers: function() {
+      setTimeout(() => {
+        let code = document.querySelector('.Code code');
+        let codeHeight = code ? code.offsetHeight : 400;
+        let lines = (codeHeight / 24).toFixed(0);
+        this.lines = Array(Number(lines)).fill(0);
+      }, 1);
+    },
+    randomID: function(i) {
+      return uniqid(i);
+    }
   },
-  computed: {
-
-  },
-  created: function(argument) {
-
-  },
-  mounted: function() {
-    this.highlight();
-  }
+  computed: {},
+  created: function() {},
+  mounted: function() {}
 }
 
 </script>
@@ -46,17 +64,33 @@ export default {
   margin-bottom: 0;
   margin-top: 0;
   width: 100%;
+  background-color: transparent !important;
+  position: relative;
 
   code {
+    background-color: transparent;
     outline: none;
-    height: 100%;
-    width: 100%;
     // font-family: 'Space Mono', monospace;
     // font-family: 'Share Tech Mono', monospace;
     // font-family: 'Cutive Mono', monospace;
-    font-family: 'Overpass Mono', monospace;
-    font-weight: 700;
-    font-size: 0.95rem;
+    font-family: monospace;
+  }
+
+  .LineNumbers {
+    height: 100%;
+    position: absolute;
+    opacity: 0.15;
+    left: -40px;
+    top: 0;
+    width: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    user-select: none;
+  }
+
+  .LineNumber {
+    display: block;
   }
 }
 

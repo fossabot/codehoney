@@ -1,7 +1,7 @@
 <template>
   <div class="Editor">
-    <Headline title="NumWays(n, steps)" description="returns the numbers of possible ways to go the stairs up for a given set of steps" />
-    <Code :content="content"/>
+    <Headline :title="snippet.title" :description="snippet.description" />
+    <Code :content="snippet.content"/>
   </div>
 </template>
 <script>
@@ -15,10 +15,10 @@ export default {
     Code,
   },
   props: {
+    snippet: null
   },
-   data: () => ({
-    content: "/*hier steht ein Kommentar*/ var num = 0;var steps = [1,2,4];function numWays(n) {if (n == 0) {num++;}for (var step of steps) {if (n - step >= 0) {  numWays(n - step);  }}}console.time();numWays(30);console.timeEnd();document.getElementById('num').innerHTML = 'Number of ways: ' + num;",
-  }),
+   data: () => ({}),
+   created: function (argument) {}
 };
 
 </script>

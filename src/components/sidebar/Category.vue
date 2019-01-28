@@ -5,8 +5,6 @@
     </div>
 </template>
 <script>
-import { EventBus } from '../../event-bus.js'
-
 export default {
     name: 'Category',
     props: {
@@ -15,8 +13,7 @@ export default {
     },
     methods: {
         toggleClass(el) {
-            this.$emit('selected', this.item.id);
-            EventBus.$emit('category-selected');
+            // this.$emit('selected', this.item.id);
         },
     },
     computed: {
