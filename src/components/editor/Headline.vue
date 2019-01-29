@@ -18,14 +18,20 @@ export default {
 <style lang="scss">
 .Headline {
     color: color(white);
-    margin-top: 30px;
+    margin-top: 40px;
     margin-bottom: 32px;
 
     h1 {
-        font-size: 1.625rem;
+        font-size: 2.5rem;
+        margin: 0;
+        line-height: 1;
+        outline: none;
     }
-    p{
+
+    p {
         opacity: 0.75;
+        outline: none;
+
     }
 }
 

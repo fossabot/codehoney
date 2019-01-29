@@ -2,7 +2,7 @@
   <div id="app">
     <Sidebar :languages="languages" :tags="tags" />
     <div class="Window">
-      <SnippetsBox :snippets="snippets" />
+      <SnippetExplorer :snippets="snippets" />
       <Editor :snippet="snippet" />
     </div>
     <div class="WindowButtons">
@@ -14,17 +14,16 @@
 </template>
 <script>
 import Sidebar from './views/Sidebar.vue';
-import SnippetsBox from './views/SnippetsBox.vue';
+import SnippetExplorer from './views/SnippetExplorer.vue';
 import Editor from './views/Editor.vue';
 import WindowButton from "./components/WindowButton.vue"
-import dummyData from "./data/dummyData.json"
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'app',
   components: {
     Sidebar,
-    SnippetsBox,
+    SnippetExplorer,
     Editor,
     WindowButton
   },
@@ -62,8 +61,8 @@ export default {
     &::before {
       width: 100%;
       height: 100%;
-      top: 7px;
-      left: 7px;
+      top: 12px;
+      left: 12px;
       content: "";
       position: absolute;
       background-color: rgba(color(purple), 0.25);

@@ -1,7 +1,7 @@
 <template>
   <div class="Editor">
-    <Headline :title="snippet.title" :description="snippet.description" />
-    <Code :content="snippet.content"/>
+    <Headline :title="snippet.name" :description="snippet.description" />
+    <Code :content="snippet.code"/>
   </div>
 </template>
 <script>
@@ -15,7 +15,11 @@ export default {
     Code,
   },
   props: {
-    snippet: null
+    snippet: {
+      name: '',
+      description: '',
+      code: ''
+    }
   },
    data: () => ({}),
    created: function (argument) {}
@@ -33,11 +37,11 @@ export default {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    padding-left: 45px;
+    padding-left: 65px;
     overflow: auto;
-    padding-right: 50px;
+    padding-right: 65px;
     padding-bottom: 50px;
-    
+
     &::-webkit-scrollbar {
       width: 5px;
       height: 4px;

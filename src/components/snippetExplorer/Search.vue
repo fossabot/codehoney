@@ -2,14 +2,13 @@
     <div class="Search">
         <input required type="text" name="">
         <label>search for your code...</label>
+        <img class="Icon Icon--search" src="@/assets/icon-search.svg">
     </div>
 </template>
 <script>
-
 export default {
     name: 'Search',
-    components: {
-    },
+    components: {},
     props: {
         title: String,
     },
@@ -52,6 +51,7 @@ export default {
         color: color(white);
         outline: none;
         border-bottom: solid 1px rgba(white, 0.5);
+        padding-right: 50px;
 
         &:focus,
         &:valid {
@@ -63,6 +63,12 @@ export default {
                 animation-timing-function: $ease;
             }
         }
+    }
+
+    .Icon--search {
+        position: absolute;
+        right: 30px;
+        top: 32px;
     }
 
     @keyframes input-is-focused {

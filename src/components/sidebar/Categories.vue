@@ -1,11 +1,11 @@
 <template>
   <div class="Categories">
     <h3 class="Title">{{title}}</h3>
-    <ul>
-      <li v-for="(category,i) in categories" :key="i">
-        <Category :item="category" :isSelected="selectedItem || Number(selectFirstItem)" @selected="handleSelected($event)" />
-      </li>
-    </ul>
+    <Category 
+      v-for="(category,i) in categories" 
+      :key="i" 
+      :item="category" 
+      @click="handleClick($event)" />
   </div>
 </template>
 <script>
@@ -16,18 +16,14 @@ export default {
   components: {
     Category,
   },
-  data: () => ({
-    selectedItem: null,
-  }),
+  data: () => ({}),
   props: {
     title: String,
     categories: Array,
-    selectFirstItem: Boolean,
-
   },
   methods: {
-    handleSelected(id) {
-      this.selectedItem = id;
+    handleClick(id) {
+      this.$emit('select', id);
     }
   },
 };
@@ -36,28 +32,18 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .Categories {
-    margin-bottom: 90px;
-    position: relative;
+  margin-bottom: 90px;
+  position: relative;
 
-    .Title {
-        font-weight: bold;
-        font-size: 1.25rem;
-        margin-bottom: 35px;
-        margin-top: 0;
-        padding-left: $appDistanceLeft;
-        user-select: none;
-        color: rgba(color(black), 1);
-    }
-
-    ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-
-        li {
-        }
-    }
-
+  .Title {
+    font-weight: bold;
+    font-size: 1.25rem;
+    margin-bottom: 35px;
+    margin-top: 0;
+    padding-left: $appDistanceLeft;
+    user-select: none;
+    color: rgba(color(black), 1);
+  }
 }
 
 </style>

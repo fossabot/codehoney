@@ -1,11 +1,12 @@
 <template>
   <div class="Sidebar">
-    <img class="Logo" src="../assets/logo.svg">
-    <Categories title="Languages" :categories="languages" selectFirstItem />
-    <Categories title="Tags" :categories="tags" />
+    <img class="Logo" src="@/assets/logo.svg">
+    <Categories title="Languages" :categories="languages" @select="selectLanguage"/>
+    <Categories title="Tags" :categories="tags" @select="selectTag"/>
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
 import Categories from '../components/sidebar/Categories.vue';
 
 export default {
@@ -18,6 +19,12 @@ export default {
     Categories,
   },
   data: () => ({}),
+  methods: {
+    ...mapActions([
+      'selectLanguage',
+      'selectTag' 
+    ])
+  }
 };
 
 </script>
@@ -29,18 +36,6 @@ export default {
   max-width: 285px;
   padding-top: $appDistanceTop;
   position: relative;
-
-  // &::before {
-  //     display: block;
-  //     position: absolute;
-  //     content: "";
-  //     height: 100%;
-  //     width: 4px;
-  //     background-color: color(orange);
-  //     top: 0;
-  //     right: 0;
-  //     transition: all .195s ease-out;
-  // }
 
   .Logo {
     position: absolute;

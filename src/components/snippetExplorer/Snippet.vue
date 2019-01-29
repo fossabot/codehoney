@@ -1,5 +1,5 @@
 <template>
-  <div class="Snippet" :class="[{'is-selected':iAmSelected}]" @click="toggleClass">
+  <div class="Snippet" :class="[{'is-selected':item.isSelected}]" @click="click">
     <h3>{{item.name}}</h3>
     <p class="Description">{{item.description}}</p>
   </div>
@@ -9,18 +9,13 @@ export default {
   name: 'Snippet',
   props: {
     item: Object,
-    isSelected: Number,
   },
   methods: {
-    toggleClass(el) {
-      this.$emit('selected', this.item.id)
+    click(el) {
+      this.$emit('click', this.item.id)
     },
   },
-  computed: {
-    iAmSelected() {
-      return this.isSelected === this.item.id;
-    },
-  },
+  computed: {},
   mounted: function() {
 
   }

@@ -1,5 +1,5 @@
 <template>
-    <div class="Category" :class="{'is-selected':iAmSelected}" @click="toggleClass">
+    <div class="Category" :class="{'is-selected':item.isSelected}" @click="click">
         <span class="Name">{{item.name}}</span>
         <span class="Counter">{{item.count}}</span>
     </div>
@@ -9,17 +9,11 @@ export default {
     name: 'Category',
     props: {
         item: Object,
-        isSelected: Number,
     },
     methods: {
-        toggleClass(el) {
-            // this.$emit('selected', this.item.id);
+        click(el) {
+            this.$emit('click', this.item.id);
         },
-    },
-    computed: {
-        iAmSelected() {
-            return this.isSelected === this.item.id;
-        }
     },
 }
 
