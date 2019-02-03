@@ -2,7 +2,7 @@
   <div class="SnippetExplorer">
     <Search />
     <Snippets :snippets="snippets" @select="selectSnippet" />
-    <Button icon round><img src="@/assets/icon-plus.svg" @click="handleClick"></Button>
+    <Button round icon><img src="@/assets/icon-plus.svg" @click="handleClick"></Button>
   </div>
 </template>
 <script>
@@ -57,17 +57,12 @@ export default {
     background-color: rgba(white, 0.1);
   }
 
-  // .Flex--row{
-  //   display: flex;
-  //   justify-content: space-between;
-  //   align-items: center;
-  //   padding: 0 10px;
-  // }
   .Button {
-    position: relative;
-    bottom: 90px;
+    position: absolute;
+    bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
+    z-index: zIndex(default) + 10;
   }
 }
 

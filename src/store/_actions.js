@@ -15,9 +15,9 @@ const actions = {
 		commit(types.SELECT_LANGUAGE, { id: payload })
 	},
 	selectTag({ getters, commit }, payload) {
-		let activeTag = getters.activeTag;
-
-		commit(types.SELECT_TAG, { activeTag, id: payload })
+		let snippets = getters.snippets;
+		let tags = getters.tags;
+		commit(types.SELECT_TAG, { tags, id: payload, snippets })
 	},
 	selectSnippet({ getters, commit }, id) {
 		let snippets = getters.activeLanguage.snippets;

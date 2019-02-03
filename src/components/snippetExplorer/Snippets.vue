@@ -1,6 +1,10 @@
 <template>
   <div class="Snippets">
-    <Snippet v-for="(snippet,i) in snippets" :key="i" :item="snippet" @click="handleClick($event)" />
+    <Snippet 
+      v-for="(snippet,i) in snippets" 
+      :key="i" 
+      :item="snippet" 
+      @click="handleClick($event)" />
   </div>
 </template>
 <script>

@@ -39,7 +39,7 @@ export default {
 
   .Logo {
     position: absolute;
-    bottom: $appDistanceBottom * 2;
+    bottom: $appDistanceBottom * 1.5;
     left: 50%;
     transform: translateX(-50%);
     display: block;

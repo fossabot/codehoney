@@ -1,7 +1,7 @@
 <template>
     <div class="Category" :class="{'is-selected':item.isSelected}" @click="click">
         <span class="Name">{{item.name}}</span>
-        <span class="Counter">{{item.count}}</span>
+        <span class="Counter">{{item.counter ? item.counter : 0}}</span>
     </div>
 </template>
 <script>
@@ -9,6 +9,14 @@ export default {
     name: 'Category',
     props: {
         item: Object,
+    },
+    watch: {
+        item: function(val) {
+            console.log(val)
+        }
+    },
+    mounted: function(argument) {
+        console.log(this.item)
     },
     methods: {
         click(el) {

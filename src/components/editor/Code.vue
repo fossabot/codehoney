@@ -1,10 +1,19 @@
 <template>
-  <pre class="Code"><code focus contenteditable v-html="code"></code><span class="LineNumbers"><span v-for="(line,i) of lines" :key="randomID(i)" class="LineNumber">{{i+1}}</span></span>
-</pre>
+  <div class="Code">
+    <textarea class="Textarea" focus ref="textarea" @keydown="update" v-model="coderaw"></textarea>
+    <pre><code ref="code"  v-html="code"></code>
+      <span class="LineNumbers">
+        <span v-for="(line,i) of lines" :key="randomID(i)" class="LineNumber">{{i+1}}</span>
+      </span>
+    </pre>
+  </div>
 </template>
 <script>
-import Prism from 'prismjs';
+import { mapGetters } from 'vuex'
+
+const Prism = require('prismjs');
 import prismtheme from 'prismjs/themes/prism-tomorrow.css';
+// const loadLanguages = require('prismjs/components/index.js');
 
 let beautify = require('js-beautify');
 let uniqid = require('uniqid');
@@ -16,6 +25,7 @@ export default {
   },
   data: () => ({
     code: "",
+    coderaw: "",
     lines: 0
   }),
   watch: {
@@ -25,30 +35,62 @@ export default {
         let code = this.beautify(content);
         let html = this.highlight(code);
         this.code = html;
+        this.coderaw = JSON.parse(JSON.stringify(code));
         this.lineNumbers();
       }
     }
   },
   methods: {
-    beautify: function(code) {
+    beautify(code) {
       return beautify(code, { indent_size: 4, space_in_empty_paren: true });
     },
-    highlight: function(code) {
-      return Prism.highlight(code, Prism.languages.javascript, 'javascript');
+    highlight(code) {
+      let language = this.language.name.toLowerCase();
+      language !== 'html' && require(`prismjs/components/prism-${language}.js`);
+      return Prism.highlight(code, Prism.languages[language], language);
     },
-    lineNumbers: function() {
+    lineNumbers() {
       setTimeout(() => {
-        let code = document.querySelector('.Code code');
+        let code = this.$refs.code;
         let codeHeight = code ? code.offsetHeight : 400;
         let lines = (codeHeight / 24).toFixed(0);
         this.lines = Array(Number(lines)).fill(0);
       }, 1);
     },
-    randomID: function(i) {
+    randomID(i) {
       return uniqid(i);
+    },
+    update(e) {
+      this.handleKeycode(e);
+      setTimeout(() => {
+        let html = this.highlight(this.coderaw);
+        this.code = html;
+        this.lineNumbers();
+      }, 10);
+    },
+    setCaretPosition(pos) {
+      let textarea = this.$refs.textarea;
+      textarea.selectionStart = textarea.selectionEnd = pos;
+    },
+    handleKeycode(e) {
+      let keyCode = e.keyCode || e.which;
+      let textarea = this.$refs.textarea;
+      const TAB = "    ";
+      const KEYCODE_TAB = 9;
+
+      if (keyCode === KEYCODE_TAB) {
+        e.preventDefault();
+        let start = textarea.selectionStart;
+        let end = textarea.selectionEnd;
+        this.coderaw = textarea.value.substring(0, start) + TAB + textarea.value.substring(end);
+        setTimeout(() => { this.setCaretPosition(start + TAB.length); }, 5);
+      }
     }
   },
-  computed: {},
+  computed: { ...mapGetters({
+      language: 'activeLanguage',
+    }),
+  },
   created: function() {},
   mounted: function() {}
 }
@@ -66,20 +108,50 @@ export default {
   width: 100%;
   background-color: transparent !important;
   position: relative;
+  margin-top: 32px;
+
+  pre {
+    margin-bottom: 0;
+    margin-top: 0;
+
+  }
+
+  .Textarea {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-family: monospace;
+    font-size: 1rem;
+    color: transparent;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    line-height: 1.5em;
+    padding: 0;
+    z-index: 0;
+    resize: none;
+    caret-color: color(white);
+
+  }
 
   code {
     background-color: transparent;
     outline: none;
-    // font-family: 'Space Mono', monospace;
-    // font-family: 'Share Tech Mono', monospace;
-    // font-family: 'Cutive Mono', monospace;
+    position: relative;
+    pointer-events: none;
     font-family: monospace;
+    white-space: pre-wrap;
   }
 
   .LineNumbers {
     height: 100%;
     position: absolute;
-    opacity: 0.15;
+    opacity: 0.25;
     left: -40px;
     top: 0;
     width: 1.5rem;

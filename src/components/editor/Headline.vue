@@ -1,7 +1,13 @@
 <template>
     <div class="Headline">
-        <h1 contenteditable>{{title}}</h1>
-        <p contenteditable>{{description}}</p>
+        <div class="Wrapper">
+            <h1 class="Title" contenteditable>{{title}}</h1>
+            <label class="Label" v-if="title">H1</label>
+        </div>
+        <div class="Wrapper">
+            <p class="Description" contenteditable>{{description}}</p>
+            <label class="Label" v-if="description">meta</label>
+        </div>
     </div>
 </template>
 <script>
@@ -14,24 +20,40 @@ export default {
 }
 
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss">
+
+<style scoped lang="scss">
 .Headline {
     color: color(white);
     margin-top: 40px;
-    margin-bottom: 32px;
+    margin-bottom: 0px;
 
-    h1 {
+    .Wrapper {
+        position: relative;
+    }
+
+    .Title {
         font-size: 2.5rem;
         margin: 0;
         line-height: 1;
         outline: none;
+        margin-bottom: 15px;
+        margin-top: 0;
     }
 
-    p {
-        opacity: 0.75;
+    .Description {
         outline: none;
+        font-size: 1.125rem;
+        margin-top: 0px;
+        opacity: .75;
+    }
 
+    .Label {
+        position: absolute;
+        left: 0;
+        transform: translateX(calc(-100% - 15px));
+        bottom: 0;
+        font-size: 0.85rem;
+        color: rgba(color(white), 0.25)
     }
 }
 

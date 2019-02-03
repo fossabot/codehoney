@@ -2,7 +2,7 @@
   <div id="app">
     <Sidebar :languages="languages" :tags="tags" />
     <div class="Window">
-      <SnippetExplorer :snippets="snippets" />
+      <SnippetExplorer :snippets="snippetsFilteredBySearch || snippetsFilteredByTags || snippets" />
       <Editor :snippet="snippet" />
     </div>
     <div class="WindowButtons">
@@ -33,6 +33,8 @@ export default {
       language: 'activeLanguage',
       tags: 'tags',
       snippets: 'snippets',
+      snippetsFilteredByTags: 'snippetsFilteredByTags',
+      snippetsFilteredBySearch: 'snippetsFilteredBySearch',
       snippet: 'activeSnippet',
     }),
   }

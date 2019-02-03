@@ -17,7 +17,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .Button {
-  color: color(black);
+  color: color(white);
   padding: 10px 25px;
   position: relative;
   background-color: color(orange);
@@ -54,11 +54,12 @@ export default {
   }
 
   &:hover {
-    background-color: darken(color(orange), 5%);
+    background-color: darken(color(orange), 2%);
   }
 
   span {
-    font-size: 0.85rem;
+    font-size: 1rem;
+    margin-right: 5px;
   }
 
 }
