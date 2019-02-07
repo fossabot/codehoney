@@ -14,6 +14,7 @@ const mutations = {
 			isSelected: false,
 			code: "awesome new code",
 			description: "snipp snipp snipp",
+			tags: [],
 			timeStamp: Date.now()
 		};
 		language.snippets.unshift(snippet);
@@ -44,11 +45,10 @@ const mutations = {
 	[types.REMOVE_LANGUAGE](state, { /*milestone*/ }) {
 
 	},
-	[types.REMOVE_TAG](state, { /*milestone*/ }) {
-
-	},
-	[types.REMOVE_SNIPPET](state, { /*milestone*/ }) {
-
+	[types.REMOVE_TAG](state, { id }) {},
+	[types.REMOVE_SNIPPET](state, { language, id }) {
+		let index = language.snippets.findIndex(snippet => snippet.id === id);
+		language.snippets.splice(index, 1);
 	},
 	[types.EDIT_SNIPPET](state, { /*milestone*/ }) {
 

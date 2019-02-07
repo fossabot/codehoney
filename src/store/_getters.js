@@ -5,7 +5,7 @@ const getters = {
 		})
 	},
 	tags: state => {
-		if(state.tags.length) return state.tags;
+		if (state.tags.length) return state.tags;
 
 		// let tagCounter = [];
 		// state.languages.forEach((language) => {
@@ -52,12 +52,13 @@ const getters = {
 			filters.push(tag.name);
 		}
 		if (filters && filters.length > 0) {
-			return getters.snippets.filter(({tags}) => (filters.every(f => tags.includes(f))));
+			return getters.snippets.filter(({ tags }) => (filters.every(f => tags.includes(f))));
 		}
 		return null;
 	},
 	snippetsFilteredBySearch: (state, getters) => {
-		let filter = getters.searchQuery ? getters.searchQuery : null;
+		let query = getters.searchQuery;
+		let filter = query && query.length > 0 ? query : null;
 		let snippets = getters.snippetsFilteredByTags || getters.snippets;
 
 		if (filter) {

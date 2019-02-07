@@ -31,8 +31,9 @@ const actions = {
 	removeTag({ commit }, payload) {
 		commit(types.REMOVE_TAG, { payload })
 	},
-	removeSnippet({ commit }, payload) {
-		commit(types.REMOVE_SNIPPET, { payload })
+	removeSnippet({ getters, commit }, payload) {
+		let language = getters.activeLanguage;
+		commit(types.REMOVE_SNIPPET, { id: payload, language })
 	},
 	editSnippet({ commit }, payload) {
 		commit(types.EDIT_SNIPPET, { payload })
