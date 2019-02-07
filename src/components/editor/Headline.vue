@@ -2,11 +2,11 @@
     <div class="Headline">
         <div class="Wrapper">
             <h1 class="Title" contenteditable>{{title}}</h1>
-            <label class="Label" v-if="title">H1</label>
+            <label class="Label">H1</label>
         </div>
         <div class="Wrapper">
             <p class="Description" contenteditable>{{description}}</p>
-            <label class="Label" v-if="description">meta</label>
+            <label class="Label">meta</label>
         </div>
     </div>
 </template>
