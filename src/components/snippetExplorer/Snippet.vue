@@ -48,8 +48,6 @@ export default {
     color: rgba(color(white), 1);
     opacity: 1;
     padding: 25px 25px 25px;
-    // filter: brightness(110%);
-    // width: calc(100% + 5px);
 
     p {
       white-space: normal;

@@ -10,14 +10,6 @@ export default {
     props: {
         item: Object,
     },
-    watch: {
-        item: function(val) {
-            console.log(val)
-        }
-    },
-    mounted: function(argument) {
-        console.log(this.item)
-    },
     methods: {
         click(el) {
             this.$emit('click', this.item.id);
@@ -55,7 +47,7 @@ export default {
     }
 
     &:hover {
-        color: rgba(color(purple), 1);
+        color: rgba(color(black), 1);
 
         &::before {
             transform: translateX(-95%) translateZ(0);
@@ -63,7 +55,7 @@ export default {
     }
 
     &.is-selected {
-        color: rgba(color(purple), 1);
+        color: rgba(color(black), 1);
 
         &::before {
             transform: translateX(-75%) translateZ(0);

@@ -1,6 +1,6 @@
 <template>
   <div class="SnippetExplorer">
-    <Search />
+    <Search v-if="snippets"/>
     <Snippets :snippets="snippets" @select="selectSnippet" />
     <Button round icon><img src="@/assets/icon-plus.svg" @click="handleClick"></Button>
   </div>

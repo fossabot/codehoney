@@ -44,7 +44,7 @@ export default {
         color: rgba(white, 0.5);
         pointer-events: none;
         animation-name: input-is-not-focused;
-        animation-duration: .295s;
+        animation-duration: .195s;
         animation-fill-mode: forwards;
         animation-timing-function: $ease;
     }
@@ -62,13 +62,14 @@ export default {
         outline: none;
         border-bottom: solid 1px rgba(white, 0.5);
         padding-right: 50px;
+        padding-bottom: 5px;
 
         &:focus,
         &:valid {
             ~label {
                 font-size: 0.75rem;
                 animation-name: input-is-focused;
-                animation-duration: .295s;
+                animation-duration: .195s;
                 animation-fill-mode: forwards;
                 animation-timing-function: $ease;
             }
@@ -77,8 +78,9 @@ export default {
 
     .Icon--search {
         position: absolute;
-        right: 30px;
+        right: 20px;
         top: 32px;
+        transform: scaleX(-1);
     }
 
     @keyframes input-is-focused {
