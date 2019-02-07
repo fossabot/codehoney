@@ -2,49 +2,34 @@
 	text-shadow: none;
 	background-color: transparent;
 	white-space: normal;
+	color: #FFFDE9;
 
 	&.keyword {
-		color: color(light-purple);
+		color: #dc65ff;
 	}
 
 	&.operator {
-		color: color(light-purple);
+		color: #2bbee2 !important;
 		background-color: transparent;
 	}
 
 	&.function {
-		color: color(blue);
+		color: #00b4ff;
 	}
-
+	&.function-variable{
+		color: #D7C19A;
+	}
 	&.number {
-		color: color(orange);
+		color: #FAD000;
 	}
 
 	&.string {
-		color: color(green);
+		color: #9BC692;
 	}
-}
+	&.comment{
+		color: color(comment);
+	}
+	&.punctuation{
 
-.hljs-number {
-	color: color(orange);
-}
-
-.hljs-function {
-	color: color(blue);
-}
-
-.hljs-comment {
-	color: rgba(#fff, 0.5);
-}
-
-.hljs-params {
-	color: #C9925A;
-}
-
-.hljs-built_in {
-	color: #6BD386;
-}
-
-.hljs-string {
-	color: color(red);
+	}
 }
