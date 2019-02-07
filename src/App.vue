@@ -57,7 +57,7 @@ export default {
     margin-left: 0;
     width: 100%;
     min-width: 900px;
-    background-color: rgba(color(purple), 0.98);
+    background-color: rgba(color(purple), 1);
     position: relative;
 
     &::before {
