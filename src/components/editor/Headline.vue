@@ -20,7 +20,6 @@ export default {
 }
 
 </script>
-
 <style scoped lang="scss">
 .Headline {
     color: color(white);
@@ -32,7 +31,7 @@ export default {
     }
 
     .Title {
-        font-size: 2.5rem;
+        font-size: 1.75rem;
         margin: 0;
         line-height: 1;
         outline: none;
@@ -42,7 +41,7 @@ export default {
 
     .Description {
         outline: none;
-        font-size: 1.125rem;
+        font-size: 0.85rem;
         margin-top: 0px;
         opacity: .75;
     }
@@ -54,6 +53,26 @@ export default {
         bottom: 0;
         font-size: 0.85rem;
         color: rgba(color(white), 0.25)
+    }
+
+    @media (min-width: breakpoint(desktop-small)) {
+        .Title {
+            font-size: 2rem;
+        }
+
+        .Description {
+            font-size: 1rem;
+        }
+    }
+
+    @media (min-width: breakpoint(desktop)) {
+        .Title {
+            font-size: 2.5rem;
+        }
+
+        .Description {
+            font-size: 1.125rem;
+        }
     }
 }
 

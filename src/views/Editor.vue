@@ -2,7 +2,11 @@
   <div class="Editor" v-if="Object.keys(snippet).length">
     <Headline :title="snippet.name" :description="snippet.description" />
     <Tags :tags="snippet.tags" />
-    <Toolbar @copy="handleCopy" @beautify="handlebeautify" @remove="handleRemove" />
+    <Toolbar 
+      @copy="handleCopy" 
+      @beautify="handleBeautify"
+      @expand="handleExpand" 
+      @remove="handleRemove" />
     <Code :content="snippet.code" @update="handleTextchange"/>
   </div>
 </template>
@@ -29,8 +33,11 @@ export default {
     handleCopy(){
       navigator.clipboard.writeText(this.beautify(this.snippet.code));
     },
-    handlebeautify(){
+    handleBeautify(){
       this.snippet.code = this.beautify(this.snippet.code);
+    },
+    handleExpand(){
+      this.$emit('expand');
     },
     handleRemove() {
       console.log('handleRemove');
@@ -69,16 +76,5 @@ export default {
     padding-right: 100px;
     padding-bottom: 50px;
 
-    &::-webkit-scrollbar {
-      width: 5px;
-      height: 4px;
-      background-color: transparent;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: color(light-purple);
-      height: 4px;
-      width: 4px;
-    }
   }
 </style>

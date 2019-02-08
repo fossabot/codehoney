@@ -1,8 +1,8 @@
 <template>
-  <div class="Sidebar">
-    <img class="Logo" src="@/assets/logo.svg">
-    <Categories title="Languages" :categories="languages" @select="selectLanguage"/>
-    <Categories title="Tags" :categories="tags" @select="selectTag"/>
+  <div class="Sidebar" :class="{'is-hidden':isHidden}">
+    <img svg-inline class="Logo" src="@/assets/logo.svg">
+    <Categories title="Languages" :categories="languages" @select="selectLanguage" />
+    <Categories title="Tags" :categories="tags" @select="selectTag" />
   </div>
 </template>
 <script>
@@ -14,6 +14,7 @@ export default {
   props: {
     languages: Array,
     tags: Array,
+    isHidden: Boolean,
   },
   components: {
     Categories,
@@ -22,7 +23,7 @@ export default {
   methods: {
     ...mapActions([
       'selectLanguage',
-      'selectTag' 
+      'selectTag'
     ])
   }
 };
@@ -36,6 +37,14 @@ export default {
   max-width: 285px;
   padding-top: $appDistanceTop;
   position: relative;
+  transition: all .35s $ease;
+  transform: translateZ(0);
+  will-change: width;
+  
+  &.is-hidden {
+    width: 0;
+    min-width: 0;
+  }
 
   .Logo {
     position: absolute;

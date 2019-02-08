@@ -1,11 +1,10 @@
 <template>
   <div class="Code">
     <textarea class="Textarea" focus ref="textarea" @keydown="update" v-model="coderaw"></textarea>
-    <pre><code ref="code" v-html="code"></code>
-      <span class="LineNumbers">
+    <pre><code ref="code" v-html="code"></code></pre>
+    <span class="LineNumbers">
         <span v-for="(line,i) of lines" :key="randomID(i)" class="LineNumber">{{line}}</span>
-      </span>
-    </pre>
+    </span>
   </div>
 </template>
 <script>
@@ -54,7 +53,7 @@ export default {
         let code = this.$refs.code;
         let codeHeight = code ? code.offsetHeight : 400;
         let lines = codeHeight / 24 > 0 ? (codeHeight / 24).toFixed(0) : 1;
-        this.lines = [...Array(Number(lines)).keys()].map(x => x+1);
+        this.lines = [...Array(Number(lines)).keys()].map(x => x + 1);
       }, 1);
     },
     randomID(i) {
@@ -66,7 +65,7 @@ export default {
         let html = this.highlight(this.coderaw);
         this.code = html;
         this.lineNumbers();
-        this.$emit('update',this.coderaw);
+        this.$emit('update', this.coderaw);
       }, 10);
     },
     setCaretPosition(pos) {
@@ -106,10 +105,11 @@ export default {
   flex: 1;
   margin-bottom: 0;
   margin-top: 0;
-  width: 100%;
+  width: 95%;
   background-color: transparent !important;
   position: relative;
   margin-top: 32px;
+  height: 100%;
 
   pre {
     margin-bottom: 0;

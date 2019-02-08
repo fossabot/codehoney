@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 290 289">
+	<title>icon-expand-2</title>
+	<path d="M1,96l32,.25V32H97V0H1Z" fill="#fff" fill-rule="evenodd" />
+	<path d="M96.88,288.12l.24-32H32.88v-64H.88v96Z" fill="#fff" fill-rule="evenodd" />
+	<path d="M289,192.25,257,192v64.25H193v32h96Z" fill="#fff" />
+	<path d="M193.12.12l-.24,32h64.24v64h32V.12Z" fill="#fff" fill-rule="evenodd" />
+</svg>

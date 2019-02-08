@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 224 225">
+  <g fill="#FFF" fill-rule="evenodd">
+    <path transform="rotate(180 48 48.125)" d="M0 96L32 96.25 32 32 96 32 96 0 0 0z"/>
+    <path transform="matrix(-1 0 0 1 96 0)" d="M0 224L32 224.25 32 160 96 160 96 128 0 128z"/>
+    <path d="M128 224L160 224.25 160 160 224 160 224 128 128 128z"/>
+    <path transform="matrix(1 0 0 -1 0 96.25)" d="M128 96L160 96.25 160 32 224 32 224 0 128 0z"/>
+  </g>
+</svg>

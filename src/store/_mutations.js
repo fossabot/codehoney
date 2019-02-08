@@ -49,6 +49,11 @@ const mutations = {
 	[types.REMOVE_SNIPPET](state, { language, id }) {
 		let index = language.snippets.findIndex(snippet => snippet.id === id);
 		language.snippets.splice(index, 1);
+
+		if (language.snippets.length) {
+			let snippet = language.snippets[index - 1] || language.snippets[index]
+			snippet.isSelected = true;
+		}
 	},
 	[types.EDIT_SNIPPET](state, { /*milestone*/ }) {
 

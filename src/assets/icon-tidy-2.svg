@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 224">
   <g fill="#FFF" fill-rule="evenodd">
-    <path d="M0 0L0 32 192 32 192 0z"/>
+    <path d="M0 0L0 32 256 32 256 0z"/>
     <path d="M0 64L0 96 256 96 256 64z"/>
-    <path d="M0 128L0 160 192 160 192 128z"/>
-    <path d="M0 192L0 224 128 224 128 192z"/>
+    <path d="M0 128L0 160 256 160 256 128z"/>
+    <path d="M0 192L0 224 256 224 256 192z"/>
   </g>
 </svg>

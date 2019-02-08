@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <Sidebar :languages="languages" :tags="tags" />
-    <div class="Window">
+    <Sidebar :languages="languages" :tags="tags" :isHidden="editorFullscreen" />
+    <div class="Window" :class="{'is-expanded':editorFullscreen}">
       <SnippetExplorer :snippets="snippetsFilteredBySearch || snippetsFilteredByTags || snippets" />
-      <Editor :snippet="snippet" />
+      <Editor :snippet="snippet" @expand="editorExpand()" />
     </div>
     <div class="WindowButtons">
       <WindowButton red />
@@ -27,7 +27,7 @@ export default {
     Editor,
     WindowButton
   },
-  data: () => ({}),
+  data: () => ({ editorFullscreen: false }),
   computed: { ...mapGetters({
       languages: 'languages',
       language: 'activeLanguage',
@@ -37,6 +37,12 @@ export default {
       snippetsFilteredBySearch: 'snippetsFilteredBySearch',
       snippet: 'activeSnippet',
     }),
+  },
+  methods: {
+    editorExpand() {
+      this.editorFullscreen = !this.editorFullscreen;
+      console.log(this.editorFullscreen)
+    }
   }
 };
 
@@ -54,23 +60,34 @@ export default {
     display: flex;
     border-radius: $windowBorder;
     margin: $windowDistance;
-    margin-left: 0;
+    // margin-left: 0;
     width: 100%;
     min-width: 900px;
     background-color: rgba(color(purple), 1);
     position: relative;
+    transition: all .35s $ease;
+    transform: translateZ(0);
+
+    &.is-expanded {
+      margin: 0;
+
+      &::before {
+        transform: translate(0, 0);
+      }
+    }
 
     &::before {
       width: 100%;
       height: 100%;
-      top: 12px;
-      left: 12px;
+      transform: translate(12px, 12px);
       content: "";
       position: absolute;
       background-color: rgba(color(purple), 0.25);
       box-shadow: 10px 15px 20px 0 rgba(color(gray), 0.15);
       pointer-events: none;
       z-index: 0;
+      transition: all .35s $ease;
+
     }
 
     // &::after {

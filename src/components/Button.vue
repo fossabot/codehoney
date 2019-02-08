@@ -37,7 +37,7 @@ export default {
     width: unset;
     height: unset;
 
-    img {
+    svg {
       width: 20px;
       height: 20px;
       padding: 17px;
