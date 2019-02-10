@@ -6,7 +6,7 @@ $colors: (
     // purple: #2c2263,
     // 23272D
     purple:#23272D,
-    light-purple: #A19DCA,
+    light-purple: lighten(rgba(#23272D,0.75), 30%),
     orange: #f4b865,
     red: #F05D5E,
     green: #5EB5B1,

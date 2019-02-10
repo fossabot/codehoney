@@ -14,15 +14,23 @@ const mutations = {
 			}
 		} else {
 			const EMPTY_STATE = {
-				searchQuery: '',
-				activeTags: [],
-				languages: [{
-					id: 0,
-					name: 'Markdown',
-					isSelected: true,
-					snippets: [{ "id": "1jryvaskz", "name": "Welcome to Codehoney", "isSelected": true, "code": "this is your first snippet", "description": "snipp snipp snipp", "tags": ['welcome'], "timeStamp": 1549800662580 }]
+				'searchQuery': '',
+				'activeTags': [],
+				'languages': [{
+					'id': 0,
+					'name': 'Javascript',
+					'isSelected': true,
+					'snippets': [{
+						'id': '1jryvaskz',
+						'name': 'numWays(n, steps)',
+						'description': "returns the numbers of possible ways to go N stairs up for a given set of steps",
+						'code': "var num = 0;var steps = [1,2,4];function numWays(n) {if (n == 0) {num++;}for (var step of steps) {if (n - step >= 0) {  numWays(n - step);  }}}console.time();numWays(30);console.timeEnd();document.getElementById('num').innerHTML = 'Number of ways: ' + num;",
+						'isSelected': true,
+						'timeStamp': 1548799437196,
+						'tags': ['cool function'],
+					}]
 				}],
-				tags: [{ "id": 0, "name": "welcome", "counter": 1, "isSelected": false }]
+				'tags': [{ "id": 0, "name": "welcome", "counter": 1, "isSelected": false }]
 			}
 			this.replaceState(Object.assign(state, EMPTY_STATE));
 		}

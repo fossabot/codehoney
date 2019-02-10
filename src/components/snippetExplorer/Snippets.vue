@@ -1,10 +1,8 @@
 <template>
   <div class="Snippets">
-    <Snippet 
-      v-for="(snippet,i) in snippets" 
-      :key="i" 
-      :item="snippet" 
-      @click="handleClick($event)" />
+    <transition-group name="list" tag="div">
+      <Snippet v-for="snippet in snippets" :key="snippet.id" :item="snippet" @click="handleClick($event)" />
+    </transition-group>
   </div>
 </template>
 <script>
@@ -32,14 +30,15 @@ export default {
 };
 
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .Snippets {
   position: relative;
   overflow: auto;
+  overflow-x: hidden;
   height: calc(100% - 90px);
-  width: calc(100% - 2px);
+  width: calc(100% - 3px);
   padding-bottom: 50px;
+  background-color: color(purple);
 
   .Title {
     font-weight: bold;
@@ -48,6 +47,30 @@ export default {
     margin-top: 0;
     padding-left: $appDistanceLeft;
     user-select: none;
+  }
+
+  .list-enter-active {
+    transition: all .3s $ease;
+  }
+
+  .list-leave-active {
+    height: 96px;
+    transition: all .5s $ease, background-color .2s $ease, height .3s .2s $ease, padding .3s .2s $ease;
+  }
+
+  .list-enter {
+    transform: translateX(-20px);
+    padding: 0;
+  }
+
+  .list-leave-to {
+    transform: translateY(-110%);
+    border-color: transparent;
+    height: 0;
+    padding: 0;
+    border: none;
+    overflow: hidden;
+    background-color: color(red);
   }
 }
 

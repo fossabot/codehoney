@@ -34,6 +34,7 @@ export default {
   position: relative;
   color: rgba(color(white), 1);
   border-bottom: solid 1px rgba(color(white), 0.08);
+  border-top: solid 1px rgba(color(white), 0.0);
   opacity: 0.5;
   width: 100%;
 
@@ -73,7 +74,7 @@ export default {
   }
 
   &:first-child {
-    border-top: solid 1px rgba(color(white), 0.08);
+    border-top-color: rgba(color(white), 0.08);
   }
 
   &:last-child {
