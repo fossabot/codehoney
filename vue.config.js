@@ -1,5 +1,5 @@
 // vue.config.js
-yarnmodule.exports = {
+module.exports = {
   publicPath: "./",
   chainWebpack: config => {
     config.module
