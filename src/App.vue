@@ -41,7 +41,6 @@ export default {
   methods: {
     editorExpand() {
       this.editorFullscreen = !this.editorFullscreen;
-      console.log(this.editorFullscreen)
     }
   }
 };
@@ -60,7 +59,7 @@ export default {
     display: flex;
     border-radius: $windowBorder;
     margin: $windowDistance;
-    // margin-left: 0;
+    margin-left: 0;
     width: 100%;
     min-width: 900px;
     background-color: rgba(color(purple), 1);

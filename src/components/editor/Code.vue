@@ -12,7 +12,6 @@ import { mapGetters } from 'vuex'
 
 const Prism = require('prismjs');
 import prismtheme from 'prismjs/themes/prism-tomorrow.css';
-// const loadLanguages = require('prismjs/components/index.js');
 
 let beautify = require('js-beautify');
 let uniqid = require('uniqid');
@@ -41,7 +40,10 @@ export default {
   },
   methods: {
     beautify(code) {
-      return beautify(code, { indent_size: 4, space_in_empty_paren: true });
+      let language = this.language.name.toLowerCase();
+
+      if (!(language === 'javascript' && language === 'js')) return code
+      return beautify(code, { indent_size: 4 });
     },
     highlight(code) {
       let language = this.language.name.toLowerCase();
@@ -65,7 +67,7 @@ export default {
         let html = this.highlight(this.coderaw);
         this.code = html;
         this.lineNumbers();
-        this.$emit('update', this.coderaw);
+        this.$emit('update', this.coderaw.replace(/\n\r?/g, '').replace(/    ?/g, ''));
       }, 10);
     },
     setCaretPosition(pos) {

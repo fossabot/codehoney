@@ -1,6 +1,32 @@
 import types from './_mutation-types'
 
 const mutations = {
+	[types.INITIALISE_STORE](state) {
+		const localStorageStore = localStorage.getItem('store');
+
+		if (localStorageStore) {
+			let store = JSON.parse(localStorageStore);
+
+			if (store.version === state.version) {
+				this.replaceState(Object.assign(state, store));
+			} else {
+				store.version = state.version;
+			}
+		} else {
+			const EMPTY_STATE = {
+				searchQuery: '',
+				activeTags: [],
+				languages: [{
+					id: 0,
+					name: 'Markdown',
+					isSelected: true,
+					snippets: [{ "id": "1jryvaskz", "name": "Welcome to Codehoney", "isSelected": true, "code": "this is your first snippet", "description": "snipp snipp snipp", "tags": ['welcome'], "timeStamp": 1549800662580 }]
+				}],
+				tags: [{ "id": 0, "name": "welcome", "counter": 1, "isSelected": false }]
+			}
+			this.replaceState(Object.assign(state, EMPTY_STATE));
+		}
+	},
 	[types.ADD_LANGUAGE](state, { /*milestone*/ }) {
 
 	},
@@ -8,7 +34,7 @@ const mutations = {
 
 	},
 	[types.ADD_SNIPPET](state, { id, language }) {
-		let snippet = {
+		const SNIPPET = {
 			id,
 			name: "a beautiful new snippet",
 			isSelected: false,
@@ -17,7 +43,7 @@ const mutations = {
 			tags: [],
 			timeStamp: Date.now()
 		};
-		language.snippets.unshift(snippet);
+		language.snippets.unshift(SNIPPET);
 	},
 	[types.SELECT_LANGUAGE](state, { id }) {
 		let language = state.languages.find(language => language.id === id);
@@ -38,7 +64,7 @@ const mutations = {
 		}
 	},
 	[types.SELECT_SNIPPET](state, { snippets, activeSnippet, id }) {
-		let snippet = snippets.find(snippet => snippet.id === id);
+		let snippet = id ? snippets.find(snippet => snippet.id === id) : snippets[0];
 		activeSnippet.isSelected = false;
 		snippet.isSelected = true;
 	},
@@ -54,9 +80,13 @@ const mutations = {
 			let snippet = language.snippets[index - 1] || language.snippets[index]
 			snippet.isSelected = true;
 		}
-	},
-	[types.EDIT_SNIPPET](state, { /*milestone*/ }) {
 
+	},
+	[types.UPDATE_SNIPPET](state, { activeSnippet, snippets, id, code, tag, name, description }) {
+		let snippet = snippets.find(snippet => snippet.id === id);
+		activeSnippet.code = code ? code : activeSnippet.code;
+		activeSnippet.name = name ? name : activeSnippet.name;
+		activeSnippet.description = description ? description : activeSnippet.description;
 	},
 	[types.SEARCH_SNIPPET](state, { payload }) {
 		state.searchQuery = payload;

@@ -1,7 +1,7 @@
 <template>
-    <div class="Icon" @click="$emit('click')" @mouseover="mouseover" @mouseleave="mouseleave">
-        <span v-html="require(`!raw-loader!../assets/icon-${this.icon}.svg`)"></span>
-        <span class="Hint" :style="{'color':fill}">{{hint || icon}}</span>
+    <div class="Icon" @click="click" @mouseover="mouseover" @mouseleave="mouseleave">
+        <span v-html="require(`!raw-loader!../assets/icon/icon-${this.icon}.svg`)"></span>
+        <span class="Hint" :style="{'color':fill}">{{name}}</span>
     </div>
 </template>
 <script>
@@ -15,48 +15,59 @@ export default {
         hint: String,
         morphTo: String
     },
-    data: () => ({ svg: null }),
+    data: () => ({
+        svg: null,
+        name: null,
+        clicked: false
+    }),
     methods: {
+        click(el) {
+            this.name = this.hint;
+            this.clicked = true;
+
+            setTimeout(() => {
+                this.clicked = false;
+                this.mouseleave(el);
+                setTimeout(() => { this.name = this.icon; }, 300);
+            }, 1000);
+            this.$emit('click');
+        },
         mouseover(el) {
             this.$el.classList.add('is-hovering');
 
             if (this.morphTo) {
-                let icon = require(`!raw-loader!../assets/icon-${this.morphTo}.svg`);
-                let svg = document.createElement('div');
-                svg.innerHTML = icon.trim();
-                let paths = [...svg.querySelectorAll('path')].map((d) => d.getAttribute('d'));
-                let targets = [...this.svg.querySelectorAll('path')]
-
-                for (let i = 0; i < paths.length; i++) {
-                    this.animate(targets[i], paths[i]);
-                }
+                let icon = require(`!raw-loader!../assets/icon/icon-${this.morphTo}.svg`);
+                let paths = this.path(icon);
+                let targets = [...this.svg.querySelectorAll('path')];
+                this.animate(targets, paths);
             }
-        },
-        animate(target, path) {
-            console.log(path);
-            anime({
-                targets: target,
-                d: path,
-                duration: 150,
-                easing: 'cubicBezier(.5, .05, .1, .3)',
-                complete: function() {
-
-                }
-            });
         },
         mouseleave(el) {
+            if (this.clicked) return
+
             this.$el.classList.remove('is-hovering');
 
-            let icon = require(`!raw-loader!../assets/icon-${this.icon}.svg`);
+            let icon = require(`!raw-loader!../assets/icon/icon-${this.icon}.svg`);
+            let paths = this.path(icon);
+            let targets = [...this.svg.querySelectorAll('path')];
+            this.animate(targets, paths);
+        },
+        path(icon) {
             let svg = document.createElement('div');
             svg.innerHTML = icon.trim();
-            let paths = [...svg.querySelectorAll('path')].map((d) => d.getAttribute('d'));
-            let targets = [...this.svg.querySelectorAll('path')]
-
+            return [...svg.querySelectorAll('path')].map((d) => d.getAttribute('d'));
+        },
+        animate(targets, paths) {
             for (let i = 0; i < paths.length; i++) {
-                this.animate(targets[i], paths[i]);
+                anime({
+                    targets: targets[i],
+                    d: paths[i],
+                    duration: 150,
+                    easing: 'cubicBezier(.5, .05, .1, .3)',
+                });
             }
-        }
+
+        },
     },
     mounted() {
         this.svg = this.$el.querySelector('svg');
@@ -64,6 +75,7 @@ export default {
         this.svg.removeAttribute('width');
         this.svg.setAttribute('color', this.fill);
         this.svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+        this.name = this.icon;
     }
 }
 
@@ -94,14 +106,14 @@ export default {
     svg {
         display: block;
         fill: currentColor;
-        padding: 5px;
+        padding: 10px;
         box-sizing: content-box;
         vertical-align: middle;
         transition: all .15s $ease;
         fill: currentColor !important;
         stroke: currentColor !important;
-        width: 1rem;
-        height: 1rem;
+        width: 1.125rem;
+        height: 1.125rem;
         display: flex;
         justify-content: center;
         align-items: center;

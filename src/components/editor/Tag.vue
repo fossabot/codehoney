@@ -22,7 +22,6 @@ export default {
     border: solid 1px rgba(235, 235, 235, 0.25);
     position: relative;
     display: block;
-    cursor: pointer;
     line-height: 1;
 
     &::before {

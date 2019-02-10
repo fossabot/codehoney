@@ -1,13 +1,20 @@
 <template>
   <div class="Editor" v-if="Object.keys(snippet).length">
-    <Headline :title="snippet.name" :description="snippet.description" />
+    <Headline 
+      :title="snippet.name" 
+      :description="snippet.description" 
+      @updateTitle="handleTitleChange"
+      @updateDescription="handleDescriptionChange"  
+      />
+
     <Tags :tags="snippet.tags" />
+
     <Toolbar 
       @copy="handleCopy" 
       @beautify="handleBeautify"
       @expand="handleExpand" 
       @remove="handleRemove" />
-    <Code :content="snippet.code" @update="handleTextchange"/>
+    <Code :content="snippet.code" @update="handleCodeChange"/>
   </div>
 </template>
 <script>
@@ -28,7 +35,8 @@ export default {
   },
   props: {
     snippet: Object
-  },    
+  },
+  data: () => ({}),
   methods: {
     handleCopy(){
       navigator.clipboard.writeText(this.beautify(this.snippet.code));
@@ -40,11 +48,17 @@ export default {
       this.$emit('expand');
     },
     handleRemove() {
-      console.log('handleRemove');
       this.removeSnippet(this.snippet.id);
     },
-    handleTextchange(code){
-      // this.updateSnippetCode(this.snippet.id,code);
+    handleTitleChange(title){
+      console.log(title)
+      this.updateSnippet({id:this.snippet.id, name:title});
+    },
+    handleDescriptionChange(description){
+      this.updateSnippet({id:this.snippet.id, description});
+    },
+    handleCodeChange(code){
+      this.updateSnippet({id:this.snippet.id, code});
     },
     beautify(code) {
       let options = { 
@@ -56,9 +70,9 @@ export default {
     },
     ...mapActions([
         'removeSnippet',
+        'updateSnippet'
       ]),
     },
-   data: () => ({}),
    created: function (argument) {}
 };
 

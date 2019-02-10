@@ -2,7 +2,7 @@
     <div class="Search">
         <input required type="text" name="" v-model="searchquery" @keyup="searchSnippet(searchquery)">
         <label>search for your code...</label>
-        <img class="Icon Icon--search" src="@/assets/icon-search.svg">
+        <img class="Icon Icon--search" src="@/assets/icon/icon-search.svg">
     </div>
 </template>
 <script>

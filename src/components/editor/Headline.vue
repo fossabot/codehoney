@@ -1,11 +1,11 @@
 <template>
     <div class="Headline">
         <div class="Wrapper">
-            <h1 class="Title" contenteditable>{{title}}</h1>
+            <input class="Title" @keydown="updateTitle" v-model="mTitle" />
             <label class="Label">H1</label>
         </div>
         <div class="Wrapper">
-            <p class="Description" contenteditable>{{description}}</p>
+            <input class="Description" @keydown="updateDescription" v-model="mDescription" />
             <label class="Label">meta</label>
         </div>
     </div>
@@ -15,8 +15,34 @@ export default {
     name: 'Headline',
     props: {
         title: String,
-        description: String,
+        description: String
     },
+    methods: {
+        updateTitle(el) {
+            this.$emit('updateTitle', el.target.innerText);
+        },
+        updateDescription(el) {
+            this.$emit('updateDescription', el.target.innerText);
+        },
+    },
+    computed: {
+        mTitle: {
+            get() {
+                return this.title;
+            },
+            set(value) {
+                this.$emit('updateTitle', value);
+            }
+        },
+        mDescription: {
+            get() {
+                return this.description;
+            },
+            set(value) {
+                !!value && this.$emit('updateDescription', value);
+            }
+        }
+    }
 }
 
 </script>
@@ -28,6 +54,7 @@ export default {
 
     .Wrapper {
         position: relative;
+        margin-bottom: 15px;
     }
 
     .Title {
@@ -35,8 +62,12 @@ export default {
         margin: 0;
         line-height: 1;
         outline: none;
-        margin-bottom: 15px;
         margin-top: 0;
+        background-color: transparent;
+        border: none;
+        color: color(white);
+        font-family: font(regular);
+        font-weight: bold;
     }
 
     .Description {

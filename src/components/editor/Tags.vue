@@ -3,19 +3,13 @@
     <Tag v-for="(tag,i) in tags" :key="i" :name="tag" />
     <label class="Label" v-if="tags">tags</label>
     <div class="Add" :class="{'is-active':addTag}" @click="addTag=!addTag">
-      <svg viewBox="0 0 40 40">
-        <g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-width="2">
-          <polyline class="Add-top" points="19.9 .995 19.9 20.075 39.818 20.075" />
-          <polyline class="Add-bottom" points="0 20 0 39.08 19.918 39.08" transform="rotate(180 9.959 29.54)" />
-        </g>
-      </svg>
+      <img svg-inline src="@/assets/icon/icon-plus.svg">
       <input type="" name="">
     </div>
   </div>
 </template>
 <script>
 import Tag from './Tag.vue';
-let iconPlus = require('../../assets/icon-plus-expand.svg');
 export default {
   name: 'Tags',
   components: {
@@ -48,7 +42,6 @@ export default {
       width: 15px;
       height: 15px;
       overflow: visible;
-
     }
 
     .Add-bottom,

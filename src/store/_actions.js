@@ -7,22 +7,24 @@ const actions = {
 	addTag({ commit }, payload) {
 		commit(types.ADD_TAG, { payload })
 	},
-	addSnippet({ getters, commit }, id) {
+	addSnippet({ dispatch, getters, commit }, id) {
 		let language = getters.activeLanguage;
 		commit(types.ADD_SNIPPET, { id, language })
+		dispatch('selectSnippet', id);
 	},
 	selectLanguage({ commit }, payload) {
 		commit(types.SELECT_LANGUAGE, { id: payload })
 	},
-	selectTag({ getters, commit }, payload) {
-		let snippets = getters.snippets;
+	selectTag({ dispatch, getters, commit }, payload) {
 		let tags = getters.tags;
-		commit(types.SELECT_TAG, { tags, id: payload, snippets })
+		commit(types.SELECT_TAG, { tags, id: payload });
+		let snippet = getters.snippetsFilteredByTags && getters.snippetsFilteredByTags[0];
+
+		dispatch('selectSnippet', snippet ? snippet.id : 0);
 	},
-	selectSnippet({ getters, commit }, id) {
+	selectSnippet({ getters, commit }, id = null) {
 		let snippets = getters.activeLanguage.snippets;
 		let activeSnippet = getters.activeSnippet;
-
 		commit(types.SELECT_SNIPPET, { snippets, activeSnippet, id })
 	},
 	removeLanguage({ commit }, payload) {
@@ -35,11 +37,15 @@ const actions = {
 		let language = getters.activeLanguage;
 		commit(types.REMOVE_SNIPPET, { id: payload, language })
 	},
-	editSnippet({ commit }, payload) {
-		commit(types.EDIT_SNIPPET, { payload })
+	updateSnippet({ getters, commit }, payload) {
+		let snippets = getters.activeLanguage.snippets;
+		let activeSnippet = getters.activeSnippet;
+
+		commit(types.UPDATE_SNIPPET, { activeSnippet, snippets, ...payload })
 	},
-	searchSnippet({ commit }, payload) {
-		commit(types.SEARCH_SNIPPET, { payload })
+	searchSnippet({ dispatch, commit }, payload) {
+		commit(types.SEARCH_SNIPPET, { payload });
+		dispatch('selectSnippet');
 	},
 }
 

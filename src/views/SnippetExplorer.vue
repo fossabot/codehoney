@@ -2,7 +2,7 @@
   <div class="SnippetExplorer">
     <Search v-if="snippets"/>
     <Snippets :snippets="snippets" @select="selectSnippet" />
-    <Button round icon><img svg-inline src="@/assets/icon-plus.svg" @click="handleClick"></Button>
+    <Button round icon><img svg-inline src="@/assets/icon/icon-plus.svg" @click="handleClick"></Button>
   </div>
 </template>
 <script>
@@ -27,7 +27,6 @@ export default {
     handleClick() {
       let uID = uniqid();
       this.addSnippet(uID);
-      this.selectSnippet(uID);
     },
     ...mapActions([
       'selectSnippet',

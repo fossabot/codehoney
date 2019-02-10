@@ -30,3 +30,14 @@ html {
 	height: 6px;
 	width: 6px;
 }
+
+input {
+	outline: none;
+	margin: 0;
+	padding: 0;
+	background-color: transparent;
+	border: none;
+	color: color(white);
+	font-family: font(regular);
+	width: 100%;
+}
