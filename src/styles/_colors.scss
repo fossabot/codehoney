@@ -1,30 +1,31 @@
 $colors: (
-    text: #E7ECEF,
-    text-disabled: #7f7f7f,
+  text: #E7ECEF,
+  text-disabled: #7f7f7f,
 
-    // purple: #332E54,
-    // purple: #2c2263,
-    // 23272D
-    purple:#23272D,
-    light-purple: lighten(rgba(#23272D,0.75), 30%),
-    orange: #f4b865,
-    red: #F05D5E,
-    green: #5EB5B1,
-    blue: #59A6D0,
+  // purple: #332E54,
+  purple: #30285a,
+  // 23272D
+  // #1D1A28
+  //#191836
+  // purple:#23272D,
+  light-purple: lighten(rgba(#23272D, 0.75), 30%),
+  orange: #f4b865,
+  red: #F05D5E,
+  green: #5EB5B1,
+  blue: #59A6D0,
 
-    gray: rgba(#332E54,1),
-    comment: #ffffff47,
-    white: #EBEBEB,
-    black: #000000,
+  gray: rgba(#332E54, 1),
+  comment: #ffffff47,
+  white: #EBEBEB,
+  black: #000000,
 
-    bg: #000
-);
+  bg: #000);
 
 @function color($key) {
-    @if map-has-key($colors, $key) {
-        @return map-get($colors, $key);
-    }
+  @if map-has-key($colors, $key) {
+    @return map-get($colors, $key);
+  }
 
-    @warn "Unknown `#{$key}` in $colors.";
-    @return null;
+  @warn "Unknown `#{$key}` in $colors.";
+  @return null;
 }

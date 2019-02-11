@@ -1,5 +1,8 @@
 <template>
-  <div class="WindowButton" :class="[{'is-red':red},{'is-green':green},{'is-orange':orange},]"></div>
+  <div
+    class="WindowButton"
+    :class="[{'is-red':red},{'is-green':green},{'is-orange':orange},]"
+  ></div>
 </template>
 <script>
 export default {

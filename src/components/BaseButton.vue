@@ -1,11 +1,15 @@
 <template>
-  <div class="Button" @click="$emit('click')" :class='[{"is-icon":icon},{"is-round":round}]'>
+  <div
+    class="BaseButton"
+    @click="$emit('click')"
+    :class='[{"is-icon":icon},{"is-round":round}]'
+  >
     <slot></slot>
   </div>
 </template>
 <script>
 export default {
-  name: 'Button',
+  name: 'BaseButton',
   props: {
     title: String,
     icon: Boolean,
@@ -16,7 +20,7 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.Button {
+.BaseButton {
   color: color(white);
   padding: 10px 25px;
   position: relative;

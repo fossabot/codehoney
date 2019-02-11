@@ -1,8 +1,8 @@
 const state = {
-	version: '',
-	searchQuery: '',
-	activeTags: [],
-	languages: [],
-	tags: [{}]
+  version: '',
+  searchQuery: '',
+  activeTags: [],
+  languages: [],
+  tags: [{}]
 }
 export default state;

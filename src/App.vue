@@ -1,9 +1,19 @@
 <template>
   <div id="app">
-    <Sidebar :languages="languages" :tags="tags" :isHidden="editorFullscreen" />
-    <div class="Window" :class="{'is-expanded':editorFullscreen}">
+    <Sidebar
+      :languages="languages"
+      :tags="tags"
+      :isHidden="editorFullscreen"
+    />
+    <div
+      class="Window"
+      :class="{'is-expanded':editorFullscreen}"
+    >
       <SnippetExplorer :snippets="snippetsFilteredBySearch || snippetsFilteredByTags || snippets" />
-      <Editor :snippet="snippet" @expand="editorExpand()" />
+      <Editor
+        :snippet="snippet"
+        @expand="editorExpand()"
+      />
     </div>
     <div class="WindowButtons">
       <WindowButton red />

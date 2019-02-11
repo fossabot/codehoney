@@ -1,20 +1,22 @@
 <template>
-  <div class="Editor" v-if="Object.keys(snippet).length">
-    <Headline 
-      :title="snippet.name" 
-      :description="snippet.description" 
+  <div
+    class="Editor"
+    v-if="Object.keys(snippet).length"
+  >
+    <Headline
+      :title="snippet.name"
+      :description="snippet.description"
       @updateTitle="handleTitleChange"
-      @updateDescription="handleDescriptionChange"  
-      />
-
+      @updateDescription="handleDescriptionChange"
+    />
     <Tags :tags="snippet.tags" />
-
-    <Toolbar 
-      @copy="handleCopy" 
+    <Toolbar
+      @copy="handleCopy"
       @beautify="handleBeautify"
-      @expand="handleExpand" 
-      @remove="handleRemove" />
-    <Code :content="snippet.code" @update="handleCodeChange"/>
+      @expand="handleExpand"
+      @remove="handleRemove"
+    />
+    <Code :code="snippet.code" @update="handleCodeChange"/>
   </div>
 </template>
 <script>
@@ -63,7 +65,6 @@ export default {
     beautify(code) {
       let options = { 
         indent_size: 4, 
-        end_with_newline  : true,
         wrap_line_length: 100,
       };
       return beautify(code, options);

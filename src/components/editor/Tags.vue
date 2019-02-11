@@ -1,10 +1,27 @@
 <template>
   <div class="Tags">
-    <Tag v-for="(tag,i) in tags" :key="i" :name="tag" />
-    <label class="Label" v-if="tags">tags</label>
-    <div class="Add" :class="{'is-active':addTag}" @click="addTag=!addTag">
-      <img svg-inline src="@/assets/icon/icon-plus.svg">
-      <input type="" name="">
+    <Tag
+      v-for="(tag,i) in tags"
+      :key="i"
+      :name="tag"
+    />
+    <label
+      class="Label"
+      v-if="tags"
+    >tags</label>
+    <div
+      class="Add"
+      :class="{'is-active':addTag}"
+      @click="addTag=!addTag"
+    >
+      <img
+        svg-inline
+        src="@/assets/icon/icon-plus.svg"
+      >
+      <input
+        type=""
+        name=""
+      >
     </div>
   </div>
 </template>

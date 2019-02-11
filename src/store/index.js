@@ -10,16 +10,15 @@ import { version } from '../../package.json';
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-	strict: true,
-	state: Object.assign(state, { version }),
-	getters,
-	mutations,
-	actions
+  strict: true,
+  state: Object.assign(state, { version }),
+  getters,
+  mutations,
+  actions
 });
 
 store.subscribe((mutation, state) => {
-	console.log('subscriber');
-	localStorage.setItem('store', JSON.stringify(state));
+  localStorage.setItem('store', JSON.stringify(state));
 });
 
 export default store;

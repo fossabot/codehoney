@@ -1,35 +1,35 @@
 .token {
-	text-shadow: none;
-	background-color: transparent;
-	white-space: normal;
-	color: #FFFDE9;
+  text-shadow: none;
+  background-color: transparent;
+  white-space: normal;
+  color: #FFFDE9;
 
-	&.keyword {
-		color: #dc65ff;
-	}
+  &.keyword {
+    color: #cc99cd;
+  }
 
-	&.operator {
-		color: #2bbee2 !important;
-		background-color: transparent;
-	}
+  &.operator {
+    color: #2bbee2 !important;
+    background-color: transparent;
+  }
 
-	&.function {
-		color: #00b4ff;
-	}
-	&.function-variable{
-		color: #D7C19A;
-	}
-	&.number {
-		color: #FAD000;
-	}
+  &.function {
+    color: #f08d49;
+  }
+  &.function-variable{
+    color: #D7C19A;
+  }
+  &.number {
+    color: #f08d49;
+  }
 
-	&.string {
-		color: #9BC692;
-	}
-	&.comment{
-		color: color(comment);
-	}
-	&.punctuation{
-
-	}
+  &.string {
+    color: #7ec699;
+  }
+  &.comment{
+    color: color(comment);
+  }
+  &.punctuation{
+    color: #ccc;
+  }
 }

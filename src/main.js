@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import App from './App.vue';
 import store from './store/';
-import SvgIcon from './components/SvgIcon.vue'
+import BaseIcon from './components/BaseIcon.vue'
 
-Vue.component('svgicon', SvgIcon)
+Vue.component('Icon', BaseIcon)
 Vue.config.productionTip = false;
 
 new Vue({

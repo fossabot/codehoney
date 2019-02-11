@@ -1,33 +1,80 @@
 <template>
-    <div class="Toolbar">
-        <svgicon @click="copy" icon="copy" hint="copied" morphTo="copy-2" fill="#f4b865" />
-        <svgicon @click="beautify" icon="tidy" hint="tidy!" morphTo="tidy-2" fill="#5EB5B1" />
-        <svgicon @click="expand" icon="expand" hint="swishh" morphTo="expand-2" fill="#59A6D0"/>
-        <svgicon @click="remove" icon="bin" hint="removed" morphTo="bin-2" fill="#F05D5E" />
-    </div>
+  <div class="Toolbar">
+    <Icon
+      @click="copy"
+      icon="copy"
+      name="copy"
+      morphTo="copy-2"
+      hint="copied"
+      fill="#f4b865"
+    />
+    <Icon
+      @click="beautify"
+      icon="tidy"
+      name="tidy"
+      morphTo="tidy-2"
+      hint="tidy!"
+      fill="#5EB5B1"
+    />
+    <Icon
+      @click="expand"
+      icon="expand-2"
+      name="expand"
+      morphTo="collapse"
+      hint="swishh"
+      fill="#59A6D0"
+    />
+    <Icon
+      @click="remove"
+      icon="bin"
+      name="remove"
+      morphTo="bin-2"
+      hint="removed"
+      fill="#F05D5E"
+    />
+  </div>
 </template>
 <script>
 export default {
-    name: 'Toolbar',
-    components: {},
-    props: {
-        title: String,
-        description: String,
+  name: 'Toolbar',
+  components: {},
+  props: {
+    title: String,
+    description: String,
+  },
+  data: () => ({ expanded: false }),
+  methods: {
+    copy(code) {
+      this.$emit('copy');
     },
-    methods: {
-        copy(code) {
-            this.$emit('copy');
-        },
-        remove() {
-            this.$emit('remove');
-        },
-        expand() {
-            this.$emit('expand');
-        },
-        beautify() {
-            this.$emit('beautify');
-        },
+    remove() {
+      this.$emit('remove');
     },
+    expand() {
+      setTimeout(() => { this.expanded = !this.expanded; }, 500);
+      this.$emit('expand');
+    },
+    beautify() {
+      this.$emit('beautify');
+    },
+    async expandState() {
+      let state = await new Promise(resolve => setTimeout(() => {
+        if (this.expanded) {
+          resolve('collapse');
+          return 'collapse';
+        };
+        resolve('expand');
+        return 'expand'
+      }, 500));
+      return await state;
+    },
+    expandMorph() {
+      if (this.expanded) {
+        return 'collapse-2'
+      };
+      return 'expand-2'
+    }
+  },
 }
 
 </script>

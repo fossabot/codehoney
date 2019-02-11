@@ -1,20 +1,24 @@
 <template>
-    <div class="Category" :class="{'is-selected':item.isSelected}" @click="click">
-        <span class="Name">{{item.name}}</span>
-        <span class="Counter">{{item.counter ? item.counter : 0}}</span>
-    </div>
+  <div
+    class="Category"
+    :class="{'is-selected':item.isSelected}"
+    @click="click"
+  >
+    <span class="Name">{{item.name}}</span>
+    <span class="Counter">{{item.counter ? item.counter : 0}}</span>
+  </div>
 </template>
 <script>
 export default {
-    name: 'Category',
-    props: {
-        item: Object,
+  name: 'Category',
+  props: {
+    item: Object,
+  },
+  methods: {
+    click(el) {
+      this.$emit('click', this.item.id);
     },
-    methods: {
-        click(el) {
-            this.$emit('click', this.item.id);
-        },
-    },
+  },
 }
 
 </script>

@@ -1,5 +1,9 @@
 <template>
-  <div class="Snippet" :class="[{'is-selected':item.isSelected}]" @click="click">
+  <div
+    class="Snippet"
+    :class="[{'is-selected':item.isSelected}]"
+    @click="click"
+  >
     <h3>{{item.name}}</h3>
     <p class="Description">{{item.description}}</p>
   </div>

@@ -1,8 +1,23 @@
 <template>
-  <div class="Sidebar" :class="{'is-hidden':isHidden}">
-    <img svg-inline class="Logo" src="@/assets/logo.svg">
-    <Categories title="Languages" :categories="languages" @select="selectLanguage" />
-    <Categories title="Tags" :categories="tags" @select="selectTag" />
+  <div
+    class="Sidebar"
+    :class="{'is-hidden':isHidden}"
+  >
+    <img
+      svg-inline
+      class="Logo"
+      src="@/assets/logo.svg"
+    >
+    <Categories
+      title="Languages"
+      :categories="languages"
+      @select="selectLanguage"
+    />
+    <Categories
+      title="Tags"
+      :categories="tags"
+      @select="selectTag"
+    />
   </div>
 </template>
 <script>

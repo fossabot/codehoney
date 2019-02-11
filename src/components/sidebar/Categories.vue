@@ -1,11 +1,12 @@
 <template>
   <div class="Categories">
     <h3 class="Title">{{title}}</h3>
-    <Category 
-      v-for="category in categories" 
-      :key="category.id" 
-      :item="category" 
-      @click="handleClick($event)" />
+    <Category
+      v-for="category in categories"
+      :key="category.id"
+      :item="category"
+      @click="handleClick($event)"
+    />
   </div>
 </template>
 <script>

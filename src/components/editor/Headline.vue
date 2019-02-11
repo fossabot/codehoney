@@ -1,48 +1,46 @@
 <template>
-    <div class="Headline">
-        <div class="Wrapper">
-            <input class="Title" @keydown="updateTitle" v-model="mTitle" />
-            <label class="Label">H1</label>
-        </div>
-        <div class="Wrapper">
-            <input class="Description" @keydown="updateDescription" v-model="mDescription" />
-            <label class="Label">meta</label>
-        </div>
+  <div class="Headline">
+    <div class="Wrapper">
+      <input
+        class="Title"
+        v-model="mTitle"
+      />
+      <label class="Label">H1</label>
     </div>
+    <div class="Wrapper">
+      <input
+        class="Description"
+        v-model="mDescription"
+      />
+      <label class="Label">meta</label>
+    </div>
+  </div>
 </template>
 <script>
 export default {
-    name: 'Headline',
-    props: {
-        title: String,
-        description: String
+  name: 'Headline',
+  props: {
+    title: String,
+    description: String
+  },
+  computed: {
+    mTitle: {
+      get() {
+        return this.title;
+      },
+      set(value) {
+        this.$emit('updateTitle', value);
+      }
     },
-    methods: {
-        updateTitle(el) {
-            this.$emit('updateTitle', el.target.innerText);
-        },
-        updateDescription(el) {
-            this.$emit('updateDescription', el.target.innerText);
-        },
-    },
-    computed: {
-        mTitle: {
-            get() {
-                return this.title;
-            },
-            set(value) {
-                this.$emit('updateTitle', value);
-            }
-        },
-        mDescription: {
-            get() {
-                return this.description;
-            },
-            set(value) {
-                !!value && this.$emit('updateDescription', value);
-            }
-        }
+    mDescription: {
+      get() {
+        return this.description;
+      },
+      set(value) {
+        this.$emit('updateDescription', value);
+      }
     }
+  }
 }
 
 </script>

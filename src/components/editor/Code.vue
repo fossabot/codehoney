@@ -1,49 +1,46 @@
 <template>
   <div class="Code">
-    <textarea class="Textarea" focus ref="textarea" @keydown="update" v-model="coderaw"></textarea>
-    <pre><code ref="code" v-html="code"></code></pre>
-    <span class="LineNumbers">
-        <span v-for="(line,i) of lines" :key="randomID(i)" class="LineNumber">{{line}}</span>
-    </span>
+    <textarea
+      class="Textarea"
+      focus
+      ref="textarea"
+      @keydown="handleKeycode"
+      v-model="mCode"
+    ></textarea>
+    <pre><code ref="code" v-html="highlight(mCode)"></code></pre>
+    <div class="LineNumbers">
+      <span v-for="(line,i) of lines" :key="i" class="LineNumber">{{line}}</span>
+    </div>
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
-
 const Prism = require('prismjs');
-import prismtheme from 'prismjs/themes/prism-tomorrow.css';
-
 let beautify = require('js-beautify');
-let uniqid = require('uniqid');
 
 export default {
   name: 'Code',
   props: {
-    content: String,
+    code: String,
   },
   data: () => ({
-    code: "",
-    coderaw: "",
     lines: 0
   }),
   watch: {
-    content: {
+    code: {
       immediate: true,
-      handler(content) {
-        let code = this.beautify(content);
-        let html = this.highlight(code);
-        this.code = html;
-        this.coderaw = JSON.parse(JSON.stringify(code));
-        this.lineNumbers();
+      handler: function(val) {
+        setTimeout(() => { this.lineNumbers(); }, 50);
       }
     }
   },
   methods: {
     beautify(code) {
-      let language = this.language.name.toLowerCase();
-
-      if (!(language === 'javascript' && language === 'js')) return code
-      return beautify(code, { indent_size: 4 });
+      let options = {
+        indent_size: 4,
+        wrap_line_length: 100,
+      };
+      return beautify(code, options);
     },
     highlight(code) {
       let language = this.language.name.toLowerCase();
@@ -51,24 +48,10 @@ export default {
       return Prism.highlight(code, Prism.languages[language], language);
     },
     lineNumbers() {
-      setTimeout(() => {
-        let code = this.$refs.code;
-        let codeHeight = code ? code.offsetHeight : 400;
-        let lines = codeHeight / 24 > 0 ? (codeHeight / 24).toFixed(0) : 1;
-        this.lines = [...Array(Number(lines)).keys()].map(x => x + 1);
-      }, 1);
-    },
-    randomID(i) {
-      return uniqid(i);
-    },
-    update(e) {
-      this.handleKeycode(e);
-      setTimeout(() => {
-        let html = this.highlight(this.coderaw);
-        this.code = html;
-        this.lineNumbers();
-        this.$emit('update', this.coderaw.replace(/\n\r?/g, '').replace(/    ?/g, ''));
-      }, 10);
+      let code = this.$refs.code;
+      let codeHeight = code ? code.offsetHeight : 400;
+      let lines = codeHeight / 24 > 0 ? (codeHeight / 24).toFixed(0) : 1;
+      this.lines = [...Array(Number(lines)).keys()].map(x => x + 1);
     },
     setCaretPosition(pos) {
       let textarea = this.$refs.textarea;
@@ -84,7 +67,7 @@ export default {
         e.preventDefault();
         let start = textarea.selectionStart;
         let end = textarea.selectionEnd;
-        this.coderaw = textarea.value.substring(0, start) + TAB + textarea.value.substring(end);
+        this.mCode = textarea.value.substring(0, start) + TAB + textarea.value.substring(end);
         setTimeout(() => { this.setCaretPosition(start + TAB.length); }, 5);
       }
     }
@@ -92,13 +75,18 @@ export default {
   computed: { ...mapGetters({
       language: 'activeLanguage',
     }),
+    mCode: {
+      get() {
+        return this.code;
+      },
+      set(value) {
+        this.$emit('update', value);
+      }
+    }
   },
-  created: function() {},
-  mounted: function() {}
 }
 
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import '../../styles/code-highlighting';
 
