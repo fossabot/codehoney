@@ -37,7 +37,7 @@ export default {
 };
 
 </script>
-<style scoped ang="scss">
+<style scoped lang="scss">
 .Snippets {
     position: relative;
     overflow: auto;
@@ -61,7 +61,7 @@ export default {
 
     .list-leave-active {
         height: 96px;
-        transition: all .5s $ease, background-color .2s $ease, height .3s .2s $ease, padding .3s .2s $ease;
+        transition: all .4s $ease, background-color .2s $ease, height .3s .2s $ease, padding .3s .2s $ease;
     }
 
     .list-enter {
