@@ -1,5 +1,6 @@
 const state = {
   version: '',
+  undocounter: 0,
   searchQuery: '',
   activeTags: [],
   languages: [],

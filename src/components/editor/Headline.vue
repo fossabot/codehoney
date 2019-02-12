@@ -49,7 +49,8 @@ export default {
     color: color(white);
     margin-top: 40px;
     margin-bottom: 0px;
-
+    margin-bottom: 15px;
+    
     .Wrapper {
         position: relative;
         margin-bottom: 15px;
@@ -81,7 +82,8 @@ export default {
         transform: translateX(calc(-100% - 15px));
         bottom: 0;
         font-size: 0.85rem;
-        color: rgba(color(white), 0.25)
+        color: rgba(color(white), 0.25);
+        user-select: none;
     }
 
     @media (min-width: breakpoint(desktop-small)) {

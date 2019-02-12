@@ -32,6 +32,14 @@
       hint="removed"
       fill="#F05D5E"
     />
+    <Icon
+      @click="undo"
+      icon="undo"
+      name="undo"
+      morphTo="undo-2"
+      hint="reverted"
+      fill="#5DF0EF"
+    />
   </div>
 </template>
 <script>
@@ -51,29 +59,14 @@ export default {
       this.$emit('remove');
     },
     expand() {
-      setTimeout(() => { this.expanded = !this.expanded; }, 500);
       this.$emit('expand');
     },
     beautify() {
       this.$emit('beautify');
     },
-    async expandState() {
-      let state = await new Promise(resolve => setTimeout(() => {
-        if (this.expanded) {
-          resolve('collapse');
-          return 'collapse';
-        };
-        resolve('expand');
-        return 'expand'
-      }, 500));
-      return await state;
+    undo(){
+      this.$emit('undo');
     },
-    expandMorph() {
-      if (this.expanded) {
-        return 'collapse-2'
-      };
-      return 'expand-2'
-    }
   },
 }
 

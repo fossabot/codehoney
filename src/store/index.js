@@ -17,7 +17,22 @@ const store = new Vuex.Store({
   actions
 });
 
+store.subscribeAction({
+  before: (action, state) => {
+    console.log(action)
+    const actions = ['selectSnippet', 'undo', 'undoIncrement'];
+    if (actions.includes(action.type)) return;
+    localStorage.setItem('store-snapshot-' + state.undocounter, JSON.stringify(state));
+  },
+  after: (action, state) => {}
+});
+
 store.subscribe((mutation, state) => {
+  const mutationTypes = ['SELECT_SNIPPET', 'UNDO', 'UNDO_INCREMENT', 'INITIALISE_STORE'];
+  console.log(mutation)
+  if (mutationTypes.includes(mutation.type)) return;
+
+  store.dispatch('undoIncrement');
   localStorage.setItem('store', JSON.stringify(state));
 });
 

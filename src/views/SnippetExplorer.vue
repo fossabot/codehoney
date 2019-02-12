@@ -18,11 +18,11 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex'
+import uniqid from 'uniqid';  
+import { mapActions } from 'vuex';
 import BaseButton from '../components/BaseButton.vue';
 import Search from '../components/snippetExplorer/Search.vue';
 import Snippets from '../components/snippetExplorer/Snippets.vue';
-const uniqid = require('uniqid');
 
 export default {
   name: 'SnippetExplorer',

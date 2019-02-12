@@ -16,6 +16,7 @@ const mutations = {
       const EMPTY_STATE = {
         'searchQuery': '',
         'activeTags': [],
+        'undocounter': '0',
         'languages': [{
           'id': 0,
           'name': 'Javascript',
@@ -99,6 +100,19 @@ const mutations = {
   [types.SEARCH_SNIPPET](state, { payload }) {
     state.searchQuery = payload;
   },
+  [types.UNDO](state) {
+    let undocounter = state.undocounter-1;
+    console.log(undocounter);
+    if (undocounter < 0) return;
+    const storeSnapshot = localStorage.getItem('store-snapshot-' + undocounter);
+    if (storeSnapshot) {
+      let store = JSON.parse(storeSnapshot);
+      this.replaceState(Object.assign(state, store));
+    }
+  },
+  [types.UNDO_INCREMENT](state) {
+    state.undocounter++;
+  }
 }
 
 export default mutations

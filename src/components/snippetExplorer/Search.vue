@@ -7,7 +7,7 @@
       v-model="searchquery"
       @keyup="searchSnippet(searchquery)"
     >
-    <label>search for your code...</label>
+    <label class="Label">search for your code...</label>
     <img
       class="Icon Icon--search"
       src="@/assets/icon/icon-search.svg"
@@ -44,7 +44,7 @@ export default {
     position: relative;
     display: flex;
 
-    label {
+    .Label {
         position: absolute;
         left: 5px;
         top: 0;
@@ -56,6 +56,7 @@ export default {
         animation-duration: .195s;
         animation-fill-mode: forwards;
         animation-timing-function: $ease;
+        user-select: none;
     }
 
     input {
@@ -90,6 +91,7 @@ export default {
         right: 20px;
         top: 32px;
         transform: scaleX(-1);
+        user-select: none;
     }
 
     @keyframes input-is-focused {
@@ -101,33 +103,6 @@ export default {
             transform: translateY(55px) translateZ(0);
         }
     }
-
-    // @keyframes input-is-focused {
-    //     0% {
-    //         transform: translateY(28px) translateZ(0);
-    //         opacity: 1;
-    //     }
-
-    //     26% {
-    //         transform: translateY(-20px) translateZ(0);
-    //         opacity: 1;
-    //     }
-
-    //     50% {
-    //         transform: translateY(-20px) translateZ(0);
-    //         opacity: 0;
-    //     }
-
-    //     51% {
-    //         transform: translateY(100px) translateZ(0);
-    //         opacity: 0;
-    //     }
-
-    //     100% {
-    //         transform: translateY(55px) translateZ(0);
-    //         opacity: 1;
-    //     }
-    // }
 
     @keyframes input-is-not-focused {
         0% {

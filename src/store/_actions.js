@@ -47,6 +47,12 @@ const actions = {
     commit(types.SEARCH_SNIPPET, { payload });
     dispatch('selectSnippet');
   },
+  undo({ commit }, payload){
+    commit(types.UNDO,);
+  },
+  undoIncrement({ commit }){
+    commit(types.UNDO_INCREMENT);
+  }
 }
 
 export default actions

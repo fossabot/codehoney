@@ -14,6 +14,9 @@ const types = {
 
   UPDATE_SNIPPET: 'UPDATE_SNIPPET',
   SEARCH_SNIPPET: 'SEARCH_SNIPPET',
+
+  UNDO: 'UNDO',
+  UNDO_INCREMENT: 'UNDO_INCREMENT'
 }
 
 export default types

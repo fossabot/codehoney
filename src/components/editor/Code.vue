@@ -9,14 +9,13 @@
     ></textarea>
     <pre><code ref="code" v-html="highlight(mCode)"></code></pre>
     <div class="LineNumbers">
-      <span v-for="(line,i) of lines" :key="i" class="LineNumber">{{line}}</span>
+      <span  v-for="(line,i) of lines" :key="i"  class="LineNumber">{{line}}</span>
     </div>
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
-const Prism = require('prismjs');
-let beautify = require('js-beautify');
+import Prism from 'prismjs';
 
 export default {
   name: 'Code',
@@ -35,13 +34,6 @@ export default {
     }
   },
   methods: {
-    beautify(code) {
-      let options = {
-        indent_size: 4,
-        wrap_line_length: 100,
-      };
-      return beautify(code, options);
-    },
     highlight(code) {
       let language = this.language.name.toLowerCase();
       language !== 'html' && require(`prismjs/components/prism-${language}.js`);

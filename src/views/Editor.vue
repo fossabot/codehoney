@@ -15,17 +15,18 @@
       @beautify="handleBeautify"
       @expand="handleExpand"
       @remove="handleRemove"
+      @undo="handleUndo"
     />
     <Code :code="snippet.code" @update="handleCodeChange"/>
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex';
+import beautify from 'js-beautify';
 import Headline from '../components/editor/Headline.vue';
 import Code from '../components/editor/Code.vue';
 import Tags from '../components/editor/Tags.vue';
 import Toolbar from '../components/editor/Toolbar.vue';
-import { mapActions } from 'vuex'
-const beautify = require('js-beautify');
 
 export default {
   name: 'Editor',
@@ -44,7 +45,7 @@ export default {
       navigator.clipboard.writeText(this.beautify(this.snippet.code));
     },
     handleBeautify(){
-      this.snippet.code = this.beautify(this.snippet.code);
+      this.handleCodeChange(this.beautify(this.snippet.code));
     },
     handleExpand(){
       this.$emit('expand');
@@ -62,6 +63,9 @@ export default {
     handleCodeChange(code){
       this.updateSnippet({id:this.snippet.id, code});
     },
+    handleUndo(){
+      this.undo();
+    },
     beautify(code) {
       let options = { 
         indent_size: 4, 
@@ -71,7 +75,8 @@ export default {
     },
     ...mapActions([
         'removeSnippet',
-        'updateSnippet'
+        'updateSnippet',
+        'undo'
       ]),
     },
    created: function (argument) {}

@@ -6,7 +6,7 @@
     @mouseleave="mouseleave"
   >
     <span v-html="require(`!raw-loader!../assets/icon/icon-${this.icon}.svg`)"></span>
-    <span class="Hint" :style="{'color':fill}">{{name}}</span>
+    <span class="Hint" :style="{'color':fill}">{{mName}}</span>
   </div>
 </template>
 <script>
@@ -23,17 +23,18 @@ export default {
   },
   data: () => ({
     svg: null,
+    mName: '',
     clicked: false
   }),
   methods: {
     click(el) {
-      this.name = this.hint;
+      this.mName = this.hint;
       this.clicked = true;
 
       setTimeout(() => {
         this.clicked = false;
         this.mouseleave(el);
-        setTimeout(() => { this.name = this.name; }, 300);
+        setTimeout(() => { this.mName = this.name; }, 300);
       }, 1000);
       this.$emit('click');
     },
@@ -85,6 +86,7 @@ export default {
     this.svg.removeAttribute('width');
     this.svg.setAttribute('color', this.fill);
     this.svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    this.mName = this.name;
   }
 }
 
@@ -127,17 +129,13 @@ export default {
         justify-content: center;
         align-items: center;
 
-        &[fill="#fff"],
-        &[stroke="#fff"] {
+        path[fill="#fff"],
+        g[fill="#FFF"]{
             fill: currentColor !important;
-            stroke: currentColor !important;
         }
 
-        path[fill="#fff"],
         path[stroke="#fff"],
-        g[fill="#FFF"],
-        g[stroke="#FFF"] {
-            fill: currentColor !important;
+        g[stroke="#FFF"]{
             stroke: currentColor !important;
         }
     }
