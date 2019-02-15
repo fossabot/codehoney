@@ -1,43 +1,45 @@
 body,
 html {
-  margin: 0;
-  width: 100%;
-  font-family: font(regular);
-  color: color(text);
-  font-size: 16px;
-  letter-spacing: 0.5px;
-  line-height: 1.5em;
-  height: 100%;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: rgba(#EFEFEF, 0.9);
+    margin: 0;
+    width: 100%;
+    font-family: font(regular);
+    color: color(text);
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    line-height: 1.5em;
+    height: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: rgba(#EFEFEF, 0.9);
 }
 
 * {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-  background-color: transparent;
+    width: 6px;
+    height: 6px;
+    background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: color(light-purple);
-  height: 6px;
-  width: 6px;
+    background-color: var(--color-theme-light);
+    height: 6px;
+    width: 6px;
+    transition: all .2s $ease;
+    opacity: 0.5;
 }
 
 input {
-  outline: none;
-  margin: 0;
-  padding: 0;
-  background-color: transparent;
-  border: none;
-  color: color(white);
-  font-family: font(regular);
-  width: 100%;
+    outline: none;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    color: color(white);
+    font-family: font(regular);
+    width: 100%;
 }

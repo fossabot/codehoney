@@ -1,32 +1,32 @@
 <template>
-  <div class="Categories">
-    <h3 class="Title">{{title}}</h3>
-    <Category
-      v-for="category in categories"
-      :key="category.id"
-      :item="category"
-      @click="handleClick($event)"
-    />
-  </div>
+    <div class="Categories">
+        <h3 class="Title">{{title}}</h3>
+        <Category
+            v-for="category in categories"
+            :key="category.id"
+            :item="category"
+            @click="handleClick($event)"
+        />
+    </div>
 </template>
 <script>
 import Category from './Category.vue';
 
 export default {
-  name: 'Categories',
-  components: {
-    Category,
-  },
-  data: () => ({}),
-  props: {
-    title: String,
-    categories: Array,
-  },
-  methods: {
-    handleClick(id) {
-      this.$emit('select', id);
-    }
-  },
+    name: 'Categories',
+    components: {
+        Category,
+    },
+    data: () => ({}),
+    props: {
+        title: String,
+        categories: Array,
+    },
+    methods: {
+        handleClick(id) {
+            this.$emit('select', id);
+        }
+    },
 };
 
 </script>

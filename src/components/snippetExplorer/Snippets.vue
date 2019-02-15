@@ -1,39 +1,39 @@
 <template>
-  <transition-group
-    class="Snippets"
-    name="list"
-    tag="div"
-  >
-    <Snippet
-      v-for="snippet in snippets"
-      :key="snippet.id"
-      :item="snippet"
-      @click="handleClick($event)"
-    />
-  </transition-group>
+    <transition-group
+        class="Snippets"
+        name="list"
+        tag="div"
+    >
+        <Snippet
+            v-for="snippet in snippets"
+            :key="snippet.id"
+            :item="snippet"
+            @click="handleClick($event)"
+        />
+    </transition-group>
 </template>
 <script>
 import Snippet from './Snippet.vue';
 
 export default {
-  name: 'Snippets',
-  components: {
-    Snippet,
-  },
-  props: {
-    title: String,
-    snippets: Array,
-  },
-  data: () => ({
-    selectedItem: null,
-  }),
-
-  methods: {
-    handleClick(id) {
-      this.$emit('select', id);
+    name: 'Snippets',
+    components: {
+        Snippet,
     },
-  },
-  mounted: function() {},
+    props: {
+        title: String,
+        snippets: Array,
+    },
+    data: () => ({
+        selectedItem: null,
+    }),
+
+    methods: {
+        handleClick(id) {
+            this.$emit('select', id);
+        },
+    },
+    mounted: function() {},
 };
 
 </script>
@@ -60,23 +60,25 @@ export default {
     }
 
     .list-leave-active {
-        height: 96px;
-        transition: all .4s $ease, background-color .2s $ease, height .3s .2s $ease, padding .3s .2s $ease;
+        max-height: 120px;
+        will-change: auto;
+        transition: all .6s $ease, background-color .2s $ease, min-height .3s .2s $ease, padding .3s .2s $ease, opacity .3s $ease;
     }
 
     .list-enter {
-        transform: translateX(-20px);
+        transform: translateX(-20px) translateZ(0);
         padding: 0;
     }
 
     .list-leave-to {
-        transform: translateY(-110%);
+        transform: translateY(-110%) translateZ(0);
         border-color: transparent;
-        height: 0;
+        max-height: 0;
         padding: 0;
         border: none;
         overflow: hidden;
-        background-color: color(red);
+        opacity: 0;
+        // background-color: color(red);
     }
 }
 

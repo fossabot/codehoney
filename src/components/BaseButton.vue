@@ -1,20 +1,20 @@
 <template>
-  <div
-    class="BaseButton"
-    @click="$emit('click')"
-    :class='[{"is-icon":icon},{"is-round":round}]'
-  >
-    <slot></slot>
-  </div>
+    <div
+        class="BaseButton"
+        @click="$emit('click')"
+        :class='[{"is-icon":icon},{"is-round":round}]'
+    >
+        <slot></slot>
+    </div>
 </template>
 <script>
 export default {
-  name: 'BaseButton',
-  props: {
-    title: String,
-    icon: Boolean,
-    round: Boolean
-  },
+    name: 'BaseButton',
+    props: {
+        title: String,
+        icon: Boolean,
+        round: Boolean
+    },
 }
 
 </script>
@@ -65,7 +65,6 @@ export default {
     font-size: 1rem;
     margin-right: 5px;
   }
-
 }
 
 </style>

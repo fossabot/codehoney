@@ -1,36 +1,36 @@
 <template>
-  <div class="Search">
-    <input
-      required
-      type="text"
-      name=""
-      v-model="searchquery"
-      @keyup="searchSnippet(searchquery)"
-    >
-    <label class="Label">search for your code...</label>
-    <img
-      class="Icon Icon--search"
-      src="@/assets/icon/icon-search.svg"
-    >
-  </div>
+    <div class="Search">
+        <input
+            required
+            type="text"
+            name=""
+            v-model="searchquery"
+            @keyup="searchSnippet(searchquery)"
+        >
+        <label class="Label">search for your code...</label>
+        <img
+            class="Icon Icon--search"
+            src="@/assets/icon/icon-search.svg"
+        >
+    </div>
 </template>
 <script>
 import { mapActions } from 'vuex'
 
 export default {
-  name: 'Search',
-  components: {},
-  data: () => ({
-    searchquery: ""
-  }),
-  props: {
-    title: String,
-  },
-  methods: {
-    ...mapActions([
-      'searchSnippet',
-    ])
-  }
+    name: 'Search',
+    components: {},
+    data: () => ({
+        searchquery: ""
+    }),
+    props: {
+        title: String,
+    },
+    methods: {
+        ...mapActions([
+            'searchSnippet',
+        ])
+    }
 }
 
 </script>

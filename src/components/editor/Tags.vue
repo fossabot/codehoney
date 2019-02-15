@@ -1,31 +1,31 @@
 <template>
-  <div class="Tags">
-    <Tag
-      v-for="(tag,i) in tags"
-      :key="i"
-      :name="tag"
-    />
-    <label
-      class="Label"
-      v-if="tags"
-      v-text="'tags'"
-    />
-  </div>
+    <div class="Tags">
+        <Tag
+            v-for="(tag,i) in tags"
+            :key="i"
+            :name="tag"
+        />
+        <label
+            class="Label"
+            v-if="tags"
+            v-text="'tags'"
+        />
+    </div>
 </template>
 <script>
 import Tag from './Tag.vue';
 
 export default {
-  name: 'Tags',
-  components: {
-    Tag
-  },
-  props: {
-    tags: Array,
-  },
-  data: () => ({
-    addTag: false,
-  })
+    name: 'Tags',
+    components: {
+        Tag
+    },
+    props: {
+        tags: Array,
+    },
+    data: () => ({
+        addTag: false,
+    })
 }
 
 </script>
@@ -37,7 +37,7 @@ export default {
   position: relative;
   align-items: center;
   min-height: 1rem;
-  
+
   .Label {
     position: absolute;
     left: 0;

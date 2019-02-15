@@ -1,25 +1,59 @@
 $colors: (
   text: #E7ECEF,
   text-disabled: #7f7f7f,
+  
+  theme: #30285a,
+  theme-dark: darken(#30285a, 30%),
+  theme-darker: darken(#30285a, 50%),
+  theme-light: lighten(#30285a, 30%),
+  theme-lighter: lighten(#30285a, 50%),
+  theme-light--transparent: rgba(lighten(#30285a, 30%), 0.35),
 
-  // purple: #332E54,
-  purple: #23272D,
-  // 23272D
-  // #1D1A28
-  //#191836
-  // purple:#23272D,
-  light-purple: lighten(rgba(#23272D, 0.75), 30%),
+  theme-purple: #30285a,
+  theme-purple-dark: darken(#30285a, 30%),
+  theme-purple-darker: darken(#30285a, 50%),
+  theme-purple-light: lighten(#30285a, 30%),
+  theme-purple-lighter: lighten(#30285a, 50%),
+
+  theme-gray: #23272D,
+  theme-gray-dark: darken(#23272D, 30%),
+  theme-gray-darker: darken(#23272D, 50%),
+  theme-gray-light: lighten(#23272D, 30%),
+  theme-gray-lighter: lighten(#23272D, 50%),
+
+  theme-winered: #330b0b,
+  theme-winered-dark: darken(#330b0b, 30%),
+  theme-winered-darker: darken(#330b0b, 50%),
+  theme-winered-light: lighten(#330b0b, 20%),
+  theme-winered-lighter: lighten(#330b0b, 50%),
+
+  theme-darkblue: #0b1033,
+  theme-darkblue-dark: darken(#0b1033, 30%),
+  theme-darkblue-darker: darken(#0b1033, 50%),
+  theme-darkblue-light: lighten(#0b1033, 20%),
+  theme-darkblue-lighter: lighten(#0b1033, 50%),
+
   orange: #f4b865,
   red: #F05D5E,
   green: #5EB5B1,
   blue: #59A6D0,
+  purple: #cc99cd,
 
   gray: rgba(#332E54, 1),
   comment: #ffffff47,
   white: #EBEBEB,
   black: #000000,
 
-  bg: #000);
+  disabled: rgba(black,0.25),
+  bg: #000,
+);
+
+:root {
+  // each item in color map
+  @each $name, $color in $colors {
+    --color-#{$name}: #{$color};
+  }
+}
 
 @function color($key) {
   @if map-has-key($colors, $key) {

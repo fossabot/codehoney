@@ -3,11 +3,14 @@
     class="Sidebar"
     :class="{'is-hidden':isHidden}"
   >
-    <img
-      svg-inline
-      class="Logo"
-      src="@/assets/logo.svg"
-    >
+    <Icon
+      @click="settings"
+      icon="settings"
+      name="settings"
+      morphTo="settings-2"
+      class="Icon--settings"
+      fill="var(--color-theme)"
+    />
     <Categories
       title="Languages"
       :categories="languages"
@@ -18,6 +21,11 @@
       :categories="tags"
       @select="selectTag"
     />
+    <img
+      svg-inline
+      class="Logo"
+      src="@/assets/logo.svg"
+    >
   </div>
 </template>
 <script>
@@ -39,7 +47,10 @@ export default {
     ...mapActions([
       'selectLanguage',
       'selectTag'
-    ])
+    ]),
+    settings(){
+
+    }
   }
 };
 
@@ -55,7 +66,7 @@ export default {
   transition: all .35s $ease;
   transform: translateZ(0);
   will-change: width;
-  
+
   &.is-hidden {
     width: 0;
     min-width: 0;
@@ -63,12 +74,20 @@ export default {
 
   .Logo {
     position: absolute;
-    bottom: $appDistanceBottom * 1.5;
+    bottom: $appDistanceBottom * 1.35;
     left: 50%;
     transform: translateX(-50%);
     display: block;
     width: 50%;
     user-select: none;
+  }
+
+  .Icon--settings{
+    position: absolute;
+    right: 20px;
+    top: 52px;
+    cursor: pointer;
+    z-index: zIndex(default);
   }
 }
 

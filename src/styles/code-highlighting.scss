@@ -1,35 +1,53 @@
 .token {
-  text-shadow: none;
-  background-color: transparent;
-  white-space: normal;
-  color: #FFFDE9;
-
-  &.keyword {
-    color: #cc99cd;
-  }
-
-  &.operator {
-    color: #2bbee2 !important;
+    text-shadow: none;
     background-color: transparent;
-  }
+    white-space: normal;
+    color: #FFFDE9;
 
-  &.function {
-    color: #f08d49;
-  }
-  &.function-variable{
-    color: #D7C19A;
-  }
-  &.number {
-    color: #f08d49;
-  }
+    &.keyword {
+        color: #cc99cd;
+    }
 
-  &.string {
-    color: #7ec699;
-  }
-  &.comment{
-    color: color(comment);
-  }
-  &.punctuation{
-    color: #ccc;
-  }
+    &.operator {
+        color: #2bbee2;
+        background-color: transparent;
+    }
+
+    &.function {
+        color: #f08d49;
+    }
+
+    &.function-variable {
+        color: #D7C19A;
+    }
+
+    &.number {
+        color: #f08d49;
+    }
+
+    &.string {
+        color: #7ec699;
+    }
+
+    &.comment {
+        color: color(comment);
+    }
+
+    &.punctuation {
+        color: #ccc;
+    }
+
+    &.title.important {
+        // font-size: 1.25rem;
+        font-weight: 700;
+    }
+
+    &.selector {
+        color: color(red);
+        font-weight: 700;
+    }
+
+    &.property {
+        color: #f08d49;
+    }
 }

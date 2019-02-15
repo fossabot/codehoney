@@ -1,5 +1,6 @@
 $z-layers: (
   default: 1,
+  toolbar: 2,
 );
 
 @function zIndex($key) {

@@ -1,73 +1,138 @@
 <template>
-  <div class="Toolbar">
-    <Icon
-      @click="copy"
-      icon="copy"
-      name="copy"
-      morphTo="copy-2"
-      hint="copied"
-      fill="#f4b865"
-    />
-    <Icon
-      @click="beautify"
-      icon="tidy"
-      name="tidy"
-      morphTo="tidy-2"
-      hint="tidy!"
-      fill="#5EB5B1"
-    />
-    <Icon
-      @click="expand"
-      icon="expand-2"
-      name="expand"
-      morphTo="collapse"
-      hint="swishh"
-      fill="#59A6D0"
-    />
-    <Icon
-      @click="remove"
-      icon="bin"
-      name="remove"
-      morphTo="bin-2"
-      hint="removed"
-      fill="#F05D5E"
-    />
-    <Icon
-      @click="undo"
-      icon="undo"
-      name="undo"
-      morphTo="undo-2"
-      hint="reverted"
-      fill="#5DF0EF"
-    />
-  </div>
+    <div class="Toolbar">
+        <Icon
+            @click="copy"
+            :disabled="!snippet"
+            icon="copy"
+            name="copy"
+            morphTo="copy-2"
+            hint="copied"
+            fill="var(--color-orange)"
+        />
+        <Icon
+            @click="beautify"
+            :disabled="!snippet"
+            icon="tidy"
+            name="tidy"
+            morphTo="tidy-2"
+            hint="tidy!"
+            fill="var(--color-green)"
+        />
+        <Icon
+            @click="expand"
+            :disabled="!snippet"
+            icon="expand-2"
+            name="expand"
+            morphTo="collapse"
+            hint="swishh"
+            fill="var(--color-blue)"
+        />
+        <Icon
+            @click="remove"
+            :disabled="!snippet"
+            icon="bin"
+            name="remove"
+            morphTo="bin-2"
+            hint="removed"
+            fill="var(--color-red)"
+        />
+        <Icon
+            @click="undo"
+            :disabled="undoCounter<=0"
+            icon="undo"
+            name="undo"
+            morphTo="undo-2"
+            hint="reverted"
+            fill="var(--color-purple)"
+        />
+        <Icon
+            @click="showThemes=!showThemes"
+            icon="palette"
+            name="theme"
+            morphTo="palette-2"
+            hint="theme"
+            fill="var(--color-theme)"
+        />
+         <Icon
+            @click="switchTheme({name:'purple', event: $event})"
+            v-if="showThemes"
+            icon="color"
+            name="purple"
+            morphTo="color-2"
+            hint="purple"
+            fill="var(--color-theme-purple-light)"
+        />
+        <Icon
+            @click="switchTheme({name:'gray', event: $event})"
+            v-if="showThemes"
+            icon="color"
+            name="gray"
+            morphTo="color-2"
+            hint="gray"
+            fill="var(--color-theme-gray-light)"
+        />
+        <Icon
+            @click="switchTheme({name:'winered', event: $event})"
+            v-if="showThemes"
+            icon="color"
+            name="winered"
+            morphTo="color-2"
+            hint="winered"
+            fill="var(--color-theme-winered-light)"
+        />
+        <Icon
+            @click="switchTheme({name:'darkblue', event: $event})"
+            v-if="showThemes"
+            icon="color"
+            name="darkblue"
+            morphTo="color-2"
+            hint="darkblue"
+            fill="var(--color-theme-darkblue-lighter)"
+        />
+    </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'Toolbar',
-  components: {},
-  props: {
-    title: String,
-    description: String,
-  },
-  data: () => ({ expanded: false }),
-  methods: {
-    copy(code) {
-      this.$emit('copy');
+    name: 'Toolbar',
+    components: {},
+    props: {
+        snippet: Boolean,
+        title: String,
+        description: String,
     },
-    remove() {
-      this.$emit('remove');
+    data: () => ({
+        expanded: false,
+        showThemes: false
+    }),
+    methods: {
+        copy(code) {
+            this.$emit('copy');
+        },
+        remove() {
+            this.$emit('remove');
+        },
+        expand() {
+            this.$emit('expand');
+        },
+        beautify() {
+            this.$emit('beautify');
+        },
+        undo() {
+            this.$emit('undo');
+        },
+        switchTheme({ name, event }) {
+            let style = getComputedStyle(document.body);
+            let color = style.getPropertyValue(`--color-theme-${name}`);
+            let theme = { name, color }
+            this.$emit('switchTheme', {theme, event });
+        }
     },
-    expand() {
-      this.$emit('expand');
-    },
-    beautify() {
-      this.$emit('beautify');
-    },
-    undo(){
-      this.$emit('undo');
-    },
-  },
+    computed: { ...mapGetters({
+            undoCounter: 'undoCounter',
+        }),
+    }
 }
 
 </script>
@@ -83,7 +148,19 @@ export default {
     justify-content: center;
     user-select: none;
     padding: 25px 15px;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-blend-mode: multiply;
+    z-index: zIndex(toolbar);
+    transition: all .2s $ease;
+
+    &::before{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        content: "";
+        background-color: var(--color-theme-light);
+        opacity: 0.35;
+        transition: all .2s $ease;
+    }
 
     .Icon {
         cursor: pointer;

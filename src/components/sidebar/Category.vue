@@ -1,24 +1,24 @@
 <template>
-  <div
-    class="Category"
-    :class="{'is-selected':item.isSelected}"
-    @click="click"
-  >
-    <span class="Name">{{item.name}}</span>
-    <span class="Counter">{{item.counter ? item.counter : 0}}</span>
-  </div>
+    <div
+        class="Category"
+        :class="{'is-selected':item.isSelected}"
+        @click="click"
+    >
+        <span class="Name">{{item.name}}</span>
+        <span class="Counter">{{item.counter ? item.counter : 0}}</span>
+    </div>
 </template>
 <script>
 export default {
-  name: 'Category',
-  props: {
-    item: Object,
-  },
-  methods: {
-    click(el) {
-      this.$emit('click', this.item.id);
+    name: 'Category',
+    props: {
+        item: Object,
     },
-  },
+    methods: {
+        click(el) {
+            this.$emit('click', this.item.id);
+        },
+    },
 }
 
 </script>
@@ -32,7 +32,8 @@ export default {
     padding-right: 30px;
     user-select: none;
     position: relative;
-    color: rgba(color(purple), 0.5);
+    color: var(--color-theme);
+    opacity: 0.5;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -52,6 +53,7 @@ export default {
 
     &:hover {
         color: rgba(color(black), 1);
+        opacity: 1;
 
         &::before {
             transform: translateX(-95%) translateZ(0);
@@ -60,6 +62,7 @@ export default {
 
     &.is-selected {
         color: rgba(color(black), 1);
+        opacity: 1;
 
         &::before {
             transform: translateX(-75%) translateZ(0);

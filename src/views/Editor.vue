@@ -1,23 +1,28 @@
 <template>
-  <div
-    class="Editor"
-    v-if="Object.keys(snippet).length"
-  >
-    <Headline
-      :title="snippet.name"
-      :description="snippet.description"
-      @updateTitle="handleTitleChange"
-      @updateDescription="handleDescriptionChange"
-    />
-    <Tags :tags="snippet.tags" />
-    <Toolbar
-      @copy="handleCopy"
-      @beautify="handleBeautify"
-      @expand="handleExpand"
-      @remove="handleRemove"
-      @undo="handleUndo"
-    />
-    <Code :code="snippet.code" @update="handleCodeChange"/>
+    <div class="Editor">
+        <Headline
+            v-if="snippet && Object.keys(snippet).length"
+            :title="snippet.name"
+            :description="snippet.description"
+            @updateTitle="handleTitleChange"
+            @updateDescription="handleDescriptionChange"
+        />
+        <Tags
+            v-if="snippet && Object.keys(snippet).length"
+            :tags="snippet.tags"
+        />
+        <Toolbar
+            :snippet="Object.keys(snippet).length>0"
+            @copy="handleCopy"
+            @beautify="handleBeautify"
+            @expand="handleExpand"
+            @remove="handleRemove"
+            @undo="handleUndo"
+            @switchTheme="handleSwitchTheme"
+        />
+        <Code
+      v-if="snippet && Object.keys(snippet).length"
+      :code="snippet.code" @update="handleCodeChange"/>
   </div>
 </template>
 <script>
@@ -66,9 +71,13 @@ export default {
     handleUndo(){
       this.undo();
     },
+    handleSwitchTheme({theme, event}){
+      this.$emit('switchTheme', {theme, event});
+      this.updateUserPreferences({theme});
+    },
     beautify(code) {
-      let options = { 
-        indent_size: 4, 
+      let options = {
+        indent_size: 4,
         wrap_line_length: 100,
       };
       return beautify(code, options);
@@ -76,7 +85,8 @@ export default {
     ...mapActions([
         'removeSnippet',
         'updateSnippet',
-        'undo'
+        'undo',
+        'updateUserPreferences'
       ]),
     },
    created: function (argument) {}
@@ -95,6 +105,5 @@ export default {
     padding-left: 65px;
     padding-right: 100px;
     padding-bottom: 50px;
-
-  }
+}
 </style>

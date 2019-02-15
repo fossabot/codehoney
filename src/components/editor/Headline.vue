@@ -1,46 +1,46 @@
 <template>
-  <div class="Headline">
-    <div class="Wrapper">
-      <input
-        class="Title"
-        v-model="mTitle"
-      />
-      <label class="Label">H1</label>
+    <div class="Headline">
+        <div class="Wrapper">
+            <input
+                class="Title"
+                v-model="mTitle"
+            />
+            <label class="Label">H1</label>
+        </div>
+        <div class="Wrapper">
+            <input
+                class="Description"
+                v-model="mDescription"
+            />
+            <label class="Label">meta</label>
+        </div>
     </div>
-    <div class="Wrapper">
-      <input
-        class="Description"
-        v-model="mDescription"
-      />
-      <label class="Label">meta</label>
-    </div>
-  </div>
 </template>
 <script>
 export default {
-  name: 'Headline',
-  props: {
-    title: String,
-    description: String
-  },
-  computed: {
-    mTitle: {
-      get() {
-        return this.title;
-      },
-      set(value) {
-        this.$emit('updateTitle', value);
-      }
+    name: 'Headline',
+    props: {
+        title: String,
+        description: String
     },
-    mDescription: {
-      get() {
-        return this.description;
-      },
-      set(value) {
-        this.$emit('updateDescription', value);
-      }
+    computed: {
+        mTitle: {
+            get() {
+                return this.title;
+            },
+            set(value) {
+                this.$emit('updateTitle', value);
+            }
+        },
+        mDescription: {
+            get() {
+                return this.description;
+            },
+            set(value) {
+                this.$emit('updateDescription', value);
+            }
+        }
     }
-  }
 }
 
 </script>
@@ -50,7 +50,7 @@ export default {
     margin-top: 40px;
     margin-bottom: 0px;
     margin-bottom: 15px;
-    
+
     .Wrapper {
         position: relative;
         margin-bottom: 15px;
@@ -59,7 +59,7 @@ export default {
     .Title {
         font-size: 1.75rem;
         margin: 0;
-        line-height: 1;
+        line-height: 1.125;
         outline: none;
         margin-top: 0;
         background-color: transparent;
@@ -74,6 +74,7 @@ export default {
         font-size: 0.85rem;
         margin-top: 0px;
         opacity: .75;
+        position: relative;
     }
 
     .Label {
