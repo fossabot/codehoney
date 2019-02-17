@@ -9,7 +9,7 @@
                 class="Icon--close"
                 icon="close"
                 morphTo="close-2"
-                fill="var(--color-theme-lighter)"
+                fill="currentColor"
                 @click="close"
             />
         </div>
@@ -19,11 +19,23 @@
 export default {
     name: 'BaseModal',
     props: {
-        isOpen: Boolean
+        open: Boolean
+    },
+    computed: {
+        isOpen: {
+            get() {
+                return this.open;
+            },
+            set(value) {
+                return value;
+            }
+        }
+
     },
     methods: {
         close() {
             this.isOpen = false;
+            this.$emit('close');
         }
     }
 }
@@ -37,20 +49,41 @@ export default {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  visibility: hidden;
+  z-index: zIndex(modal);
+  transition: all .2s $ease;
+  // background-color: rgba(black,0.5);
 
-  &-Wrapper{
-    background-color: var(--color-theme-dark);
-    padding: 20px 30px;
-    width: 50vw;
+  &.is-open {
+      opacity: 1;
+      visibility: visible;
+
+    .BaseModal-Wrapper{
+      transform: translateX(0%);
+    }
+  }
+
+  &-Wrapper {
+    background-color: var(--color-white);
+    padding: 20px;
+    left: 0px;
+    width: calc(25% - 0px);
+    max-width: 335px;
+    height: calc(100% - 0px);
+    position: relative;
+    transform: translateX(-120%);
+    transition: all .4s $ease;
+    // border: solid 2px var(--color-orange);
   }
 
   .Icon--close {
     position: absolute;
-    top: 20px;
+    top: 15px;
     right: 30px;
     cursor: pointer;
+    color: var(--color-black);
   }
 }
 

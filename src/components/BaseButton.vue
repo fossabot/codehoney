@@ -30,7 +30,12 @@ export default {
   align-items: center;
   cursor: pointer;
   transition: all .195s $ease;
-  box-shadow: 4px 9px 13px 0px rgba(color(orange), 0.1);
+
+  &.is-round {
+    border-radius: 48%;
+    padding: 0;
+    position: relative;
+  }
 
   &.is-icon {
     width: 20px;
@@ -49,16 +54,6 @@ export default {
       box-sizing: content-box;
 
     }
-  }
-
-  &.is-round {
-    border-radius: 48%;
-    padding: 0;
-    position: relative;
-  }
-
-  &:hover {
-    background-color: darken(color(orange), 2%);
   }
 
   span {

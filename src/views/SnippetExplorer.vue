@@ -1,50 +1,50 @@
 <template>
-  <div class="SnippetExplorer">
-    <Search v-if="snippets" />
-    <Snippets
-      :snippets="snippets"
-      @select="selectSnippet"
-    />
-    <BaseButton
-      round
-      icon
-    >
-      <img
-        svg-inline
-        src="@/assets/icon/icon-plus.svg"
-        @click="handleClick"
-      />
-    </BaseButton>
-  </div>
+    <div class="SnippetExplorer">
+        <Search v-if="snippets" />
+        <Snippets
+            :snippets="snippets"
+            @select="selectSnippet"
+        />
+        <BaseButton
+            round
+            icon
+        >
+            <Icon
+                @click.native="handleClick"
+                icon="add"
+                fill="var(--color-white)"
+            />
+        </BaseButton>
+    </div>
 </template>
 <script>
-import uniqid from 'uniqid';  
 import { mapActions } from 'vuex';
+import uniqid from 'uniqid';
 import BaseButton from '../components/BaseButton.vue';
 import Search from '../components/snippetExplorer/Search.vue';
 import Snippets from '../components/snippetExplorer/Snippets.vue';
 
 export default {
-  name: 'SnippetExplorer',
-  components: {
-    BaseButton,
-    Search,
-    Snippets,
-  },
-  props: {
-    snippets: Array,
-  },
-  data: () => ({}),
-  methods: {
-    handleClick() {
-      let uID = uniqid();
-      this.addSnippet(uID);
+    name: 'SnippetExplorer',
+    components: {
+        BaseButton,
+        Search,
+        Snippets,
     },
-    ...mapActions([
-      'selectSnippet',
-      'addSnippet'
-    ])
-  }
+    props: {
+        snippets: Array,
+    },
+    data: () => ({}),
+    methods: {
+        handleClick() {
+            let uID = uniqid();
+            this.addSnippet(uID);
+        },
+        ...mapActions([
+            'selectSnippet',
+            'addSnippet'
+        ])
+    }
 };
 
 </script>
@@ -74,6 +74,14 @@ export default {
         left: 50%;
         transform: translateX(-50%);
         z-index: zIndex(default) + 10;
+        padding: 10px;
+
+  &:hover {
+    background-color: darken(color(orange), 10%);
+    background-color: var(--color-theme-lighter);
+
+  }
+
     }
 }
 

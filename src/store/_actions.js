@@ -1,8 +1,8 @@
 import types from './_mutation-types'
 
 const actions = {
-    addLanguage({ commit }, payload) {
-        commit(types.ADD_LANGUAGE, { payload })
+    addLanguage({ commit }, language) {
+        commit(types.ADD_LANGUAGE, { language })
     },
     addTag({ commit }, payload) {
         commit(types.ADD_TAG, { payload })
@@ -27,8 +27,9 @@ const actions = {
         let activeSnippet = getters.activeSnippet;
         commit(types.SELECT_SNIPPET, { snippets, activeSnippet, id })
     },
-    removeLanguage({ commit }, payload) {
-        commit(types.REMOVE_LANGUAGE, { payload })
+    removeLanguage({ getters, commit }, payload) {
+        let language = getters.activeLanguage;
+        commit(types.REMOVE_LANGUAGE, { language })
     },
     removeTag({ commit }, payload) {
         commit(types.REMOVE_TAG, { payload })
@@ -54,7 +55,6 @@ const actions = {
         commit(types.UNDO_INCREMENT);
     },
     updateUserPreferences({ commit }, payload) {
-
         commit(types.UPDATE_USER_PREFERENCES, payload);
     }
 }

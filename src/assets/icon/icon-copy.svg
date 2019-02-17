@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 259 259">
-	<title>icon-copy</title>
-	<path d="M195,3H3V195H195Z" fill="none" stroke="currentColor" stroke-width="5" />
-	<path d="M195,3H3V195H195Z" fill="currentColor" fill-rule="evenodd" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <g fill="none" fill-rule="evenodd">
+    <path fill="#FFF" d="M192 0L0 0 0 192 192 192z"/>
+    <path stroke="#FFF" stroke-width="32" d="M16,16 L16,176 L176,176 L176,16 L16,16 Z"/>
+  </g>
 </svg>
-

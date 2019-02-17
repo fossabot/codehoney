@@ -1,6 +1,8 @@
 $z-layers: (
   default: 1,
   toolbar: 2,
+  contextMenu: 3,
+  modal: 4
 );
 
 @function zIndex($key) {

@@ -53,7 +53,7 @@ export default {
 
     .Wrapper {
         position: relative;
-        margin-bottom: 15px;
+        margin-bottom: 5px;
     }
 
     .Title {

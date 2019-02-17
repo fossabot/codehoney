@@ -21,9 +21,9 @@
         <Icon
             @click="expand"
             :disabled="!snippet"
-            icon="expand-2"
+            icon="expand"
             name="expand"
-            morphTo="collapse"
+            morphTo="expand-2"
             hint="swishh"
             fill="var(--color-blue)"
         />
@@ -45,14 +45,14 @@
             hint="reverted"
             fill="var(--color-purple)"
         />
-        <Icon
+<!--         <Icon
             @click="showThemes=!showThemes"
             icon="palette"
             name="theme"
             morphTo="palette-2"
             hint="theme"
             fill="var(--color-theme)"
-        />
+        /> -->
          <Icon
             @click="switchTheme({name:'purple', event: $event})"
             v-if="showThemes"
@@ -60,7 +60,7 @@
             name="purple"
             morphTo="color-2"
             hint="purple"
-            fill="var(--color-theme-purple-light)"
+            fill="var(--color-theme-purple)"
         />
         <Icon
             @click="switchTheme({name:'gray', event: $event})"
@@ -69,17 +69,17 @@
             name="gray"
             morphTo="color-2"
             hint="gray"
-            fill="var(--color-theme-gray-light)"
+            fill="var(--color-theme-gray)"
         />
-        <Icon
-            @click="switchTheme({name:'winered', event: $event})"
+<!--         <Icon
+            @click="switchTheme({name:'white', event: $event})"
             v-if="showThemes"
             icon="color"
-            name="winered"
+            name="white"
             morphTo="color-2"
-            hint="winered"
-            fill="var(--color-theme-winered-light)"
-        />
+            hint="white"
+            fill="var(--color-theme-white)"
+        /> -->
         <Icon
             @click="switchTheme({name:'darkblue', event: $event})"
             v-if="showThemes"
@@ -87,7 +87,7 @@
             name="darkblue"
             morphTo="color-2"
             hint="darkblue"
-            fill="var(--color-theme-darkblue-lighter)"
+            fill="var(--color-theme-darkblue)"
         />
     </div>
 </template>
@@ -99,11 +99,8 @@ export default {
     components: {},
     props: {
         snippet: Boolean,
-        title: String,
-        description: String,
     },
     data: () => ({
-        expanded: false,
         showThemes: false
     }),
     methods: {
@@ -140,8 +137,8 @@ export default {
 <style lang="scss">
 .Toolbar {
     position: fixed;
-    right: 20px;
-    top: 15px;
+    right: 50px;
+    top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -158,7 +155,7 @@ export default {
         height: 100%;
         content: "";
         background-color: var(--color-theme-light);
-        opacity: 0.35;
+        opacity: 0.5;
         transition: all .2s $ease;
     }
 

@@ -1,57 +1,113 @@
 <template>
-  <div
-    class="Sidebar"
-    :class="{'is-hidden':isHidden}"
-  >
-    <Icon
-      @click="settings"
-      icon="settings"
-      name="settings"
-      morphTo="settings-2"
-      class="Icon--settings"
-      fill="var(--color-theme)"
-    />
-    <Categories
-      title="Languages"
-      :categories="languages"
-      @select="selectLanguage"
-    />
-    <Categories
-      title="Tags"
-      :categories="tags"
-      @select="selectTag"
-    />
-    <img
-      svg-inline
-      class="Logo"
-      src="@/assets/logo.svg"
+    <div
+        class="Sidebar"
+        :class="{'is-hidden':isHidden}"
     >
-  </div>
+        <Icon
+            @click="openModal"
+            icon="settings"
+            name="settings"
+            hint="settings"
+            morphTo="settings-2"
+            class="Icon--settings"
+            fill="var(--color-theme-dark)"
+        />
+        <Categories
+            title="Categories"
+            :categories="languages"
+            :hasAddButton="true"
+            @select="selectLanguage"
+            @context-menu="handleShowContextMenu"
+            @add="handleAddLanguage"
+        />
+        <Categories
+            title="Tags"
+            :categories="tags"
+            @select="selectTag"
+        />
+        <img
+            svg-inline
+            class="Logo"
+            src="@/assets/logo.svg"
+        >
+        <BaseContextMenu
+            :visible="showContextMenu"
+            :top="contextMenuTop"
+            :left="contextMenuLeft"
+            :items="contextMenuItems"
+            @click="handleBaseContextClick"
+        />
+    </div>
 </template>
 <script>
 import { mapActions } from 'vuex'
+import uniqid from 'uniqid';
 import Categories from '../components/sidebar/Categories.vue';
+import BaseContextMenu from '../components/BaseContextMenu.vue';
 
 export default {
-  name: 'Sidebar',
-  props: {
-    languages: Array,
-    tags: Array,
-    isHidden: Boolean,
-  },
-  components: {
-    Categories,
-  },
-  data: () => ({}),
-  methods: {
-    ...mapActions([
-      'selectLanguage',
-      'selectTag'
-    ]),
-    settings(){
+    name: 'Sidebar',
+    props: {
+        languages: Array,
+        tags: Array,
+        isHidden: Boolean,
+    },
+    components: {
+        Categories,
+        BaseContextMenu
+    },
+    data: () => ({
+        showContextMenu: false,
+        contextMenuTop: 0,
+        contextMenuLeft: 0,
+        contextMenuItems: [{
+            name:'rename category',
+            cb:'null'
+        },{
+            name :'delete category',
+            cb: 'removeLanguage'
+        }],
+    }),
+    methods: {
+        ...mapActions([
+            'addLanguage',
+            'addSnippet',
+            'selectLanguage',
+            'selectTag',
+            'removeLanguage'
+        ]),
+        handleAddLanguage(name) {
+            let id = uniqid();
+            let language = {
+                id,
+                name,
+                isSelected: false,
+                snippets: []
+            }
+            this.addLanguage(language);
+            this.selectLanguage(id);
+            this.addSnippet(uniqid())
+        },
+        handleShowContextMenu({x = event.x, y = event.y, id}) {
+            this.selectLanguage(id);
+            this.contextMenuTop = y;
+            this.contextMenuLeft = x;
 
+            if (this.showContextMenu) {
+                this.showContextMenu = false;
+                setTimeout(() => { this.showContextMenu = true; }, 50);
+            } else {
+                this.showContextMenu= true;
+            }
+        },
+        handleBaseContextClick(cb){
+            this[cb]()
+            this.showContextMenu = false;
+        },
+        openModal() {
+            this.$emit('openModal', 'settings');
+        }
     }
-  }
 };
 
 </script>
@@ -60,11 +116,10 @@ export default {
 .Sidebar {
   width: 16%;
   min-width: 225px;
-  max-width: 285px;
+  max-width: 225px;
   padding-top: $appDistanceTop;
   position: relative;
   transition: all .35s $ease;
-  transform: translateZ(0);
   will-change: width;
 
   &.is-hidden {
@@ -85,7 +140,7 @@ export default {
   .Icon--settings{
     position: absolute;
     right: 20px;
-    top: 52px;
+    top: 54px;
     cursor: pointer;
     z-index: zIndex(default);
   }

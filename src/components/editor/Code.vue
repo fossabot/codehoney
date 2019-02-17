@@ -25,7 +25,7 @@ export default {
         code: String,
     },
     data: () => ({
-        lines: 0
+        lines: 0,
     }),
     watch: {
         code: {
@@ -37,9 +37,17 @@ export default {
     },
     methods: {
         highlight(code) {
-            let language = this.language.name.toLowerCase();
-            language !== 'html' && require(`prismjs/components/prism-${language}.js`);
-            return Prism.highlight(code, Prism.languages[language], language);
+            let language = this.language.name.toLowerCase();;
+
+            try {
+                language !== 'html' && require(`prismjs/components/prism-${language}.js`);
+                let mCode = Prism.highlight(code, Prism.languages[language], language)
+                return mCode;
+            } catch (e) {
+                console.log("Error: " + e);
+                return code;
+            }
+
         },
         lineNumbers() {
             const LINE_HEIGHT = 24;
@@ -99,7 +107,7 @@ export default {
   width: 95%;
   background-color: transparent !important;
   position: relative;
-  margin-top: 32px;
+  margin-top: 25px;
 
   pre {
     margin-bottom: 0;

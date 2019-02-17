@@ -2,7 +2,8 @@
     <div
         class="Category"
         :class="{'is-selected':item.isSelected}"
-        @click="click"
+        @click.left="click"
+        @click.right="clickRight"
     >
         <span class="Name">{{item.name}}</span>
         <span class="Counter">{{item.counter ? item.counter : 0}}</span>
@@ -16,8 +17,13 @@ export default {
     },
     methods: {
         click(el) {
+            console.log(el)
             this.$emit('click', this.item.id);
         },
+        clickRight(el){
+            el.preventDefault()
+            this.$emit('click-right', { event:el, id:this.item.id });
+        }
     },
 }
 
@@ -32,7 +38,7 @@ export default {
     padding-right: 30px;
     user-select: none;
     position: relative;
-    color: var(--color-theme);
+    color: var(--color-theme-dark);
     opacity: 0.5;
     display: flex;
     justify-content: space-between;

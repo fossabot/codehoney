@@ -17,6 +17,18 @@ export default {
     name: 'BaseIcon',
     props: {
         icon: String,
+        width: {
+            type: Number,
+            default: () => {
+                return 1.125
+            }
+        },
+        height: {
+            type: Number,
+            default: () => {
+                return 1.125
+            }
+        },
         fill: String,
         hint: String,
         name: String,
@@ -46,28 +58,28 @@ export default {
         },
         mouseover(el) {
             this.$el.classList.add('is-hovering');
-            this.isHovering = true;
 
             if (this.morphTo) {
                 let icon = require(`!raw-loader!../assets/icon/icon-${this.morphTo}.svg`);
-                let paths = this.path(icon);
+                let paths = this.attributesToMorph(icon);
                 let targets = [...this.svg.querySelectorAll('path')];
                 this.animate(targets, paths);
             }
         },
 
         mouseleave(el) {
-            this.$el.classList.remove('is-hovering');
+
             let icon = require(`!raw-loader!../assets/icon/icon-${this.icon}.svg`);
-            let paths = this.path(icon);
+            let paths = this.attributesToMorph(icon);
             let targets = [...this.svg.querySelectorAll('path')];
             this.animate(targets, paths);
 
             setTimeout(() => {
                 this.mName = this.name;
+                this.$el.classList.remove('is-hovering');
             }, 100);
         },
-        path(icon) {
+        attributesToMorph(icon) {
             let svg = document.createElement('div');
             svg.innerHTML = icon.trim();
             return [...svg.querySelectorAll('path')].map((p) => {
@@ -95,15 +107,13 @@ export default {
         },
     },
     updated: function() {
-        this.svg.removeAttribute('height');
-        this.svg.removeAttribute('width');
+        this.svg.setAttribute('style', `height:${this.height}rem; width:${this.width}rem`);
         this.svg.setAttribute('color', this.disabled ? this.fillDisabled : this.fill);
         this.svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
     },
     mounted: function() {
         this.svg = this.$el.querySelector('svg');
-        this.svg.removeAttribute('height');
-        this.svg.removeAttribute('width');
+        this.svg.setAttribute('style', `height:${this.height}rem; width:${this.width}rem`);
         this.svg.setAttribute('color', this.disabled ? this.fillDisabled : this.fill);
         this.svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
         this.mName = this.name;
@@ -160,7 +170,6 @@ export default {
         padding: 8px;
         box-sizing: content-box;
         vertical-align: middle;
-        transition: all .15s $ease;
         fill: currentColor !important;
         stroke: currentColor !important;
         width: 1.125rem;

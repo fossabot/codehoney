@@ -38,8 +38,8 @@ export default {
 <style scoped lang="scss">
 .Search {
     color: color(white);
-    margin: 0 25px 0;
-    padding: 28px 0 30px;
+    margin: 0 15px 0;
+    padding: 35px 0 30px;
     overflow: hidden;
     position: relative;
     display: flex;
@@ -47,7 +47,7 @@ export default {
     .Label {
         position: absolute;
         left: 5px;
-        top: 0;
+        top: 10px;
         font-size: 0.85rem;
         transition: all .295s $ease;
         color: rgba(white, 0.5);
@@ -89,7 +89,7 @@ export default {
     .Icon--search {
         position: absolute;
         right: 20px;
-        top: 32px;
+        top: 40px;
         transform: scaleX(-1);
         user-select: none;
     }

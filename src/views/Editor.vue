@@ -13,6 +13,7 @@
         />
         <Toolbar
             :snippet="Object.keys(snippet).length>0"
+            isExpanded
             @copy="handleCopy"
             @beautify="handleBeautify"
             @expand="handleExpand"
@@ -20,9 +21,15 @@
             @undo="handleUndo"
             @switchTheme="handleSwitchTheme"
         />
+        <ThemeSwitcher
+            isExpanded
+            @switchTheme="handleSwitchTheme"
+        />
         <Code
-      v-if="snippet && Object.keys(snippet).length"
-      :code="snippet.code" @update="handleCodeChange"/>
+            v-if="snippet && Object.keys(snippet).length"
+            :code="snippet.code"
+            @update="handleCodeChange"
+        />
   </div>
 </template>
 <script>
@@ -32,6 +39,7 @@ import Headline from '../components/editor/Headline.vue';
 import Code from '../components/editor/Code.vue';
 import Tags from '../components/editor/Tags.vue';
 import Toolbar from '../components/editor/Toolbar.vue';
+import ThemeSwitcher from '../components/editor/ThemeSwitcher.vue';
 
 export default {
   name: 'Editor',
@@ -39,12 +47,15 @@ export default {
     Headline,
     Code,
     Tags,
-    Toolbar
+    Toolbar,
+    ThemeSwitcher
   },
   props: {
     snippet: Object
   },
-  data: () => ({}),
+  data: () => ({
+    isExpanded: false
+  }),
   methods: {
     handleCopy(){
       navigator.clipboard.writeText(this.beautify(this.snippet.code));
@@ -54,6 +65,7 @@ export default {
     },
     handleExpand(){
       this.$emit('expand');
+      this.isExpanded = !this.isExpanded;
     },
     handleRemove() {
       this.removeSnippet(this.snippet.id);
@@ -105,5 +117,6 @@ export default {
     padding-left: 65px;
     padding-right: 100px;
     padding-bottom: 50px;
+
 }
 </style>

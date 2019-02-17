@@ -59,14 +59,14 @@ const mutations = {
             this.replaceState(Object.assign(state, EMPTY_STATE));
         }
     },
-    [types.ADD_LANGUAGE](state, { /*milestone*/ }) {
-
+    [types.ADD_LANGUAGE](state, { language }) {
+        state.languages.push(language);
     },
     [types.ADD_TAG](state, { /*milestone*/ }) {
 
     },
     [types.ADD_SNIPPET](state, { id, language }) {
-        const SNIPPET = {
+        let snippet = {
             id,
             name: "a beautiful new snippet",
             isSelected: false,
@@ -75,7 +75,7 @@ const mutations = {
             tags: [],
             timeStamp: Date.now()
         };
-        language.snippets.unshift(SNIPPET);
+        language.snippets.unshift(snippet);
     },
     [types.SELECT_LANGUAGE](state, { id }) {
         let language = state.languages.find(language => language.id === id);
@@ -100,8 +100,9 @@ const mutations = {
         activeSnippet.isSelected = false;
         snippet.isSelected = true;
     },
-    [types.REMOVE_LANGUAGE](state, { /*milestone*/ }) {
-
+    [types.REMOVE_LANGUAGE](state, { language }) {
+        let index = state.languages.findIndex(l => l.id === language.id);
+        state.languages.splice(index, 1);
     },
     [types.REMOVE_TAG](state, { id }) {},
     [types.REMOVE_SNIPPET](state, { language, id }) {
@@ -113,6 +114,10 @@ const mutations = {
             snippet.isSelected = true;
         }
 
+    },
+    [types.UPDATE_LANGUAGE_NAME](state, { id, name }) {
+        let language = languages.find(l => l.id === id);
+        language.name = name;
     },
     [types.UPDATE_SNIPPET](state, { activeSnippet, snippets, id, code, tag, name, description }) {
         let snippet = snippets.find(snippet => snippet.id === id);
@@ -140,7 +145,6 @@ const mutations = {
     },
     [types.UPDATE_USER_PREFERENCES](state, { theme }) {
         let userPreferences = state.userPreferences;
-        console.log(theme)
         userPreferences.theme = typeof theme === 'object' ? theme : userPreferences.theme;
         localStorage.setItem('user-preferences', JSON.stringify(state.userPreferences));
     }

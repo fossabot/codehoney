@@ -5,26 +5,40 @@
             v-for="category in categories"
             :key="category.id"
             :item="category"
-            @click="handleClick($event)"
+            @click="handleCategoryClick"
+            @click-right="handleCategoryRightClick"
+        />
+        <CategoryAddButton
+            v-if="hasAddButton"
+            @add="handleCategoryAdd"
         />
     </div>
 </template>
 <script>
 import Category from './Category.vue';
+import CategoryAddButton from './CategoryAddButton.vue';
 
 export default {
     name: 'Categories',
     components: {
         Category,
+        CategoryAddButton
     },
     data: () => ({}),
     props: {
         title: String,
         categories: Array,
+        hasAddButton: Boolean
     },
     methods: {
-        handleClick(id) {
+        handleCategoryClick(id) {
             this.$emit('select', id);
+        },
+        handleCategoryRightClick(id){
+            this.$emit('context-menu', id);
+        },
+        handleCategoryAdd(language) {
+            this.$emit('add', language)
         }
     },
 };

@@ -44,12 +44,12 @@ export default {
 
   &:hover {
     color: color(white);
-    background-color: rgba(color(black), 0.35);
+    background-color: rgba(color(black), 0.25);
     opacity: 1;
   }
 
   &.is-selected {
-    background-color: rgba(color(black), 0.35);
+    background-color: rgba(color(black), 0.25);
     color: color(white);
     opacity: 1;
     padding: 25px 25px 25px;
