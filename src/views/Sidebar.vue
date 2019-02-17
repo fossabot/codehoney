@@ -19,6 +19,7 @@
             @select="selectLanguage"
             @context-menu="handleShowContextMenu"
             @add="handleAddLanguage"
+            @update="handleUpdateLanguage"
         />
         <Categories
             title="Tags"
@@ -61,10 +62,10 @@ export default {
         contextMenuTop: 0,
         contextMenuLeft: 0,
         contextMenuItems: [{
-            name:'rename category',
-            cb:'null'
-        },{
-            name :'delete category',
+            name: 'rename category',
+            cb: 'editLanguageName'
+        }, {
+            name: 'delete category',
             cb: 'removeLanguage'
         }],
     }),
@@ -72,9 +73,11 @@ export default {
         ...mapActions([
             'addLanguage',
             'addSnippet',
+            'editLanguageName',
+            'removeLanguage',
             'selectLanguage',
             'selectTag',
-            'removeLanguage'
+            'updateLanguageName',
         ]),
         handleAddLanguage(name) {
             let id = uniqid();
@@ -82,27 +85,34 @@ export default {
                 id,
                 name,
                 isSelected: false,
-                snippets: []
+                snippets: [],
+                isInEditMode: false
             }
             this.addLanguage(language);
             this.selectLanguage(id);
             this.addSnippet(uniqid())
         },
-        handleShowContextMenu({x = event.x, y = event.y, id}) {
+        handleUpdateLanguage({ id, name }) {
+            console.log(id,name)
+            this.updateLanguageName({ id, name });
+        },
+        handleShowContextMenu({ x = event.x, y = event.y, id }) {
             this.selectLanguage(id);
             this.contextMenuTop = y;
             this.contextMenuLeft = x;
 
             if (this.showContextMenu) {
                 this.showContextMenu = false;
-                setTimeout(() => { this.showContextMenu = true; }, 50);
+                setTimeout(() => {
+                    this.showContextMenu = true;
+                }, 50);
             } else {
-                this.showContextMenu= true;
+                this.showContextMenu = true;
             }
         },
-        handleBaseContextClick(cb){
-            this[cb]()
-            this.showContextMenu = false;
+        handleBaseContextClick(cb) {
+            console.log('msg')
+            cb && this[cb]()
         },
         openModal() {
             this.$emit('openModal', 'settings');
@@ -111,39 +121,38 @@ export default {
 };
 
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style lang="scss">
 .Sidebar {
-  width: 16%;
-  min-width: 225px;
-  max-width: 225px;
-  padding-top: $appDistanceTop;
-  position: relative;
-  transition: all .35s $ease;
-  will-change: width;
+    width: 16%;
+    min-width: 225px;
+    max-width: 225px;
+    padding-top: $appDistanceTop;
+    position: relative;
+    transition: all .35s $ease;
+    will-change: width;
 
-  &.is-hidden {
-    width: 0;
-    min-width: 0;
-  }
+    &.is-hidden {
+        width: 0;
+        min-width: 0;
+    }
 
-  .Logo {
-    position: absolute;
-    bottom: $appDistanceBottom * 1.35;
-    left: 50%;
-    transform: translateX(-50%);
-    display: block;
-    width: 50%;
-    user-select: none;
-  }
+    .Logo {
+        position: absolute;
+        bottom: $appDistanceBottom * 1.35;
+        left: 50%;
+        transform: translateX(-50%);
+        display: block;
+        width: 50%;
+        user-select: none;
+    }
 
-  .Icon--settings{
-    position: absolute;
-    right: 20px;
-    top: 54px;
-    cursor: pointer;
-    z-index: zIndex(default);
-  }
+    .Icon--settings {
+        position: absolute;
+        right: 20px;
+        top: 54px;
+        cursor: pointer;
+        z-index: zIndex(default);
+    }
 }
 
 </style>

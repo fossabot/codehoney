@@ -35,7 +35,7 @@ export default {
 
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style lang="scss">
 .Search {
     color: color(white);
     margin: 0 15px 0;

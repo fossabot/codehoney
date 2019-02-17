@@ -12,12 +12,16 @@ const actions = {
         commit(types.ADD_SNIPPET, { id, language })
         dispatch('selectSnippet', id);
     },
-    selectLanguage({ commit }, payload) {
-        commit(types.SELECT_LANGUAGE, { id: payload })
+    editLanguageName({ getters, commit }) {
+        let language = getters.activeLanguage;
+        commit(types.EDIT_LANGUAGE_NAME, { language })
     },
-    selectTag({ dispatch, getters, commit }, payload) {
+    selectLanguage({ commit }, id) {
+        commit(types.SELECT_LANGUAGE, { id })
+    },
+    selectTag({ dispatch, getters, commit }, id) {
         let tags = getters.tags;
-        commit(types.SELECT_TAG, { tags, id: payload });
+        commit(types.SELECT_TAG, { tags, id });
         let snippet = getters.snippetsFilteredByTags && getters.snippetsFilteredByTags[0];
 
         dispatch('selectSnippet', snippet ? snippet.id : 0);
@@ -32,11 +36,17 @@ const actions = {
         commit(types.REMOVE_LANGUAGE, { language })
     },
     removeTag({ commit }, payload) {
+        //TODO: implement
+
         commit(types.REMOVE_TAG, { payload })
     },
     removeSnippet({ getters, commit }, payload) {
         let language = getters.activeLanguage;
         commit(types.REMOVE_SNIPPET, { id: payload, language })
+    },
+    updateLanguageName({ getters, commit }, { id, name }) {
+        console.log(id,name)
+        commit(types.UPDATE_LANGUAGE_NAME, { id, name })
     },
     updateSnippet({ getters, commit }, payload) {
         let snippets = getters.activeLanguage.snippets;

@@ -1,9 +1,21 @@
 <template>
-    <div class="BaseContextMenu" :class='{"is-visible":isVisible}'>
-        <div class="Item" v-for="(item, i) in items" :key="i" @click="click(item.cb)">{{item.name}}</div>
+    <div
+        class="BaseContextMenu"
+        :class='{"is-visible":isVisible}'
+    >
+        <div
+            class="Item"
+            v-for="(item, i) in items"
+            :key="i"
+            v-html="item.name"
+            v-click-outside="close"
+            @click="click({event:$event,cb:item.cb})"
+        />
     </div>
 </template>
 <script>
+import ClickOutside from 'vue-click-outside'
+
 export default {
     name: 'BaseContextMenu',
     props: {
@@ -12,78 +24,82 @@ export default {
         top: Number,
         left: Number
     },
-    watch:{
-        visible: function (visible) {
+    directives: {
+        ClickOutside
+    },
+    data: (_this) => ({
+        isVisible: _this.visible
+    }),
+    watch: {
+        visible: function(visible) {
             let el = this.$el;
-            if(!visible) { return }
-
             el.style.setProperty('--baseContextMenuTop', this.top + 'px');
             el.style.setProperty('--baseContextMenuLeft', this.left + 'px');
-            el.style.setProperty('--baseContextMenuHeight', el.scrollHeight + 'px');
+            setTimeout(() => {
+                el.style.setProperty('--baseContextMenuHeight', el.scrollHeight + 'px');
+            }, 60);
+            this.isVisible = visible;
         }
     },
-    computed:{
-      isVisible:{
-        get() {
-          return this.visible;
+    mounted: function() {},
+    methods: {
+        click({event, cb}) {
+            this.$emit('click', cb);
+            this.close();
         },
-        set(value) {
-          return value;
+        close() {
+            this.$el.style.setProperty('--baseContextMenuHeight', 0 + 'px');
+            this.isVisible = false;
         }
-      }
     },
-    methods:{
-      click(cb){
-        this.$emit('click', cb);
-        this.$el.style.setProperty('--baseContextMenuHeight', 0 + 'px');
-      }
-    }
 }
 
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style lang="scss">
 .BaseContextMenu {
-  --baseContextMenuHeight: 0px;
-  --baseContextMenuTop: 0px;
-  --baseContextMenuLeft: 0px;
+    --baseContextMenuHeight: 0px;
+    --baseContextMenuTop: 150px;
+    --baseContextMenuLeft: 25px;
 
-  position: fixed;
-  z-index: zIndex(contextMenu);
-  transition: all .395s $ease;
-  width: 0;
-  top: var(--baseContextMenuTop);
-  left: var(--baseContextMenuLeft);
-  max-height: var(--baseContextMenuHeight);
-  visibility: hidden;
-  background-color: color(white);
-  box-shadow: 2px 2px 20px 0px rgba(black, 0.15);
-  overflow: hidden;
+    position: fixed;
+    z-index: zIndex(contextMenu);
+    visibility: hidden;
+    width: 0;
+    top: var(--baseContextMenuTop);
+    left: var(--baseContextMenuLeft);
+    max-height: var(--baseContextMenuHeight);
+    transition: all .3s $ease, top .255s $ease, left .255s $ease;
+    background-color: color(white);
+    box-shadow: 2px 2px 20px 0px rgba(black, 0.15);
+    overflow: hidden;
+    position: fixed;
+    pointer-events: all;
 
-  &.is-visible {
-      visibility: visible;
-      width: 200px;
-      transition: all .195s $ease, top 0s, left 0s;
+    &.is-visible {
+        visibility: visible;
+        width: 200px;
 
-      .Item {
-        transition: all .255s .2s $ease, background .3s $ease;
-        opacity: 1;
-      }
-  }
+        .Item {
+            opacity: 1;
+            transition: all .3s .1s $ease, opacity .3s .2s $ease;
+        }
 
-  .Item {
-    font-size: 0.85rem;
-    padding: 8px 15px;
-    transition: all .4s .1s $ease;
-    color: color(theme-dark);
-    cursor: pointer;
-    opacity: 0;
-    user-select: none;
-
-    &:hover {
-      background-color: color(orange);
+        .BaseContextMenu-Wrapper {}
     }
-  }
+
+    .Item {
+        font-size: 0.85rem;
+        padding: 8px 15px;
+        transition: all .4s .1s $ease, opacity 0s $ease;
+        color: color(theme-dark);
+        cursor: pointer;
+        user-select: none;
+        opacity: 0;
+
+        &:hover {
+            background-color: color(orange);
+        }
+    }
 }
 
 </style>

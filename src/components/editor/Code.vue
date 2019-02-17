@@ -9,7 +9,12 @@
         ></textarea>
         <pre><code ref="code" v-html="highlight(mCode)"></code></pre>
         <div class="LineNumbers">
-            <span v-for="(line,i) of lines" :key="i"  class="LineNumber">{{line}}</span>
+            <span
+                v-for="(line,i) of lines"
+                :key="i"
+                class="LineNumber"
+                v-html="line"
+            />
         </div>
     </div>
 </template>
@@ -44,7 +49,7 @@ export default {
                 let mCode = Prism.highlight(code, Prism.languages[language], language)
                 return mCode;
             } catch (e) {
-                console.log("Error: " + e);
+                // console.log("Error: " + e);
                 return code;
             }
 
@@ -96,79 +101,79 @@ export default {
 }
 
 </script>
-<style scoped lang="scss">
+<style lang="scss">
 @import '../../styles/code-highlighting';
 
 .Code {
-  outline: none;
-  flex: 1;
-  margin-bottom: 0;
-  margin-top: 0;
-  width: 95%;
-  background-color: transparent !important;
-  position: relative;
-  margin-top: 25px;
-
-  pre {
+    outline: none;
+    flex: 1;
     margin-bottom: 0;
     margin-top: 0;
-
-  }
-
-  .Textarea {
-    background-color: transparent;
-    border: none;
-    outline: none;
-    font-family: monospace;
-    font-size: 1rem;
-    color: transparent;
-    position: absolute;
-    top: 0px;
-    left: 0;
-    width: 100%;
-    height: calc(100% + 1.5rem);
-    margin: 0;
-    font-size: 1rem;
-    letter-spacing: 0.5px;
-    line-height: 1.5em;
-    padding: 0;
-    z-index: 0;
-    resize: none;
-    caret-color: color(white);
-    padding-right: 0px;
-    white-space: pre-wrap;
-
-  }
-
-  code {
-    background-color: transparent;
-    outline: none;
+    width: 95%;
+    background-color: transparent !important;
     position: relative;
-    pointer-events: none;
-    font-family: monospace;
-    white-space: pre-wrap;
-    color: #ffd777;
-    display: inline-block;
-    // width: 100%;
-    padding-right: 0px;
-  }
+    margin-top: 25px;
 
-  .LineNumbers {
-    height: 100%;
-    position: absolute;
-    opacity: 0.25;
-    left: -40px;
-    top: 0;
-    width: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    user-select: none;
-  }
+    pre {
+        margin-bottom: 0;
+        margin-top: 0;
 
-  .LineNumber {
-    display: block;
-  }
+    }
+
+    .Textarea {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        font-family: monospace;
+        font-size: 1rem;
+        color: transparent;
+        position: absolute;
+        top: 0px;
+        left: 0;
+        width: 100%;
+        height: calc(100% + 1.5rem);
+        margin: 0;
+        font-size: 1rem;
+        letter-spacing: 0.5px;
+        line-height: 1.5em;
+        padding: 0;
+        z-index: 0;
+        resize: none;
+        caret-color: color(white);
+        padding-right: 0px;
+        white-space: pre-wrap;
+
+    }
+
+    code {
+        background-color: transparent;
+        outline: none;
+        position: relative;
+        pointer-events: none;
+        font-family: monospace;
+        white-space: pre-wrap;
+        color: #ffd777;
+        display: inline-block;
+        // width: 100%;
+        padding-right: 0px;
+    }
+
+    .LineNumbers {
+        height: 100%;
+        position: absolute;
+        opacity: 0.25;
+        left: -40px;
+        top: 0;
+        width: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        user-select: none;
+    }
+
+    .LineNumber {
+        display: block;
+    }
 }
 
 </style>

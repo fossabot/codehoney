@@ -1,11 +1,17 @@
 <template>
     <div
         class="Category"
-        :class="{'is-selected':item.isSelected}"
+        :class="[{'is-selected':item.isSelected},{'is-in-editmode':item.isInEditMode}]"
         @click.left="click"
         @click.right="clickRight"
     >
-        <span class="Name">{{item.name}}</span>
+        <input
+            class="Name"
+            :readonly="!item.isInEditMode"
+            @keyup.enter="handleEnterPress"
+            v-model="item.name"
+            :ref="item.id"
+        />
         <span class="Counter">{{item.counter ? item.counter : 0}}</span>
     </div>
 </template>
@@ -17,19 +23,22 @@ export default {
     },
     methods: {
         click(el) {
-            console.log(el)
             this.$emit('click', this.item.id);
         },
-        clickRight(el){
+        clickRight(el) {
             el.preventDefault()
-            this.$emit('click-right', { event:el, id:this.item.id });
-        }
+            this.$emit('click-right', { event: el, id: this.item.id });
+        },
+        handleEnterPress() {
+            this.$emit('edited', { id: this.item.id, name: this.item.name });
+            setTimeout(() => { this.$refs[this.item.id].focus(); }, 50);
+        },
     },
 }
 
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style lang="scss">
 .Category {
     padding: 8px 0;
     transition: all .295s $ease;
@@ -58,8 +67,11 @@ export default {
     }
 
     &:hover {
-        color: rgba(color(black), 1);
         opacity: 1;
+
+        .Name {
+            color: rgba(color(black), 1);
+        }
 
         &::before {
             transform: translateX(-95%) translateZ(0);
@@ -67,16 +79,30 @@ export default {
     }
 
     &.is-selected {
-        color: rgba(color(black), 1);
         opacity: 1;
+
+        .Name {
+            color: rgba(color(black), 1);
+        }
 
         &::before {
             transform: translateX(-75%) translateZ(0);
         }
     }
 
+    &.is-in-editmode {
+        opacity: 1;
+
+        &::before {
+            transform: translateX(-8%) translateZ(0);
+        }
+    }
+
     .Name {
         position: relative;
+        font-size: 1rem;
+        color: rgba(color(black), 1);
+        cursor: pointer;
     }
 
     .Counter {

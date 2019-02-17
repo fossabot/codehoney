@@ -11,6 +11,7 @@ const mutations = {
                 this.replaceState(Object.assign(state, store));
                 state.undocounter = 0;
                 let name = state.userPreferences.theme.name;
+                if (name.length === 0) { return }
 
                 let style = getComputedStyle(document.body);
                 let color = style.getPropertyValue(`--color-theme-${name}`);
@@ -32,28 +33,30 @@ const mutations = {
                 'searchQuery': '',
                 'activeTags': [],
                 'undocounter': '0',
-                'userPreferences': {},
+                'userPreferences': {
+                    'theme': {
+                        'name': '',
+                    }
+                },
                 'languages': [{
                     'id': 0,
-                    'name': 'javascript',
+                    'name': 'Javascript',
                     'isSelected': true,
-                    'snippets': []
+                    'snippets': [],
+                    'isInEditMode': false,
                 }, {
                     'id': 1,
-                    'name': 'scss',
+                    'name': 'SCSS',
                     'isSelected': false,
-                    'snippets': []
+                    'snippets': [],
+                    'isInEditMode': false,
                 }, {
                     'id': 2,
                     'name': 'markdown',
                     'isSelected': false,
-                    'snippets': []
-                }, {
-                    'id': 3,
-                    'name': 'PHP',
-                    'isSelected': false,
-                    'snippets': []
-                }],
+                    'snippets': [],
+                    'isInEditMode': false,
+                }, ],
                 'tags': [{ "id": 0, "name": "welcome", "counter": 1, "isSelected": false }]
             }
             this.replaceState(Object.assign(state, EMPTY_STATE));
@@ -76,6 +79,11 @@ const mutations = {
             timeStamp: Date.now()
         };
         language.snippets.unshift(snippet);
+    },
+    [types.EDIT_LANGUAGE_NAME](state, { language }) {
+        console.log(language)
+        state.languages.forEach(l => l.isInEditMode = false);
+        language.isInEditMode = true;
     },
     [types.SELECT_LANGUAGE](state, { id }) {
         let language = state.languages.find(language => language.id === id);
@@ -116,8 +124,10 @@ const mutations = {
 
     },
     [types.UPDATE_LANGUAGE_NAME](state, { id, name }) {
-        let language = languages.find(l => l.id === id);
+        console.log(id,name)
+        let language = state.languages.find(l => l.id === id);
         language.name = name;
+        language.isInEditMode = false;
     },
     [types.UPDATE_SNIPPET](state, { activeSnippet, snippets, id, code, tag, name, description }) {
         let snippet = snippets.find(snippet => snippet.id === id);

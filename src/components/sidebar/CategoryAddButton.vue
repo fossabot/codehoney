@@ -54,7 +54,7 @@ export default {
 
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style lang="scss">
 .CategoryAddButton {
     padding: 8px 0;
     transition: all .295s $ease;
@@ -100,12 +100,13 @@ export default {
         &::before {
             transform: translateX(-8%) translateZ(0);
         }
-       .Icon--add {
+
+        .Icon--add {
             transform: translateX(160px) translateZ(0) rotateZ(45deg);
         }
     }
 
-    .Icon--add{
+    .Icon--add {
         left: 16px;
         transition: all .295s $ease;
         position: absolute;
@@ -114,7 +115,8 @@ export default {
         z-index: zIndex(default)+2;
 
     }
-    .CategoryAddButton-Input{
+
+    .CategoryAddButton-Input {
         font-size: 1rem;
         position: relative;
         letter-spacing: 0.5px;

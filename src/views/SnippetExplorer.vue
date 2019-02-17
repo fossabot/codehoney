@@ -76,11 +76,11 @@ export default {
         z-index: zIndex(default) + 10;
         padding: 10px;
 
-  &:hover {
-    background-color: darken(color(orange), 10%);
-    background-color: var(--color-theme-lighter);
+        &:hover {
+            background-color: darken(color(orange), 10%);
+            background-color: var(--color-theme-lighter);
 
-  }
+        }
 
     }
 }

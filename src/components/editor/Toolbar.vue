@@ -45,7 +45,7 @@
             hint="reverted"
             fill="var(--color-purple)"
         />
-<!--         <Icon
+        <!--         <Icon
             @click="showThemes=!showThemes"
             icon="palette"
             name="theme"
@@ -53,7 +53,7 @@
             hint="theme"
             fill="var(--color-theme)"
         /> -->
-         <Icon
+        <Icon
             @click="switchTheme({name:'purple', event: $event})"
             v-if="showThemes"
             icon="color"
@@ -71,7 +71,7 @@
             hint="gray"
             fill="var(--color-theme-gray)"
         />
-<!--         <Icon
+        <!--         <Icon
             @click="switchTheme({name:'white', event: $event})"
             v-if="showThemes"
             icon="color"
@@ -123,7 +123,7 @@ export default {
             let style = getComputedStyle(document.body);
             let color = style.getPropertyValue(`--color-theme-${name}`);
             let theme = { name, color }
-            this.$emit('switchTheme', {theme, event });
+            this.$emit('switchTheme', { theme, event });
         }
     },
     computed: { ...mapGetters({
@@ -133,7 +133,7 @@ export default {
 }
 
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style lang="scss">
 .Toolbar {
     position: fixed;
@@ -149,7 +149,7 @@ export default {
     z-index: zIndex(toolbar);
     transition: all .2s $ease;
 
-    &::before{
+    &::before {
         position: absolute;
         width: 100%;
         height: 100%;

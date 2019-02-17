@@ -44,7 +44,7 @@ export default {
 }
 
 </script>
-<style scoped lang="scss">
+<style lang="scss">
 .Headline {
     color: color(white);
     margin-top: 40px;

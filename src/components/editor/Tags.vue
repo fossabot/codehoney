@@ -29,24 +29,24 @@ export default {
 }
 
 </script>
-<style scoped lang="scss">
+<style lang="scss">
 .Tags {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  position: relative;
-  align-items: center;
-  min-height: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    position: relative;
+    align-items: center;
+    min-height: 1rem;
 
-  .Label {
-    position: absolute;
-    left: 0;
-    transform: translateX(calc(-100% - 15px));
-    bottom: 0;
-    font-size: 0.85rem;
-    color: rgba(color(white), 0.25);
-    user-select: none;
-  }
+    .Label {
+        position: absolute;
+        left: 0;
+        transform: translateX(calc(-100% - 15px));
+        bottom: 0;
+        font-size: 0.85rem;
+        color: rgba(color(white), 0.25);
+        user-select: none;
+    }
 }
 
 </style>

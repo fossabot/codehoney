@@ -56,7 +56,6 @@ export default {
 }
 
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 .ThemeSwitcher {
     position: fixed;
@@ -85,13 +84,13 @@ export default {
     }
 
     &.show-themes {
-        &:before{
+        &:before {
             max-width: 220px;
         }
 
         .Icon {
             &:last-child {
-                border-left: solid 1px rgba(black,0.3);
+                border-left: solid 1px rgba(black, 0.3);
                 padding-left: 5px;
             }
         }
@@ -105,27 +104,30 @@ export default {
         transition: all .2s $ease;
 
         $num: 4;
-        @while $num > 0 {
-            &:nth-child(#{4 - $num}){
+
+        @while $num>0 {
+            &:nth-child(#{4 - $num}) {
                 transform: translateY(#{$num * 5px}) translateX(#{$num * 10px});
                 $num: $num - 1;
             }
         }
+
         &:last-child {
             margin-right: 0;
             opacity: 1;
             visibility: visible;
-            border-left: solid 1px rgba(black,0);
+            border-left: solid 1px rgba(black, 0);
 
         }
 
-        &.show-theme{
+        &.show-theme {
             opacity: 1;
             visibility: visible;
 
             $num: 4;
-            @while $num > 0 {
-                &:nth-child(#{4 - $num}){
+
+            @while $num>0 {
+                &:nth-child(#{4 - $num}) {
                     transform: translateY(0) translateX(0);
                     $num: $num - 1;
                 }

@@ -31,80 +31,79 @@ export default {
 @import '../../styles/code-highlighting';
 
 .Snippet {
-  padding: 15px 25px 15px;
-  transition: all .295s $ease;
-  cursor: pointer;
-  user-select: none;
-  position: relative;
-  color: color(white);
-  border-bottom: solid 1px rgba(color(white), 0.08);
-  border-top: solid 1px rgba(color(white), 0.0);
-  opacity: 0.5;
-  width: 100%;
-
-  &:hover {
+    padding: 15px 25px 15px;
+    transition: all .295s $ease;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
     color: color(white);
-    background-color: rgba(color(black), 0.25);
-    opacity: 1;
-  }
+    border-bottom: solid 1px rgba(color(white), 0.08);
+    border-top: solid 1px rgba(color(white), 0.0);
+    opacity: 0.5;
+    width: 100%;
 
-  &.is-selected {
-    background-color: rgba(color(black), 0.25);
-    color: color(white);
-    opacity: 1;
-    padding: 25px 25px 25px;
+    &:hover {
+        color: color(white);
+        background-color: rgba(color(black), 0.25);
+        opacity: 1;
+    }
 
-    p {
-      white-space: normal;
-      max-height: 3rem;
+    &.is-selected {
+        background-color: rgba(color(black), 0.25);
+        color: color(white);
+        opacity: 1;
+        padding: 25px 25px 25px;
+
+        p {
+            white-space: normal;
+            max-height: 3rem;
+        }
+
+        &::before {
+            opacity: 1;
+            left: 0px;
+        }
     }
 
     &::before {
-      opacity: 1;
-      left: 0px;
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 10px;
+        left: -4px;
+        content: "";
+        background-color: color(orange);
+        opacity: 0;
+        transition: all .295s $ease;
     }
-  }
 
-  &::before {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 10px;
-    left: -4px;
-    content: "";
-    background-color: color(orange);
-    opacity: 0;
-    transition: all .295s $ease;
-  }
+    &:first-child {
+        border-top-color: rgba(color(white), 0.08);
+    }
 
-  &:first-child {
-    border-top-color: rgba(color(white), 0.08);
-  }
+    &:last-child {
+        margin-bottom: 50px;
+    }
 
-  &:last-child {
-    margin-bottom: 50px;
-  }
+    h3 {
+        margin-top: 0;
+        margin-bottom: 0.25rem;
+        font-size: 1rem;
+    }
 
-  h3 {
-    margin-top: 0;
-    margin-bottom: 0.25rem;
-    font-size: 1rem;
-  }
-
-  p {
-    margin: 0;
-    color: rgba(color(white), 0.5);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 0.85rem;
-    transition: all .295s $ease;
-    line-height: 1.125rem;
-    max-height: 1rem;
-    // overflow: hidden;
-    // white-space: nowrap;
-    // text-overflow: ellipsis;
-    // width: 100%;
-  }
+    p {
+        margin: 0;
+        color: rgba(color(white), 0.5);
+        overflow: hidden;
+        font-size: 0.85rem;
+        transition: all .295s $ease;
+        line-height: 1.125rem;
+        max-height: 1rem;
+        // overflow: hidden;
+        // white-space: nowrap;
+        // text-overflow: ellipsis;
+        // width: 100%;
+    }
 }
 
 </style>
