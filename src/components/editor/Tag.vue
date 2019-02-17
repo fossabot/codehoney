@@ -33,7 +33,6 @@ export default {
             width: 100%;
             border: solid 1px rgba(color(white), 0.25);
             transition: all .19s $ease;
-
         }
     }
 }

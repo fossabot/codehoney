@@ -3,6 +3,7 @@
         class="CategoryAddButton"
         :class="{'is-selected':isSelected}"
         @click="open"
+        v-click-outside="close"
     >
         <Icon
             class="Icon--add"
@@ -23,10 +24,15 @@
     </div>
 </template>
 <script>
+import ClickOutside from 'vue-click-outside';
+
 export default {
     name: 'CategoryAddButton',
     props: {
         item: Object,
+    },
+    directives: {
+        ClickOutside
     },
     data: () => ({
         isSelected: false,
@@ -42,6 +48,7 @@ export default {
         close() {
             this.clickedClose = true;
             this.isSelected = false;
+            this.language = "";
             setTimeout(() => { this.clickedClose = false; }, 300);
         },
         handleEnterPress() {

@@ -67,7 +67,7 @@ export default {
     justify-content: center;
     user-select: none;
     padding: 10px;
-    z-index: 999999;
+    z-index: zIndex(toolbar);
     transition: all .2s $ease;
 
     &::before {
@@ -76,7 +76,7 @@ export default {
         width: 100%;
         height: 100%;
         content: "";
-        background-color: rgba(white, 1);
+        background-color: color(white);
         opacity: 1;
         right: 0;
         transition: all .2s $ease;

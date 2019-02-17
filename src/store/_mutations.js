@@ -38,26 +38,8 @@ const mutations = {
                         'name': '',
                     }
                 },
-                'languages': [{
-                    'id': 0,
-                    'name': 'Javascript',
-                    'isSelected': true,
-                    'snippets': [],
-                    'isInEditMode': false,
-                }, {
-                    'id': 1,
-                    'name': 'SCSS',
-                    'isSelected': false,
-                    'snippets': [],
-                    'isInEditMode': false,
-                }, {
-                    'id': 2,
-                    'name': 'markdown',
-                    'isSelected': false,
-                    'snippets': [],
-                    'isInEditMode': false,
-                }, ],
-                'tags': [{ "id": 0, "name": "welcome", "counter": 1, "isSelected": false }]
+                'languages': [],
+                'tags': []
             }
             this.replaceState(Object.assign(state, EMPTY_STATE));
         }
@@ -73,17 +55,24 @@ const mutations = {
             id,
             name: "a beautiful new snippet",
             isSelected: false,
-            code: "awesome new code",
-            description: "snipp snipp snipp",
+            code: "your awesome new code",
+            description: "snipp snipp",
             tags: [],
             timeStamp: Date.now()
         };
         language.snippets.unshift(snippet);
     },
+    [types.DELETE_HISTORY](state) {
+        localStorage.clear();
+
+        // this.replaceState(state);
+
+    },
     [types.EDIT_LANGUAGE_NAME](state, { language }) {
-        console.log(language)
-        state.languages.forEach(l => l.isInEditMode = false);
         language.isInEditMode = true;
+    },
+    [types.FINISH_EDIT_LANGUAGE_NAME](state) {
+        state.languages.forEach(l => l.isInEditMode = false);
     },
     [types.SELECT_LANGUAGE](state, { id }) {
         let language = state.languages.find(language => language.id === id);
@@ -124,10 +113,12 @@ const mutations = {
 
     },
     [types.UPDATE_LANGUAGE_NAME](state, { id, name }) {
-        console.log(id,name)
         let language = state.languages.find(l => l.id === id);
-        language.name = name;
-        language.isInEditMode = false;
+
+        if (language) {
+            language.name = name;
+            language.isInEditMode = false;
+        }
     },
     [types.UPDATE_SNIPPET](state, { activeSnippet, snippets, id, code, tag, name, description }) {
         let snippet = snippets.find(snippet => snippet.id === id);
@@ -142,8 +133,10 @@ const mutations = {
         state.undocounter = state.undocounter - 1;
 
         if (state.undocounter < 0) return;
+
         let key = 'store-snapshot-' + state.undocounter;
         const storeSnapshot = localStorage.getItem(key);
+
         if (storeSnapshot) {
             let store = JSON.parse(storeSnapshot);
             this.replaceState(Object.assign(state, store));

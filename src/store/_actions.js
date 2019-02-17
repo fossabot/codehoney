@@ -16,6 +16,9 @@ const actions = {
         let language = getters.activeLanguage;
         commit(types.EDIT_LANGUAGE_NAME, { language })
     },
+    finishEditLanguageName({ commit }) {
+        commit(types.FINISH_EDIT_LANGUAGE_NAME)
+    },
     selectLanguage({ commit }, id) {
         commit(types.SELECT_LANGUAGE, { id })
     },
@@ -45,7 +48,7 @@ const actions = {
         commit(types.REMOVE_SNIPPET, { id: payload, language })
     },
     updateLanguageName({ getters, commit }, { id, name }) {
-        console.log(id,name)
+        console.log(id, name)
         commit(types.UPDATE_LANGUAGE_NAME, { id, name })
     },
     updateSnippet({ getters, commit }, payload) {

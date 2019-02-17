@@ -4,22 +4,37 @@
         :class="[{'is-selected':item.isSelected},{'is-in-editmode':item.isInEditMode}]"
         @click.left="click"
         @click.right="clickRight"
+        v-click-outside="finishEditMode"
     >
         <input
             class="Name"
-            :readonly="!item.isInEditMode"
-            @keyup.enter="handleEnterPress"
+            spellcheck="false"
             v-model="item.name"
             :ref="item.id"
+            :readonly="!item.isInEditMode"
+            @keyup.enter="handleEnterPress"
         />
         <span class="Counter">{{item.counter ? item.counter : 0}}</span>
     </div>
 </template>
 <script>
+import ClickOutside from 'vue-click-outside';
+
 export default {
     name: 'Category',
     props: {
         item: Object,
+    },
+    directives: {
+        ClickOutside
+    },
+    watch: {
+        item: function(argument) {
+            if (this.item.isInEditMode) {
+                let input = this.$refs[this.item.id];
+                input.focus();
+            }
+        }
     },
     methods: {
         click(el) {
@@ -31,8 +46,10 @@ export default {
         },
         handleEnterPress() {
             this.$emit('edited', { id: this.item.id, name: this.item.name });
-            setTimeout(() => { this.$refs[this.item.id].focus(); }, 50);
         },
+        finishEditMode() {
+            this.item.isInEditMode && this.$emit('close-edit-mode', { id: null, name: null });
+        }
     },
 }
 

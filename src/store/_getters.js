@@ -1,7 +1,10 @@
 const getters = {
     languages: state => {
-        return state.languages.map((language) => {
-            return Object.assign({ counter: language.snippets.length }, language);
+        return state.languages.map(language => {
+            if (language.snippets) {
+                let counter = language.snippets.length;
+                return { ...counter, ...language }
+            }
         });
     },
     tags: state => {

@@ -12,6 +12,7 @@
                 @click="handleCategoryClick"
                 @click-right="handleCategoryRightClick"
                 @edited="handleEdit"
+                @close-edit-mode="handleCloseEditMode"
             />
         </transition-group>
 
@@ -48,8 +49,10 @@ export default {
             this.$emit('add', language)
         },
         handleEdit(language) {
-            console.log(language)
             this.$emit('update', language)
+        },
+        handleCloseEditMode(){
+            this.$emit('finish-edit-mode');
         }
     },
 };

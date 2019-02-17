@@ -17,11 +17,6 @@ html {
 * {
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
-
-    &.is-blured {
-        // filter: blur(2px);
-        // pointer-events: none;
-    }
 }
 
 ::-webkit-scrollbar {
@@ -47,4 +42,5 @@ input {
     color: color(white);
     font-family: font(regular);
     width: 100%;
+    font-size: 1rem;
 }

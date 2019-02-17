@@ -20,6 +20,7 @@
             @context-menu="handleShowContextMenu"
             @add="handleAddLanguage"
             @update="handleUpdateLanguage"
+            @finish-edit-mode="handleFinishEditMode"
         />
         <Categories
             title="Tags"
@@ -74,6 +75,7 @@ export default {
             'addLanguage',
             'addSnippet',
             'editLanguageName',
+            'finishEditLanguageName',
             'removeLanguage',
             'selectLanguage',
             'selectTag',
@@ -92,8 +94,7 @@ export default {
             this.selectLanguage(id);
             this.addSnippet(uniqid())
         },
-        handleUpdateLanguage({ id, name }) {
-            console.log(id,name)
+        handleUpdateLanguage({ id = null, name = null }) {
             this.updateLanguageName({ id, name });
         },
         handleShowContextMenu({ x = event.x, y = event.y, id }) {
@@ -105,13 +106,15 @@ export default {
                 this.showContextMenu = false;
                 setTimeout(() => {
                     this.showContextMenu = true;
-                }, 50);
+                }, 10);
             } else {
                 this.showContextMenu = true;
             }
         },
+        handleFinishEditMode() {
+            this.finishEditLanguageName();
+        },
         handleBaseContextClick(cb) {
-            console.log('msg')
             cb && this[cb]()
         },
         openModal() {
