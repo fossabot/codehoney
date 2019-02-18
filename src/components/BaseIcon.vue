@@ -1,13 +1,17 @@
 <template>
     <div
         class="Icon"
-        :class="{'is-disabled':disabled}"
+        :class="[{'is-disabled':disabled},{'show-name':showName}]"
         @click="click"
         @mouseover="mouseover"
         @mouseleave="mouseleave"
     >
-        <span v-html="require(`!raw-loader!../assets/icon/icon-${this.icon}.svg`)"></span>
-        <span class="Hint" :style="{'color':disabled ? fillDisabled:fill}">{{mName}}</span>
+        <span v-html="require(`!raw-loader!../assets/icon/icon-${this.icon}.svg`)" />
+        <span
+            class="Hint"
+            :style="{'color':disabled ? fillDisabled:fill}"
+            v-html="mName"
+        />
     </div>
 </template>
 <script>
@@ -33,7 +37,8 @@ export default {
         hint: String,
         name: String,
         morphTo: String,
-        disabled: Boolean
+        disabled: Boolean,
+        showName: Boolean,
     },
     data: () => ({
         svg: null,
@@ -137,24 +142,33 @@ export default {
         }
     }
 
-    &.is-disabled{
-      pointer-events: none;
-
-      svg {
-        path[fill="#fff"],
-        path[fill="#FFF"],
-        g[fill="#FFF"],
-        g[fill="#fff"],{
-            fill: color(disabled) !important;
+    &.show-name {
+        .Hint {
+            transform: translateY(10px);
+            opacity: 1;
         }
+    }
 
-        path[stroke="#fff"],
-        path[stroke="#FFF"],
-        g[stroke="#FFF"],
-        g[stroke="#fff"]{
-            stroke: color(disabled) !important;
+    &.is-disabled {
+        pointer-events: none;
+
+        svg {
+
+            path[fill="#fff"],
+            path[fill="#FFF"],
+            g[fill="#FFF"],
+            g[fill="#fff"],
+                {
+                fill: color(disabled) !important;
+            }
+
+            path[stroke="#fff"],
+            path[stroke="#FFF"],
+            g[stroke="#FFF"],
+            g[stroke="#fff"] {
+                stroke: color(disabled) !important;
+            }
         }
-      }
     }
 
     >span {
@@ -181,14 +195,15 @@ export default {
         path[fill="#fff"],
         path[fill="#FFF"],
         g[fill="#FFF"],
-        g[fill="#fff"],{
+        g[fill="#fff"],
+            {
             fill: currentColor !important;
         }
 
         path[stroke="#fff"],
         path[stroke="#FFF"],
         g[stroke="#FFF"],
-        g[stroke="#fff"]{
+        g[stroke="#fff"] {
             stroke: currentColor !important;
         }
     }

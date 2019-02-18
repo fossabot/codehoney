@@ -122,7 +122,7 @@ export default {
                 document.documentElement.style.setProperty('--color-theme-lighter', colorLighter);
                 document.documentElement.style.setProperty('--color-theme-dark', colorDark);
                 document.documentElement.style.setProperty('--color-theme-darker', colorDarker);
-            }, 320);
+            }, 350);
         },
         handleOpenModal(modal) {
             this.modalIsOpen = true;

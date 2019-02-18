@@ -8,10 +8,7 @@
             @keyup="searchSnippet(searchquery)"
         >
         <label class="Label">search for your code...</label>
-        <img
-            class="Icon Icon--search"
-            src="@/assets/icon/icon-search.svg"
-        >
+        <Icon icon="search" class="Icon--search" />
     </div>
 </template>
 <script>
@@ -88,8 +85,8 @@ export default {
 
     .Icon--search {
         position: absolute;
-        right: 20px;
-        top: 25px;
+        right: 10px;
+        top: 15px;
         transform: scaleX(-1);
         user-select: none;
     }

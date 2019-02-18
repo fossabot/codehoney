@@ -27,6 +27,9 @@
         <Icon
             @click="showThemes=!showThemes"
             icon="palette"
+            name="themes"
+            hint="themes"
+            :showName="true"
             fill="var(--color-theme-dark)"
         />
     </div>
@@ -72,7 +75,7 @@ export default {
 
     &::before {
         position: absolute;
-        max-width: 54px;
+        max-width: 55px;
         width: 100%;
         height: 100%;
         content: "";
@@ -91,7 +94,8 @@ export default {
         .Icon {
             &:last-child {
                 border-left: solid 1px rgba(black, 0.3);
-                padding-left: 5px;
+                padding-left: 12px;
+                margin-top: -12px;
             }
         }
     }
@@ -114,10 +118,11 @@ export default {
 
         &:last-child {
             margin-right: 0;
+            padding-left: 12px;
+            margin-top: -12px;
             opacity: 1;
             visibility: visible;
             border-left: solid 1px rgba(black, 0);
-
         }
 
         &.show-theme {
