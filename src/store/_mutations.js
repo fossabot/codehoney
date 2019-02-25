@@ -47,8 +47,19 @@ const mutations = {
     [types.ADD_LANGUAGE](state, { language }) {
         state.languages.push(language);
     },
-    [types.ADD_TAG](state, { /*milestone*/ }) {
+    [types.ADD_TAG](state, { tag }) {
+        let tags = state.tags;
+        let tagWithSameName = tags.find(t => t.name === tag.name);
 
+        if (typeof tags === "object" && tagWithSameName) {
+            tagWithSameName.counter++;
+        } else {
+            let mTags = [...new Set([...tags, ...[tag]])];
+            state.tags = mTags;
+        }
+    },
+    [types.ADD_TAG_TO_SNIPPET](state, { snippet, tag }) {
+        snippet.tags.push(tag);
     },
     [types.ADD_SNIPPET](state, { id, language }) {
         let snippet = {
@@ -64,9 +75,7 @@ const mutations = {
     },
     [types.DELETE_HISTORY](state) {
         localStorage.clear();
-
-        // this.replaceState(state);
-
+        localStorage.setItem('store', JSON.stringify(state));
     },
     [types.EDIT_LANGUAGE_NAME](state, { language }) {
         language.isInEditMode = true;
@@ -76,11 +85,13 @@ const mutations = {
     },
     [types.SELECT_LANGUAGE](state, { id }) {
         let language = state.languages.find(language => language.id === id);
+
         state.languages.forEach(language => { language.isSelected = false });
         language.isSelected = true;
     },
     [types.SELECT_TAG](state, { tags, id }) {
         let tag = tags.find(tag => tag.id === id);
+
         if (tag.isSelected) {
             state.activeTags.splice(state.activeTags.indexOf(tag), 1);
             tag.isSelected = false
@@ -94,16 +105,32 @@ const mutations = {
     },
     [types.SELECT_SNIPPET](state, { snippets, activeSnippet, id }) {
         let snippet = id ? snippets.find(snippet => snippet.id === id) : snippets[0];
+
         activeSnippet.isSelected = false;
         snippet.isSelected = true;
     },
     [types.REMOVE_LANGUAGE](state, { language }) {
         let index = state.languages.findIndex(l => l.id === language.id);
+
         state.languages.splice(index, 1);
     },
-    [types.REMOVE_TAG](state, { id }) {},
+    [types.REMOVE_TAG](state, { tag }) {
+        let tags = state.tags;
+        let tagWithSameName = tags.find(t => t.name === tag.name);
+
+        if (typeof tags === "object" && tagWithSameName.counter > 1) {
+            tagWithSameName.counter--;
+        } else {
+            let index = tags.findIndex(t => t.name === tag.name);
+            tags.splice(index, 1);
+        }
+    },
+    [types.REMOVE_TAG_FROM_SNIPPET](state, { snippet, index }) {
+        snippet.tags.splice(index, 1);
+    },
     [types.REMOVE_SNIPPET](state, { language, id }) {
         let index = language.snippets.findIndex(snippet => snippet.id === id);
+
         language.snippets.splice(index, 1);
 
         if (language.snippets.length) {
@@ -122,6 +149,7 @@ const mutations = {
     },
     [types.UPDATE_SNIPPET](state, { activeSnippet, snippets, id, code, tag, name, description }) {
         let snippet = snippets.find(snippet => snippet.id === id);
+
         activeSnippet.code = typeof code === 'string' ? code : activeSnippet.code;
         activeSnippet.name = typeof name === 'string' ? name : activeSnippet.name;
         activeSnippet.description = typeof description === 'string' ? description : activeSnippet.description;
@@ -148,6 +176,7 @@ const mutations = {
     },
     [types.UPDATE_USER_PREFERENCES](state, { theme }) {
         let userPreferences = state.userPreferences;
+
         userPreferences.theme = typeof theme === 'object' ? theme : userPreferences.theme;
         localStorage.setItem('user-preferences', JSON.stringify(state.userPreferences));
     }

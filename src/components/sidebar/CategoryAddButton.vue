@@ -1,29 +1,31 @@
 <template>
     <div
-        class="CategoryAddButton"
-        :class="{'is-selected':isSelected}"
-        @click="open"
-        v-click-outside="close"
+     class="CategoryAddButton"
+     :class="[{'is-selected':isSelected},{'is-active':languages.length===0}]"
+     @click="open"
+     v-click-outside="close"
     >
         <Icon
-            class="Icon--add"
-            icon="plus"
-            fill="currentColor"
-            :width="0.75"
-            :height="0.75"
-            @click="close"
+         class="Icon--add"
+         icon="plus"
+         fill="currentColor"
+         :width="0.75"
+         :height="0.75"
+         @click="close"
         />
         <input
-            spellcheck="false"
-            v-if="isSelected"
-            ref="input"
-            class="CategoryAddButton-Input"
-            v-model="language"
-            @keyup.enter="handleEnterPress"
+         spellcheck="false"
+         v-if="isSelected"
+         ref="input"
+         class="CategoryAddButton-Input"
+         v-model="language"
+         @keyup.enter="handleEnterPress"
         >
     </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+
 import ClickOutside from 'vue-click-outside';
 
 export default {
@@ -39,17 +41,30 @@ export default {
         clickedClose: false,
         language: ''
     }),
+    computed: { ...mapGetters({
+            languages: 'languages',
+        }),
+    },
     methods: {
         open(el) {
             if (this.clickedClose) { return }
+
             this.isSelected = true;
-            setTimeout(() => { this.$refs.input.focus(); }, 10);
+
+            setTimeout(() => {
+                this.$refs.input.focus();
+            }, 10);
         },
         close() {
+            if (!this.isSelected) return
+
             this.clickedClose = true;
             this.isSelected = false;
             this.language = "";
-            setTimeout(() => { this.clickedClose = false; }, 300);
+
+            setTimeout(() => {
+                this.clickedClose = false;
+            }, 300);
         },
         handleEnterPress() {
             this.$emit('add', this.language);
@@ -99,6 +114,20 @@ export default {
         }
     }
 
+    &.is-active {
+        color: rgba(color(black), 1);
+        opacity: 1;
+        cursor: unset;
+
+        &::before {
+            transform: translateX(-75%) translateZ(0);
+        }
+
+        .Icon--add {
+            transform: translateX(7px) translateZ(0) rotateZ(0deg);
+        }
+    }
+
     &.is-selected {
         color: rgba(color(black), 1);
         opacity: 1;
@@ -109,9 +138,10 @@ export default {
         }
 
         .Icon--add {
-            transform: translateX(160px) translateZ(0) rotateZ(45deg);
+            transform: translateX(154px) translateZ(0) rotateZ(45deg);
         }
     }
+
 
     .Icon--add {
         left: 16px;
@@ -119,8 +149,8 @@ export default {
         position: absolute;
         color: var(--color-theme) !important;
         height: 1rem;
-        z-index: zIndex(default)+2;
-
+        z-index: zIndex(default)+3;
+        cursor: pointer;
     }
 
     .CategoryAddButton-Input {

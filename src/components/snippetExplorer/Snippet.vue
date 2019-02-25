@@ -5,7 +5,7 @@
         @click="click"
     >
         <h3>{{item.name}}</h3>
-        <p class="Description">{{item.description || item.code}}</p>
+        <p class="Description">{{item.description || "no description..."}}</p>
     </div>
 </template>
 <script>

@@ -3,7 +3,7 @@
         class="Sidebar"
         :class="{'is-hidden':isHidden}"
     >
-        <Icon
+<!--         <Icon
             @click="openModal"
             icon="settings"
             name="settings"
@@ -11,7 +11,7 @@
             morphTo="settings-2"
             class="Icon--settings"
             fill="var(--color-theme-dark)"
-        />
+        /> -->
         <Categories
             title="Categories"
             :categories="languages"
@@ -44,6 +44,7 @@
 <script>
 import { mapActions } from 'vuex'
 import uniqid from 'uniqid';
+
 import Categories from '../components/sidebar/Categories.vue';
 import BaseContextMenu from '../components/BaseContextMenu.vue';
 

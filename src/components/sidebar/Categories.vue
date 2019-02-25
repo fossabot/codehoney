@@ -1,25 +1,28 @@
 <template>
     <div class="Categories">
         <h3 class="Title">{{title}}</h3>
-        <transition-group
-            name="list"
-            tag="div"
-        >
-            <Category
-                v-for="category in categories"
-                :key="category.id"
-                :item="category"
-                @click="handleCategoryClick"
-                @click-right="handleCategoryRightClick"
-                @edited="handleEdit"
-                @close-edit-mode="handleCloseEditMode"
-            />
-        </transition-group>
+        <div class="Categories-Wrapper">
+            <transition-group
+             name="list"
+             tag="div"
+            >
+                <Category
+                 v-for="category in categories"
+                 :key="category.id"
+                 :item="category"
+                 @click="handleCategoryClick"
+                 @click-right="handleCategoryRightClick"
+                 @edited="handleEdit"
+                 @close-edit-mode="handleCloseEditMode"
+                />
+            </transition-group>
 
-        <CategoryAddButton
-            v-if="hasAddButton"
-            @add="handleCategoryAdd"
-        />
+            <CategoryAddButton
+             v-if="hasAddButton"
+             @add="handleCategoryAdd"
+            />
+        </div>
+
     </div>
 </template>
 <script>
@@ -51,7 +54,7 @@ export default {
         handleEdit(language) {
             this.$emit('update', language)
         },
-        handleCloseEditMode(){
+        handleCloseEditMode() {
             this.$emit('finish-edit-mode');
         }
     },
@@ -64,10 +67,15 @@ export default {
     margin-bottom: 90px;
     position: relative;
 
+    >div {
+        max-height: 40vh;
+        overflow: scroll;
+    }
+
     .Title {
         font-weight: bold;
         font-size: 1.25rem;
-        margin-bottom: 35px;
+        margin-bottom: 15px;
         margin-top: 0;
         padding-left: $appDistanceLeft;
         user-select: none;
@@ -76,21 +84,27 @@ export default {
 
     .list-enter-active {
         transition: all .4s $ease;
+        height: 40px;
     }
 
     .list-leave-active {
         will-change: auto;
         transition: all .4s $ease;
+        height: 40px;
     }
 
     .list-enter {
         transform: translateX(-50%) translateZ(0);
+        height: 0;
+        padding: 0;
     }
 
     .list-leave-to {
         transform: translateX(-110%) translateZ(0);
         border-color: transparent;
         opacity: 0;
+        height: 0;
+        padding: 0;
         overflow: hidden;
         // background-color: color(red);
     }

@@ -1,14 +1,17 @@
 <template>
     <div class="Search">
         <input
-            required
-            type="text"
-            name=""
-            v-model="searchquery"
-            @keyup="searchSnippet(searchquery)"
+         required
+         type="text"
+         name=""
+         v-model="searchquery"
+         @keyup="searchSnippet(searchquery)"
         >
         <label class="Label">search for your code...</label>
-        <Icon icon="search" class="Icon--search" />
+        <Icon
+         icon="search"
+         class="Icon--search"
+        />
     </div>
 </template>
 <script>

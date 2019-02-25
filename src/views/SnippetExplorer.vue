@@ -1,24 +1,25 @@
 <template>
     <div class="SnippetExplorer">
-        <Search v-if="snippets" />
+        <Search v-if="languages.length>0" />
         <Snippets
-            :snippets="snippets"
-            @select="selectSnippet"
+         :snippets="snippets"
+         @select="selectSnippet"
         />
         <BaseButton
-            round
-            icon
+         round
+         icon
+         :class="{'is-active':languages.length>0}"
         >
             <Icon
-                @click.native="handleClick"
-                icon="add"
-                fill="var(--color-white)"
+             @click.native="handleClick"
+             icon="add"
+             fill="var(--color-white)"
             />
         </BaseButton>
     </div>
 </template>
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import uniqid from 'uniqid';
 import BaseButton from '../components/BaseButton.vue';
 import Search from '../components/snippetExplorer/Search.vue';
@@ -35,6 +36,11 @@ export default {
         snippets: Array,
     },
     data: () => ({}),
+    computed: {
+        ...mapGetters({
+            languages: 'languages'
+        })
+    },
     methods: {
         handleClick() {
             let uID = uniqid();
@@ -72,14 +78,17 @@ export default {
         position: absolute;
         bottom: 30px;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translateX(-50%) scale(0);
         z-index: zIndex(default) + 10;
         padding: 10px;
+
+        &.is-active {
+            transform: translateX(-50%) scale(1);
+        }
 
         &:hover {
             background-color: darken(color(orange), 10%);
             background-color: var(--color-theme-lighter);
-
         }
 
     }

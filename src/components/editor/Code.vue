@@ -112,7 +112,7 @@ export default {
     width: 95%;
     background-color: transparent !important;
     position: relative;
-    margin-top: 25px;
+    margin-top: 15px;
 
     pre {
         margin-bottom: 0;

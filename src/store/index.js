@@ -34,9 +34,17 @@ store.subscribeAction({
 });
 
 store.subscribe((mutation, state) => {
-    const mutationTypes = ['SELECT_SNIPPET', 'UNDO', 'UNDO_INCREMENT', 'INITIALISE_STORE'];
+    const mutationTypes = [
+        'DELETE_HISTORY',
+        'SELECT_SNIPPET',
+        'UNDO',
+        'UNDO_INCREMENT',
+        'INITIALISE_STORE',
+        'UPDATE_USER_PREFERENCES'
+    ];
     if (mutationTypes.includes(mutation.type)) return;
 
+    console.log('mutation', mutation);
     store.dispatch('undoIncrement');
     localStorage.setItem('store', JSON.stringify(state));
 });

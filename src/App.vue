@@ -19,11 +19,10 @@
                 @expand="editorExpand"
                 @switchTheme="switchTheme"
             />
-            <SettingsModal
+<!--             <SettingsModal
                 :open="modalIsOpen"
                 @close="handleCloseModal"
-            >
-            </SettingsModal>
+            /> -->
         </div>
         <div class="WindowButtons">
             <WindowButton red />
@@ -38,7 +37,7 @@ import Sidebar from './views/Sidebar.vue';
 import SnippetExplorer from './views/SnippetExplorer.vue';
 import Editor from './views/Editor.vue';
 import WindowButton from './components/WindowButton.vue';
-import SettingsModal from './components/SettingsModal.vue';
+// import SettingsModal from './components/SettingsModal.vue';
 
 export default {
     name: 'app',
@@ -47,12 +46,13 @@ export default {
         SnippetExplorer,
         Editor,
         WindowButton,
-        SettingsModal
+        // SettingsModal
     },
     data: () => ({
         editorFullscreen: false,
         modalIsOpen: false
     }),
+
     computed: { ...mapGetters({
             languages: 'languages',
             language: 'activeLanguage',
@@ -70,7 +70,6 @@ export default {
         switchTheme({ theme, event }) {
             this.themeTransition(theme, event);
             this.setThemeColors(theme.name);
-
         },
         themeTransition(theme, event) {
             let color = theme.color;
